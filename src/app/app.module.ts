@@ -9,14 +9,24 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/module/shared.module';
 
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
+
+
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
+    NgxPaginationModule,
+    CommonModule,
+    ReactiveFormsModule,
 
     FormsModule,
     ReactiveFormsModule,  // ✅ Garder seulement une seule importation

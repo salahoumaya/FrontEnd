@@ -19,9 +19,14 @@ import { InstructorDashboardComponent } from './instructor-dashboard/instructor-
 import { InstructorEarningsComponent } from './instructor-earnings/instructor-earnings.component';
 import { InstructorNotificationComponent } from './instructor-notification/instructor-notification.component';
 import { InstructorProfileComponent } from './instructor-profile/instructor-profile.component';
-import { InstructorReviewsComponent } from './instructor-reviews/instructor-reviews.component';
+
 import { InstructorEditComponent } from './instructor-edit/instructor-edit.component';
 import { InstructorQuizDetailsComponent } from './instructor-quiz-details/instructor-quiz-details.component';
+
+import { TestListComponent } from './tests/test-list/test-list.component';
+import { TestFormComponent } from './tests/test-form/test-form.component';
+import { QuestionListComponent } from './questions/question-list/question-list.component';
+import { QuestionFormComponent } from './questions/question-form/question-form.component';
 
 const routes: Routes = [
   {
@@ -56,14 +61,29 @@ const routes: Routes = [
         path: 'instructor-profile',
         component: InstructorProfileComponent,
       },
-      {
-        path: 'instructor-reviews',
-        component: InstructorReviewsComponent,
-      },
+
       {
         path: 'instructor-tickets',
         component: InstructorTicketsComponent,
       },
+      ////////
+      {
+        path: 'instructor-levelTest',
+        component: TestListComponent,
+      },
+      {
+        path: 'instructor-addTest',
+        component: TestFormComponent,
+      },
+      {
+        path: 'instructor-question',
+        component: QuestionListComponent,
+      },
+      {
+        path: 'instructor-addQuestions',
+        component: QuestionFormComponent,
+      },
+
       {
         path: 'instructor-view',
         loadChildren: () =>

@@ -15,7 +15,6 @@ import { InstructorReferralComponent } from './instructor-referral/instructor-re
 import { InstructorWithdrawComponent } from './instructor-withdraw/instructor-withdraw.component';
 import { InstructorTicketsComponent } from './instructor-tickets/instructor-tickets.component';
 import { InstructorOrdersComponent } from './instructor-orders/instructor-orders.component';
-import { InstructorReviewsComponent } from './instructor-reviews/instructor-reviews.component';
 import { InstructorProfileComponent } from './instructor-profile/instructor-profile.component';
 import { InstructorNotificationComponent } from './instructor-notification/instructor-notification.component';
 import { InstructorEditComponent } from './instructor-edit/instructor-edit.component';
@@ -27,6 +26,15 @@ import { RouterModule } from '@angular/router';
 import { InstructorQuizDetailsComponent } from './instructor-quiz-details/instructor-quiz-details.component';
 import { InstructorEnrolledCourseComponent } from './instructor-enrolled-course/instructor-enrolled-course.component';
 import { SharedModule } from 'src/app/shared/module/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TestFormComponent } from './tests/test-form/test-form.component';
+
+import { QuestionFormComponent } from './questions/question-form/question-form.component';
+import { TestListComponent } from './tests/test-list/test-list.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { QuestionListComponent } from './questions/question-list/question-list.component';
+
+
 
 @NgModule({
   declarations: [
@@ -42,7 +50,6 @@ import { SharedModule } from 'src/app/shared/module/shared.module';
     InstructorWithdrawComponent,
     InstructorTicketsComponent,
     InstructorOrdersComponent,
-    InstructorReviewsComponent,
     InstructorProfileComponent,
     InstructorNotificationComponent,
     InstructorEditComponent,
@@ -52,12 +59,24 @@ import { SharedModule } from 'src/app/shared/module/shared.module';
     InstructorCourseComponent,
     InstructorQuizDetailsComponent,
     InstructorEnrolledCourseComponent,
+    TestFormComponent,
+    TestListComponent,
+    QuestionFormComponent,
+    QuestionListComponent
+
+
+
+
+
   ],
   imports: [
     CommonModule,
     InstructorRoutingModule,
     FeatherIconModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxPaginationModule,
     SharedModule,
   ],
 })

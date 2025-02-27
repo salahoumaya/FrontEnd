@@ -97,6 +97,20 @@ export class routes {
   public static get instructorWishlist(): string {
     return this.instructor + 'instructor-wishlist';
   }
+  //////
+  public static get TestLevel(): string {
+    return this.instructor + 'instructor-levelTest';
+  }
+  public static get AddLevel(): string {
+    return this.instructor + 'instructor-addTest';
+  }
+  public static get Questions(): string {
+    return this.instructor + 'instructor-question';
+  }
+  public static get AddQuestions(): string {
+    return this.instructor + 'instructor-addQuestions';
+  }
+
   public static get instructorChangePassword(): string {
     return this.instructor + 'settings/instructor-change-password';
   }
@@ -160,6 +174,16 @@ export class routes {
   }
   public static get students_edit_profile(): string {
     return this.students + 'setting-edit-profile';
+  }
+//
+
+public static get test_attempt(): string {
+  return '/test-attempt';
+}
+
+
+  public static get student_test(): string {
+    return this.students + 'student-test';
   }
   public static get students_profile(): string {
     return this.students + 'student-profile';

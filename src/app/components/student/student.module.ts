@@ -18,6 +18,9 @@ import { StudentReviewsComponent } from './student-reviews/student-reviews.compo
 import { StudentReferralComponent } from './student-referral/student-referral.component';
 import { StudentTicketsComponent } from './student-tickets/student-tickets.component';
 import { StudentQuizDetailsComponent } from './student-quiz-details/student-quiz-details.component';
+import { TestSelectionComponent } from './tests/test-selection/test-selection.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TestAttemptComponent } from './tests/test-attempt/test-attempt.component';
 
 
 @NgModule({
@@ -34,14 +37,18 @@ import { StudentQuizDetailsComponent } from './student-quiz-details/student-quiz
     StudentReviewsComponent,
     StudentReferralComponent,
     StudentTicketsComponent,
-    StudentQuizDetailsComponent
+    StudentQuizDetailsComponent,
+    TestSelectionComponent,
+    TestAttemptComponent
   ],
   imports: [
     CommonModule,
     StudentRoutingModule,
     FeatherIconModule,
     SharedModule,
-    RouterModule 
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class StudentModule { }

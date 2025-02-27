@@ -1,0 +1,69 @@
+<!-- Page Wrapper -->
+<div class="page-content">
+  <div class="container">
+      <div class="row">
+
+         <!-- Sidebar -->
+         <app-instructor-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-instructor-sidebar>
+         <!-- /Sidebar -->
+
+          <!-- Instructor Add Test Form -->
+          <div class="col-xl-9 col-lg-9">
+              <div class="settings-widget card-details">
+                  <div class="settings-menu p-4">
+                      <div class="profile-heading text-center">
+                          <h3>Créer un Test</h3>
+                      </div>
+
+                      <!-- Form -->
+                      <div class="checkout-form">
+                          <form (ngSubmit)="createTest()">
+                              <div class="form-group">
+                                  <label for="title">Titre</label>
+                                  <input id="title" [(ngModel)]="test.title" name="title" required class="form-control"/>
+                              </div>
+
+                              <div class="form-group">
+                                  <label for="description">Description</label>
+                                  <textarea id="description" [(ngModel)]="test.description" name="description"
+                                            class="form-control"></textarea>
+                              </div>
+
+                              <div class="form-group">
+                                  <label for="scheduledAt">Date</label>
+                                  <input type="datetime-local" id="scheduledAt" [(ngModel)]="test.scheduledAt" name="scheduledAt"
+                                         required class="form-control"/>
+                              </div>
+
+                              <div class="form-group">
+                                  <label for="duration">Durée du Test (min)</label>
+                                  <input type="number" id="duration" [(ngModel)]="test.duration" name="duration"
+                                         required min="10" max="180" class="form-control"/>
+                              </div>
+
+                              <div class="form-group">
+                                  <label for="score">Score Total</label>
+                                  <input type="number" id="score" [(ngModel)]="test.score" name="score"
+                                         required min="10" max="100" class="form-control"/>
+                              </div>
+
+                              <div class="d-flex justify-content-between mt-4">
+                                  <!-- Submit Button -->
+                                  <button type="submit" class="btn btn-success">Créer</button>
+
+                                  <!-- Go to Add Question Button -->
+                                  <button type="button" (click)="goToAddQuestion()" class="btn btn-primary">
+                                      Ajouter une Question
+                                  </button>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- /Instructor Add Test Form -->
+
+      </div>
+  </div>
+</div>
+<!-- /Page Wrapper -->

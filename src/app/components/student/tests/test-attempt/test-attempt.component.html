@@ -1,0 +1,31 @@
+<div class="page-content">
+  <div class="container">
+    <div class="row">
+      <app-instructor-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-instructor-sidebar>
+
+      <div class="col-xl-9 col-lg-9">
+        <div class="settings-widget card-details">
+          <div class="settings-menu p-4">
+            <div class="profile-heading text-center">
+              <h3>Test : {{ test?.title }}</h3>
+              <p><strong>Durée :</strong> {{ test?.duration }} minutes | <strong>Score total :</strong> {{ test?.score }}</p>
+            </div>
+
+            <div *ngFor="let question of test?.questions">
+              <h4>{{ question.questionText }}</h4>
+              <div *ngFor="let option of ['optionA', 'optionB', 'optionC', 'optionD']">
+                <input type="radio" [name]="'question' + question.id" [value]="question[option]"
+                       [(ngModel)]="answers[question.id]"> {{ question[option] }}
+              </div>
+            </div>
+
+            <button class="btn btn-success mt-3" (click)="submitTest()">Soumettre</button>
+            <div *ngIf="score !== null">
+              <h4>Votre Score : {{ score }} / {{ test?.score }}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

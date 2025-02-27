@@ -14,6 +14,8 @@ import { StudentReviewsComponent } from './student-reviews/student-reviews.compo
 import { StudentReferralComponent } from './student-referral/student-referral.component';
 import { StudentTicketsComponent } from './student-tickets/student-tickets.component';
 import { StudentQuizDetailsComponent } from './student-quiz-details/student-quiz-details.component';
+import { TestSelectionComponent } from './tests/test-selection/test-selection.component';
+import { TestAttemptComponent } from './tests/test-attempt/test-attempt.component';
 
 const routes: Routes = [
   {
@@ -27,22 +29,15 @@ const routes: Routes = [
             (m) => m.StudentViewModule
           ),
       },
-      {
-        path: 'student-profile',
-        component: StudentProfileComponent,
-      },
-      {
-        path: 'view-invoice',
-        component: ViewInvoiceComponent,
-      },
+      { path: 'student-profile', component: StudentProfileComponent },
       { path: 'student-dashboard', component: StudentDashboardComponent },
+      { path: 'student-test', component: TestSelectionComponent },
+      { path: 'test-attempt/:id', component: TestAttemptComponent }, // ✅ Corrigé ici !
+      { path: 'view-invoice', component: ViewInvoiceComponent },
       { path: 'student-qa', component: StudentQaComponent },
       { path: 'student-quiz', component: StudentQuizComponent },
       { path: 'student-message', component: StudentMessageComponent },
-      {
-        path: 'student-order-history',
-        component: StudentOrderHistoryComponent,
-      },
+      { path: 'student-order-history', component: StudentOrderHistoryComponent },
       { path: 'student-wishlist', component: StudentWishlistComponent },
       { path: 'student-courses', component: StudentCoursesComponent },
       { path: 'student-quiz-details', component: StudentQuizDetailsComponent },

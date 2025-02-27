@@ -10,6 +10,7 @@ import { StudentHeaderComponent } from '../layouts/student-header/student-header
 import { SharedModule } from '../shared/module/shared.module';
 import { FooterTopContainerComponent } from '../layouts/footer/footer-top-container/footer-top-container.component';
 
+
 @NgModule({
   declarations: [
     ComponentsComponent,
@@ -17,7 +18,9 @@ import { FooterTopContainerComponent } from '../layouts/footer/footer-top-contai
     FooterComponent,
     AdminHeaderComponent,
     StudentHeaderComponent,
-    FooterTopContainerComponent
+    FooterTopContainerComponent,
+
+
   ],
   imports: [CommonModule, ComponentsRoutingModule, SharedModule],
 })
