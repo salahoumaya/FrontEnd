@@ -10,7 +10,6 @@ import { routes } from 'src/app/shared/service/routes/routes';
 })
 export class TestSelectionComponent implements OnInit {
   tests: any[] = [];
-  selectedTestId: number | null = null;
   isLoading: boolean = true;
   errorMessage: string = '';
   public routes = routes;
@@ -35,14 +34,8 @@ export class TestSelectionComponent implements OnInit {
     });
   }
 
-  startTest() {
-    if (!this.selectedTestId) {
-      alert("Veuillez sélectionner un test avant de commencer.");
-      return;
-    }
-
-    this.router.navigate([this.routes.test_attempt, this.selectedTestId]);
-
-
+  startTest(testId: number) {
+    console.log("Navigation vers :", `${this.routes.test_attempt}/${testId}`);
+    this.router.navigate([`${this.routes.test_attempt}/${testId}`]);
   }
 }

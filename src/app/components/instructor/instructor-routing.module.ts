@@ -27,6 +27,7 @@ import { TestListComponent } from './tests/test-list/test-list.component';
 import { TestFormComponent } from './tests/test-form/test-form.component';
 import { QuestionListComponent } from './questions/question-list/question-list.component';
 import { QuestionFormComponent } from './questions/question-form/question-form.component';
+import { AdminTestResultComponent } from './tests/admin-test-result/admin-test-result.component';
 
 const routes: Routes = [
   {
@@ -67,6 +68,10 @@ const routes: Routes = [
         component: InstructorTicketsComponent,
       },
       ////////
+      {
+        path: 'instructor-test-result',
+        component: AdminTestResultComponent,
+      },
       {
         path: 'instructor-levelTest',
         component: TestListComponent,

@@ -17,6 +17,8 @@ export class RegisterComponent {
   errorMessage: string = '';
   loading = false;
 
+
+  selectedImageBase64: string | null = null;  // 🔹 Store image as base64 string
   passwordType = 'password';
   showPassword = true;
   passwordResponce: passwordResponce = {};
@@ -55,7 +57,31 @@ export class RegisterComponent {
       numTel: ['', [Validators.required, Validators.pattern('^[0-9]{9,10}$')]],
       cin: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
       role: ['USER'],
+      image: ['']
     });
+  }
+
+   /**
+   * 🔄 Handle Image Upload
+   */
+   onImageSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      // 🔴 Limiter la taille de l'image à 2 Mo
+      if (file.size > 2 * 1024 * 1024) {
+        alert("La taille de l'image ne doit pas dépasser 2 Mo.");
+        return;
+      }
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        this.selectedImageBase64 = reader.result as string;
+        this.registerForm.patchValue({
+          image: this.selectedImageBase64  // 🔹 Update form with base64 image
+        });
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   onSubmit() {
@@ -68,7 +94,6 @@ export class RegisterComponent {
       next: () => {
         alert('✅ Inscription réussie !');
         this.router.navigate([this.routes.login]);
-
       },
       error: (error) => {
         console.log('❌ Erreur API:', error);

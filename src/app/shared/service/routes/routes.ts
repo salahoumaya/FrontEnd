@@ -98,6 +98,10 @@ export class routes {
     return this.instructor + 'instructor-wishlist';
   }
   //////
+
+  public static get ResultTest(): string {
+    return this.instructor + 'instructor-test-result';
+  }
   public static get TestLevel(): string {
     return this.instructor + 'instructor-levelTest';
   }
@@ -178,8 +182,9 @@ export class routes {
 //
 
 public static get test_attempt(): string {
-  return '/test-attempt';
+  return  this.students + 'test-attempt';
 }
+
 
 
   public static get student_test(): string {

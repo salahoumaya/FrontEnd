@@ -20,17 +20,17 @@ export class userTestService {
     });
   }
 
-  // ✅ Récupérer tous les tests disponibles
+
   getTests(): Observable<any[]> {
     return this.http.get<any[]>(this.baseUrl, { headers: this.getAuthHeaders() });
   }
 
-  // ✅ Récupérer un test spécifique par ID
+
   getTestById(testId: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/${testId}`, { headers: this.getAuthHeaders() });
   }
 
-  // ✅ Soumettre les réponses d'un test et récupérer le score
+
   submitTest(submissionData: any): Observable<number> {
     return this.http.post<number>(`${this.baseUrl}/submit`, submissionData, {
       headers: this.getAuthHeaders()

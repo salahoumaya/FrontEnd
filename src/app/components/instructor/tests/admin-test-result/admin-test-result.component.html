@@ -1,0 +1,29 @@
+<div class="container mt-4">
+  <h3>Résultats du Test</h3>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Étudiant</th>
+        <th>Score</th>
+        <th>Réponses</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let submission of submissions">
+        <td>{{ submission.userId }}</td>
+        <td>{{ submission.score }} / 100</td>
+        <td>
+          <ul>
+            <li *ngFor="let answer of submission.answers">
+              <strong>Question {{ answer.questionId }}:</strong> {{ answer.userAnswer }}
+              <span [ngClass]="{'text-success': answer.isCorrect, 'text-danger': !answer.isCorrect}">
+                {{ answer.isCorrect ? '✔' : '❌' }}
+              </span>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -33,6 +33,7 @@ import { QuestionFormComponent } from './questions/question-form/question-form.c
 import { TestListComponent } from './tests/test-list/test-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { QuestionListComponent } from './questions/question-list/question-list.component';
+import { AdminTestResultComponent } from './tests/admin-test-result/admin-test-result.component';
 
 
 
@@ -62,7 +63,8 @@ import { QuestionListComponent } from './questions/question-list/question-list.c
     TestFormComponent,
     TestListComponent,
     QuestionFormComponent,
-    QuestionListComponent
+    QuestionListComponent,
+    AdminTestResultComponent
 
 
 

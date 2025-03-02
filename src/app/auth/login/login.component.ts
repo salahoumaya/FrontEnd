@@ -19,7 +19,6 @@ export class LoginComponent {
   passwordType = 'password';
   showPassword = true;
 
-  // Welcome Login Carousel Data
   welcomeLogin = [
     { img: 'assets/img/register-img.png' },
     { img: 'assets/img/register-img.png' },
@@ -40,52 +39,71 @@ export class LoginComponent {
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).*$/)
+        ],
+      ],
     });
   }
 
-  /**
-   * 🔹 Handle Login Submission
-   */
   onSubmit() {
-    if (this.loginForm.invalid) return;
+    if (this.loginForm.invalid) {
+        this.errorMessage = 'Veuillez corriger les erreurs ci-dessus avant de continuer.';
+        return;
+    }
 
     this.loading = true;
     console.log('📤 Sending login request:', this.loginForm.value);
 
     this.authService.login(this.loginForm.value).subscribe({
-      next: (response) => {
-        console.log('✅ Login Successful:', response);
-        localStorage.setItem('token', response.token);
+        next: (response) => {
+            console.log('✅ Login Successful:', response);
 
-        // 🔹 Redirection en fonction du rôle
-        switch (response.role) {
-          case 'ADMIN':
-            this.router.navigate(['/instructor/instructor-dashboard']);
-            break;
-          case 'MODERATOR':
-            this.router.navigate(['/home-three']); // Change selon ta page modérateur
-            break;
-          default:
-            this.router.navigate(['/student/student-dashboard']); // Page par défaut des utilisateurs normaux
-            break;
-        }
+            // 🔹 Vérification du token dans la réponse
+            if (response.token) {
+                localStorage.setItem('token', response.token);  // Stocker le token si présent
+            } else {
+                this.errorMessage = ' Réessayez.';
+                this.loading = false;
+                return;
+            }
 
-        alert('✅ Login successful!');
-      },
-      error: (error) => {
-        console.log('❌ Login Error:', error);
-        this.errorMessage = error.error?.message || error.message || 'Invalid credentials. Please try again.';
-        this.loading = false;
-      },
+            // 🔹 Redirection selon le rôle
+            switch (response.role) {
+                case 'ADMIN':
+                    this.router.navigate(['/instructor/instructor-dashboard']);
+                    break;
+                case 'MODERATOR':
+                    this.router.navigate(['/home-three']);
+                    break;
+                default:
+                    this.router.navigate(['/student/student-test']);
+                    break;
+            }
+
+            alert('✅ Login réussi !');
+        },
+        error: (error) => {
+            console.log('❌ Login Error:', error);
+            if (error.status === 401) {
+                this.errorMessage = 'Mot de passe incorrect. Veuillez réessayer.';
+            } else if (error.status === 404) {
+                this.errorMessage = 'Email non trouvé. Veuillez vérifier votre email.';
+            } else if (error.status === 403) {
+                this.errorMessage = 'Accès refusé. Veuillez contacter l’administrateur.';
+            } else {
+                this.errorMessage = error.error?.message || error.message || 'Une erreur est survenue. Réessayez.';
+            }
+            this.loading = false;
+        },
     });
-  }
+}
 
 
-
-  /**
-   * 🔹 Toggle Password Visibility
-   */
   togglePassword() {
     this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
     this.showPassword = !this.showPassword;

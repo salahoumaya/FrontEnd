@@ -22,6 +22,8 @@ const routes: Routes = [
     path: '',
     component: StudentComponent,
     children: [
+      { path: 'student-test', component: TestSelectionComponent },
+      { path: 'test-attempt/:id', component: TestAttemptComponent },
       {
         path: 'student-view',
         loadChildren: () =>
@@ -29,10 +31,10 @@ const routes: Routes = [
             (m) => m.StudentViewModule
           ),
       },
+
       { path: 'student-profile', component: StudentProfileComponent },
       { path: 'student-dashboard', component: StudentDashboardComponent },
-      { path: 'student-test', component: TestSelectionComponent },
-      { path: 'test-attempt/:id', component: TestAttemptComponent }, // ✅ Corrigé ici !
+
       { path: 'view-invoice', component: ViewInvoiceComponent },
       { path: 'student-qa', component: StudentQaComponent },
       { path: 'student-quiz', component: StudentQuizComponent },

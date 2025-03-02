@@ -23,8 +23,8 @@ export class TestFormComponent {
 
   createTest() {
     // Validation des valeurs minimales/maximales
-    if (this.test.duration < 10 || this.test.duration > 180) {
-      alert("La durée du test doit être entre 10 et 180 minutes.");
+    if (this.test.duration < 1 || this.test.duration > 180) {
+      alert("La durée du test doit être entre 1 et 180 minutes.");
       return;
     }
     if (this.test.score < 10 || this.test.score > 100) {
