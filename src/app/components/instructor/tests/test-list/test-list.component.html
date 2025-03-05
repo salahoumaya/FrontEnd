@@ -51,7 +51,9 @@
                                                 </div>
                                             </div>
                                             <div class="course-edit-btn d-flex align-items-center justify-content-between">
-                                                <a href="javascript:void(0);" (click)="getTestById(test.id)"><i class="bx bx-info-circle me-2"></i>Détails</a>
+                                              <button class="btn btn-info" (click)="viewTestResults(test.id)">
+                                                Voir Résultats
+                                              </button>
                                                 <a href="javascript:void(0);" (click)="deleteTest(test.id)"><i class="bx bx-trash me-2"></i>Supprimer</a>
                                             </div>
                                         </div>

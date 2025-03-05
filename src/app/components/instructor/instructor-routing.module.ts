@@ -69,9 +69,10 @@ const routes: Routes = [
       },
       ////////
       {
-        path: 'instructor-test-result',
+        path: 'instructor-test-result/:id/submissions',
         component: AdminTestResultComponent,
-      },
+    },
+
       {
         path: 'instructor-levelTest',
         component: TestListComponent,

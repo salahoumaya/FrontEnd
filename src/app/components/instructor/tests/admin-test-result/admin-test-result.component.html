@@ -1,10 +1,12 @@
 <div class="container mt-4">
   <h3>Résultats du Test</h3>
 
+  <!-- Tableau des résultats -->
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Étudiant</th>
+        <th>ID Utilisateur</th>
+        <th>ID Test</th>
         <th>Score</th>
         <th>Réponses</th>
       </tr>
@@ -12,6 +14,7 @@
     <tbody>
       <tr *ngFor="let submission of submissions">
         <td>{{ submission.userId }}</td>
+        <td>{{ submission.testId }}</td>
         <td>{{ submission.score }} / 100</td>
         <td>
           <ul>
@@ -26,4 +29,22 @@
       </tr>
     </tbody>
   </table>
+
+  <!-- ✅ Section des Statistiques -->
+  <div *ngIf="statistics">
+    <h4 class="mt-4">📊 Statistiques</h4>
+    <ul>
+      <li><strong>Test le plus réussi :</strong> {{ statistics.bestTest?.testName || 'N/A' }} avec un score moyen de {{ statistics.bestTest?.averageScore.toFixed(2) || 0 }}%</li>
+      <li><strong>Score moyen global :</strong> {{ statistics.averageScore.toFixed(2) || 0 }}%</li>
+      <li><strong>Nombre de participants :</strong> {{ statistics.totalParticipants || 0 }}</li>
+    </ul>
+
+    <h5 class="mt-4">Questions les plus difficiles :</h5>
+    <ul>
+      <li *ngFor="let question of difficultQuestions">
+        <strong>{{ question.questionText }}:</strong> Taux de réponse correcte: {{ question.correctRate?.toFixed(2) || 0 }}%
+      </li>
+    </ul>
+
+  </div>
 </div>

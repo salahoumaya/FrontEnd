@@ -34,6 +34,8 @@ import { TestListComponent } from './tests/test-list/test-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { QuestionListComponent } from './questions/question-list/question-list.component';
 import { AdminTestResultComponent } from './tests/admin-test-result/admin-test-result.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 
 
@@ -80,6 +82,16 @@ import { AdminTestResultComponent } from './tests/admin-test-result/admin-test-r
     ReactiveFormsModule,
     NgxPaginationModule,
     SharedModule,
+    NgApexchartsModule,
+    NgCircleProgressModule.forRoot({
+      // Configuration par défaut pour les graphiques circulaires
+      radius: 60,
+      outerStrokeWidth: 8,
+      innerStrokeWidth: 4,
+      outerStrokeColor: "#4882c2",
+      innerStrokeColor: "#e7e8ea",
+      animationDuration: 300
+    })
   ],
 })
 export class InstructorModule { }

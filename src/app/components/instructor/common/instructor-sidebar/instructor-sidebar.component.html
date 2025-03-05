@@ -3,12 +3,15 @@
         <div class="settings-menu">
             <div class="profile-bg">
                 <div class="profile-img">
-                    <a [routerLink]="routes.instructorProfile"><img src="assets/img/user/user-17.jpg" alt="Img"></a>
+                  <a [routerLink]="routes.instructorProfile">
+                    <img [src]="userPhoto" alt="Photo de profil">
+                </a>
                 </div>
             </div>
             <div class="profile-group">
                 <div class="profile-name text-center">
-                    <h4><a [routerLink]="routes.instructorProfile">Admin</a></h4>
+                  <h4><a [routerLink]="routes.instructorProfile">{{ userName }}</a></h4>
+
                     <p></p>
                     <a [routerLink]="routes.page_add_course" class="add-course btn-primary">Add New Course</a>
                 </div>

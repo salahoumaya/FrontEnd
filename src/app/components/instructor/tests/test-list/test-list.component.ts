@@ -96,4 +96,10 @@ export class TestListComponent implements OnInit {
       error: err => console.error("Erreur lors de l'ajout de la question au test :", err)
     });
   }
+  viewTestResults(testId: number) {
+    this.router.navigate([`${this.routes.ResultTest}${testId}/submissions`]);
+}
+
+
+
 }

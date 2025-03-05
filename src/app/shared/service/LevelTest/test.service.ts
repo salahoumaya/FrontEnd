@@ -48,7 +48,13 @@ addQuestionToTest(testId: number, questionId: number): Observable<any> {
   );
 }
 getTestSubmissions(testId: number): Observable<any[]> {
+
   return this.http.get<any[]>(`${this.baseUrl}/${testId}/submissions`, {
+    headers: this.getAuthHeaders()
+  });
+}
+getTestStatistics(testId: number): Observable<any> {
+  return this.http.get<any>(`${this.baseUrl}/${testId}/statistics`, {
     headers: this.getAuthHeaders()
   });
 }

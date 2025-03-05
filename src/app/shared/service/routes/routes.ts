@@ -100,8 +100,9 @@ export class routes {
   //////
 
   public static get ResultTest(): string {
-    return this.instructor + 'instructor-test-result';
-  }
+    return this.instructor + 'instructor-test-result/';
+}
+
   public static get TestLevel(): string {
     return this.instructor + 'instructor-levelTest';
   }
