@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { InstructorRoutingModule } from './instructor-routing.module';
@@ -36,6 +36,7 @@ import { QuestionListComponent } from './questions/question-list/question-list.c
 import { AdminTestResultComponent } from './tests/admin-test-result/admin-test-result.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -68,10 +69,6 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     QuestionListComponent,
     AdminTestResultComponent
 
-
-
-
-
   ],
   imports: [
     CommonModule,
@@ -93,5 +90,6 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
       animationDuration: 300
     })
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class InstructorModule { }

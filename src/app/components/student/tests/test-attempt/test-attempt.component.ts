@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { userTestService } from 'src/app/shared/service/LevelTest/userTest.service';
 
@@ -12,7 +12,7 @@ export class TestAttemptComponent implements OnInit {
   answers: { [questionId: number]: string } = {};
   score: number | null = null;
   testId: number = 0;
-  timeLeft: number = 0; // Temps restant en secondes
+  timeLeft: number = 0;
   timerInterval: any;
   hasSubmitted: boolean = false;
 
@@ -33,13 +33,28 @@ export class TestAttemptComponent implements OnInit {
     this.loadTestDetails();
   }
 
+
+  @HostListener('document:copy', ['$event'])
+  @HostListener('document:paste', ['$event'])
+  @HostListener('document:cut', ['$event'])
+  handleCopyPaste(event: ClipboardEvent) {
+    event.preventDefault(); // Bloque copier, couper, coller
+    alert('🚫 Copier, couper et coller sont désactivés pendant le test.');
+  }
+
+
+  @HostListener('document:contextmenu', ['$event'])
+  disableRightClick(event: MouseEvent) {
+    event.preventDefault(); // Bloque le clic droit
+    alert('🚫 Clic droit désactivé pendant le test.');
+  }
+
   loadTestDetails() {
     this.testService.getTestById(this.testId).subscribe({
       next: (data) => {
         this.test = data;
 
         if (this.test?.duration) {
-          // ✅ Initialiser timeLeft avec la durée du test en secondes
           this.timeLeft = this.test.duration * 60;
           this.startTimer();
         } else {
@@ -58,14 +73,15 @@ export class TestAttemptComponent implements OnInit {
   startTimer() {
     this.timerInterval = setInterval(() => {
       if (this.timeLeft > 0) {
-        this.timeLeft--;  // Diminue le temps restant chaque seconde
+        this.timeLeft--;
       } else {
         clearInterval(this.timerInterval);
         alert("⏳ Temps écoulé ! Votre test est soumis automatiquement.");
-        this.autoSubmitTest(); // ✅ Appelle la fonction de soumission automatique
+        this.autoSubmitTest();
       }
     }, 1000);
   }
+
   autoSubmitTest() {
     const submissionData = {
       testId: this.testId,
@@ -88,8 +104,6 @@ export class TestAttemptComponent implements OnInit {
       }
     });
   }
-
-
 
   submitTest() {
     if (this.hasSubmitted) {

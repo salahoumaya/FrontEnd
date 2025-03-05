@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TestService } from 'src/app/shared/service/LevelTest/test.service';
+import {
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexFill,
+  ApexStroke,
+  ApexTooltip
+} from 'ng-apexcharts';
 
 @Component({
   selector: 'app-admin-test-results',
@@ -12,9 +20,6 @@ export class AdminTestResultComponent implements OnInit {
   submissions: any[] = [];
   statistics: any = null;
   difficultQuestions: any[] = [];
-chartData: any[] = [];
-circleChartData: any[] = [];
-averageScore: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,32 +50,17 @@ averageScore: number = 0;
   }
 
 
+
   loadStatistics() {
     this.testService.getTestStatistics(this.testId).subscribe({
       next: (data) => {
         console.log("📊 Statistiques reçues :", data);
         this.statistics = data;
         this.difficultQuestions = data.difficultQuestions;
-        this.averageScore = data.averageScore || 0;
-        this.prepareChartData();
       },
       error: (err) => {
         console.error("❌ Erreur lors du chargement des statistiques :", err);
       }
     });
-  }
-
-  prepareChartData() {
-    // ✅ Données pour les graphiques en barres
-    this.chartData = [
-      { name: 'Score moyen', value: this.averageScore },
-      { name: 'Taux de réussite', value: this.statistics.passRate || 0 }
-    ];
-
-    // ✅ Données pour les graphiques circulaires
-    this.circleChartData = this.difficultQuestions.map((question) => ({
-      questionText: question.questionText,
-      correctRate: question.correctRate
-    }));
   }
 }

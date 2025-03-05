@@ -14,6 +14,7 @@
                   <div class="settings-menu p-0">
                       <div class="profile-heading">
                           <h3>Mes Tests</h3>
+
                           <p>Gérez vos tests et leurs mises à jour</p>
                       </div>
 
@@ -42,19 +43,19 @@
                                             <p>{{ test.description }}</p>
                                             <div class="course-info d-flex align-items-center">
                                                 <div class="rating-img d-flex align-items-center">
-                                                    <img src="assets/img/icon/icon-01.svg" alt="Icon">
+                                                    <img src="assets/img/icon/icon-02.svg" alt="Icon">
                                                     <p>Durée: {{ test.duration }} min</p>
                                                 </div>
                                                 <div class="course-view d-flex align-items-center">
-                                                    <img src="assets/img/icon/icon-02.svg" alt="Icon">
+                                                    <img src="assets/img/icon/icon-01.svg" alt="Icon">
                                                     <p>Score: {{ test.score }}</p>
                                                 </div>
                                             </div>
                                             <div class="course-edit-btn d-flex align-items-center justify-content-between">
-                                              <button class="btn btn-info" (click)="viewTestResults(test.id)">
-                                                Voir Résultats
-                                              </button>
-                                                <a href="javascript:void(0);" (click)="deleteTest(test.id)"><i class="bx bx-trash me-2"></i>Supprimer</a>
+                                              <a href="javascript:void(0);" (click)="viewTestResults(test.id)">
+                                                <i class="bx bx-trash me-2"></i>Voir Resultat</a>
+                                                <a href="javascript:void(0);"
+                                                 (click)="deleteTest(test.id)"><i class="bx bx-trash me-2"></i>Supprimer</a>
                                             </div>
                                         </div>
                                     </div>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
   declarations: [
@@ -27,12 +29,28 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgxPaginationModule,
     CommonModule,
     ReactiveFormsModule,
-
     FormsModule,
-    ReactiveFormsModule,  // ✅ Garder seulement une seule importation
+    ReactiveFormsModule,
     AppRoutingModule,
-    SharedModule
-  ],
+    BrowserAnimationsModule,
+    SharedModule,
+    NgApexchartsModule,
+    NgCircleProgressModule.forRoot({
+      radius: 60,
+      outerStrokeWidth: 8,
+      innerStrokeWidth: 4,
+      outerStrokeColor: "#4882c2",
+      innerStrokeColor: "#e7e8ea",
+      animationDuration: 300,
+      showTitle: false,
+      showUnits: true,
+      showSubtitle: false,
+      units: '%',
+    }),
+
+      ],
+
+
   providers: [],
   bootstrap: [AppComponent]
 })

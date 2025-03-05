@@ -28,7 +28,7 @@
     "aos": "^2.3.4",
     "bootstrap": "^5.3.3",
     "jquery": "^3.7.1",
-    "ng-apexcharts": "^1.11.0",
+    "ng-apexcharts": "^1.15.0",
     "ng-circle-progress": "^1.7.1",
     "ngx-bootstrap": "^18.0.2",
     "ngx-countup": "^13.2.0",
