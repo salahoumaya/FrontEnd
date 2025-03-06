@@ -26,6 +26,10 @@ export class TestService {
   createTest(test: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}`, test,{headers: this.getAuthHeaders()});
   }
+  updateTest(testId: number, updatedTest: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/${testId}`, updatedTest, { headers: this.getAuthHeaders() });
+  }
+
 
 
 

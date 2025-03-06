@@ -72,6 +72,7 @@ const routes: Routes = [
         path: 'instructor-test-result/:id/submissions',
         component: AdminTestResultComponent,
     },
+    { path: 'instructor-editTest/:id', component: TestFormComponent },
 
       {
         path: 'instructor-levelTest',

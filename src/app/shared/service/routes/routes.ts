@@ -102,6 +102,9 @@ export class routes {
   public static get ResultTest(): string {
     return this.instructor + 'instructor-test-result/';
 }
+public static get EditTest(): string {
+  return this.instructor + 'instructor-editTest';
+}
 
   public static get TestLevel(): string {
     return this.instructor + 'instructor-levelTest';
@@ -109,6 +112,7 @@ export class routes {
   public static get AddLevel(): string {
     return this.instructor + 'instructor-addTest';
   }
+
   public static get Questions(): string {
     return this.instructor + 'instructor-question';
   }

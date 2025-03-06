@@ -25,10 +25,17 @@
                               </select>
                           </div>
 
+                          <!-- 🟢 Champ pour télécharger une image ou saisir du texte -->
                           <div class="form-group">
-                              <label>Question</label>
-                              <input type="text" [(ngModel)]="question.questionText" class="form-control" required>
+                              <label>Question (Texte ou Image)</label>
+                              <input *ngIf="!question.questionImage" type="text" [(ngModel)]="question.questionText"
+                                     class="form-control" placeholder="Texte de la question" required>
+                              <input type="file" (change)="onImageSelected($event)" accept="image/*" class="form-control">
                           </div>
+
+                          <!-- 🟢 Aperçu de l'image sélectionnée -->
+                          <img *ngIf="question.questionImage" [src]="question.questionImage" alt="Aperçu"
+                               class="img-thumbnail mt-2" width="200">
 
                           <div class="form-group">
                               <label>Option A</label>
@@ -61,7 +68,6 @@
                           </div>
 
                           <div class="d-flex justify-content-between mt-4">
-                              <!-- Submit Button -->
                               <button (click)="createQuestion()" class="btn btn-success">Ajouter</button>
                           </div>
                       </div>

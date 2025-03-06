@@ -30,7 +30,8 @@
                                     <div class="product">
                                         <div class="product-img">
                                             <a href="javascript:void(0);">
-                                                <img class="img-fluid" alt="Test Image" src="assets/img/course/course-02.jpg">
+                                              <img class="img-fluid" alt="Test Image" [src]="test.image ? 'data:image/png;base64,' + test.image : 'assets/img/course/course-02.jpg'">
+
                                             </a>
                                             <div class="price">
                                                 <h3>{{ test.scheduledAt | date:'dd/MM/yyyy' }}</h3>
@@ -52,10 +53,12 @@
                                                 </div>
                                             </div>
                                             <div class="course-edit-btn d-flex align-items-center justify-content-between">
-                                              <a href="javascript:void(0);" (click)="viewTestResults(test.id)">
-                                                <i class="bx bx-trash me-2"></i>Voir Resultat</a>
-                                                <a href="javascript:void(0);"
-                                                 (click)="deleteTest(test.id)"><i class="bx bx-trash me-2"></i>Supprimer</a>
+                                              <a   class="btn btn-primary " (click)="viewTestResults(test.id)">
+                                                Resultat</a>
+                                                <a class="btn btn-warning"  (click)="goToEditTest(test.id)">
+                                                  Modifier
+                                              </a>
+                                                <a  class="btn btn-primary " (click)="deleteTest(test.id)">Supprimer</a>
                                             </div>
                                         </div>
                                     </div>

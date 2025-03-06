@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TestService } from 'src/app/shared/service/LevelTest/test.service';
 import { routes } from 'src/app/shared/service/routes/routes';
 
@@ -8,52 +8,80 @@ import { routes } from 'src/app/shared/service/routes/routes';
   templateUrl: './test-form.component.html',
   styleUrls: ['./test-form.component.scss']
 })
-export class TestFormComponent {
+export class TestFormComponent implements OnInit {
   public routes = routes;
-  selectedImageBase64: string | null = null;  // 🔹 Stocker l'image en base64
+  selectedImage: File | null = null;
+  isEditMode: boolean = false;
+  testId: number | null = null;
+  selectedImageBase64: string | null = null;  // 🔹 Stocker l'image en base64 ici
 
-  // 🔹 Ajouter 'image' dans l'objet test pour stocker l'image en base64
   test = {
     title: '',
     description: '',
     scheduledAt: '',
     duration: 60,
     score: 100,
-    image: ''  // 🔹 Nouvelle propriété pour l'image
+    image: ''
   };
 
-  constructor(private testService: TestService, private router: Router) {}
+  constructor(
+    private testService: TestService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  createTest() {
-    if (this.test.duration < 1 || this.test.duration > 180) {
-      alert("La durée du test doit être entre 1 et 180 minutes.");
-      return;
-    }
-    if (this.test.score < 10 || this.test.score > 100) {
-      alert("Le score total doit être entre 10 et 100.");
-      return;
-    }
-
-    this.testService.createTest(this.test).subscribe(() => {
-      alert("Test créé avec succès !");
-      this.router.navigate([this.routes.TestLevel]);
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
+        this.testId = +id;
+        this.isEditMode = true;
+        this.loadTestDetails(this.testId);
+      }
     });
   }
 
-  // 🔹 Fonction pour gérer l'image sélectionnée et la convertir en base64
+  loadTestDetails(testId: number) {
+    this.testService.getTestById(testId).subscribe({
+      next: (data) => {
+        this.test = data;
+        console.log("Données du test chargées :", data);
+      },
+      error: (err) => console.error("Erreur lors du chargement du test :", err)
+    });
+  }
+
   onImageSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
-      if (file.size > 2 * 1024 * 1024) {
-        alert("La taille de l'image ne doit pas dépasser 2 Mo.");
+      // 🔴 Limiter la taille de l'image à 500 Ko
+      if (file.size > 500 * 1024) {
+        alert("La taille de l'image ne doit pas dépasser 500 Ko.");
         return;
       }
+
       const reader = new FileReader();
       reader.onload = () => {
         this.selectedImageBase64 = reader.result as string;
-        this.test.image = this.selectedImageBase64;  // 🔹 Mettre à jour l'image dans l'objet test
+        // 🔹 Enlever le préfixe "data:image/png;base64," et stocker seulement les données base64
+        this.test.image = this.selectedImageBase64.split(',')[1];
       };
       reader.readAsDataURL(file);
+    }
+  }
+
+
+  saveTest() {
+    if (this.isEditMode && this.testId) {
+      this.testService.updateTest(this.testId, this.test).subscribe(() => {
+        alert("Test mis à jour avec succès !");
+        this.router.navigate([this.routes.TestLevel]);
+      });
+    } else {
+      this.testService.createTest(this.test).subscribe(() => {
+        alert("Test créé avec succès !");
+        this.router.navigate([this.routes.TestLevel]);
+      });
     }
   }
 

@@ -32,6 +32,7 @@ export class TestListComponent implements OnInit {
       next: (data) => {
         this.tests = data;
         this.filteredTests = data;
+        console.log("Tests récupérés :", data); // Pour vérifier les images dans la console
         this.isLoading = false;
       },
       error: (err) => {
@@ -41,6 +42,22 @@ export class TestListComponent implements OnInit {
       }
     });
   }
+  editTest(test: any) {
+    const updatedTest = { ...test }; // Copier le test sélectionné pour l'éditer
+    const newTitle = prompt("Modifier le titre du test:", test.title);
+    if (newTitle) {
+      updatedTest.title = newTitle;
+      this.testService.updateTest(test.id, updatedTest).subscribe({
+        next: () => {
+          alert("Test mis à jour avec succès !");
+          this.loadTests(); // Recharger les tests après la mise à jour
+        },
+        error: (err) => console.error("Erreur lors de la mise à jour du test :", err)
+      });
+    }
+  }
+
+
 
   filterTests() {
     this.filteredTests = this.tests.filter(test =>
@@ -99,6 +116,10 @@ export class TestListComponent implements OnInit {
   viewTestResults(testId: number) {
     this.router.navigate([`${this.routes.ResultTest}${testId}/submissions`]);
 }
+goToEditTest(testId: number) {
+  this.router.navigate([`${this.routes.EditTest}/${testId}`]);
+}
+
 
 
 

@@ -38,14 +38,14 @@ export class TestAttemptComponent implements OnInit {
   @HostListener('document:paste', ['$event'])
   @HostListener('document:cut', ['$event'])
   handleCopyPaste(event: ClipboardEvent) {
-    event.preventDefault(); // Bloque copier, couper, coller
+    event.preventDefault();
     alert('🚫 Copier, couper et coller sont désactivés pendant le test.');
   }
 
 
   @HostListener('document:contextmenu', ['$event'])
   disableRightClick(event: MouseEvent) {
-    event.preventDefault(); // Bloque le clic droit
+    event.preventDefault();
     alert('🚫 Clic droit désactivé pendant le test.');
   }
 

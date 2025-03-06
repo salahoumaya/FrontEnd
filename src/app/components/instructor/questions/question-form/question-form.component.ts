@@ -12,6 +12,7 @@ import { routes } from 'src/app/shared/service/routes/routes';
 export class QuestionFormComponent implements OnInit {
   question = {
     questionText: '',
+    questionImage: '',  // 🟢 Champ pour l'image (base64)
     optionA: '',
     optionB: '',
     optionC: '',
@@ -22,6 +23,7 @@ export class QuestionFormComponent implements OnInit {
   public routes = routes;
   tests: any[] = [];
   selectedTestId: number | null = null;
+  selectedImageBase64: string | null = null;  // 🔹 Stocker l'image en base64 ici
 
   constructor(
     private questionService: QuestionService,
@@ -44,13 +46,25 @@ export class QuestionFormComponent implements OnInit {
     });
   }
 
+  onImageSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.selectedImageBase64 = reader.result as string;
+        // 🔹 Enlever le préfixe "data:image/png;base64," et stocker seulement les données base64
+        this.question.questionImage = this.selectedImageBase64.split(',')[1];
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   createQuestion() {
     if (!this.selectedTestId) {
       alert("Veuillez sélectionner un test.");
       return;
     }
 
-    // Validation : au moins 3 options doivent être remplies
     const filledOptions = [this.question.optionA, this.question.optionB, this.question.optionC, this.question.optionD]
       .filter(option => option.trim() !== '');
 
@@ -59,7 +73,6 @@ export class QuestionFormComponent implements OnInit {
       return;
     }
 
-    // Validation : la réponse correcte doit être l'une des options fournies
     if (!filledOptions.includes(this.question.correctAnswer)) {
       alert("La réponse correcte doit être l'une des options fournies.");
       return;

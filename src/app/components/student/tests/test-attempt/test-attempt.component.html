@@ -12,13 +12,21 @@
                   {{ (timeLeft / 60) | number:'2.0-0' }}:{{ (timeLeft % 60) | number:'2.0-0' }}
                 </span>
               </p>
-
-
             </div>
 
-            <div *ngFor="let question of test?.questions">
-              <h4>{{ question.questionText }}</h4>
-              <div *ngFor="let option of ['optionA', 'optionB', 'optionC', 'optionD']">
+            <div *ngFor="let question of test?.questions" class="mb-4">
+              <!-- 🔄 Vérifier si la question est une image ou un texte -->
+              <div *ngIf="question.questionImage; else textQuestion">
+                <img [src]="'data:image/png;base64,' + question.questionImage"
+                     alt="Image de la Question"
+                     class="img-thumbnail mb-2"
+                     style="width: 300px; height: 200px; object-fit: cover;">
+              </div>
+              <ng-template #textQuestion>
+                <h4>{{ question.questionText }}</h4>
+              </ng-template>
+
+              <div *ngFor="let option of ['optionA', 'optionB', 'optionC', 'optionD']" class="mb-2">
                 <input type="radio" [name]="'question' + question.id" [value]="question[option]"
                        [(ngModel)]="answers[question.id]"> {{ question[option] }}
               </div>
@@ -31,3 +39,9 @@
             <div *ngIf="score !== null">
               <h4>Votre Score : {{ score }} / {{ test?.score }}</h4>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
