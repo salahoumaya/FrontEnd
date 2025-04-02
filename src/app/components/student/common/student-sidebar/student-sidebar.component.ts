@@ -10,6 +10,7 @@ import { routes } from 'src/app/shared/service/routes/routes';
 })
 export class StudentSidebarComponent implements OnInit {
   public routes = routes;
+  public userProfile: any = {};
   public userName: string = '';
   public userImage: string = 'assets/img/user/default-avatar.png'; // Image par défaut
 
@@ -22,12 +23,14 @@ export class StudentSidebarComponent implements OnInit {
   getUserProfile() {
     this.authService.getProfile().subscribe({
       next: (response) => {
-        console.log('📥 Données utilisateur reçues:', response);
-        this.userName = response.ourUsers.name || 'Utilisateur';
-        this.userImage = response.ourUsers.image ? `data:image/png;base64,${response.ourUsers.image}` : this.userImage;
+        console.log('📥 Détails de ourUsers :', response.ourUsers);
+
+        this.userProfile = response.ourUsers;
+
       },
       error: (error) => {
-        console.log('❌ Erreur lors de la récupération du profil utilisateur:', error);
+        console.log('❌ Erreur lors de la récupération des données utilisateur :', error);
+
       }
     });
   }

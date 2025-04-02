@@ -7,6 +7,149 @@ export class routes {
 
   // Instructor Routings
 
+  public static get moderator(): string {
+    return this.baseUrl + '/moderator/';
+  }
+  public static get moderator_dashboard(): string {
+    return this.moderator + 'moderator-dashboard';
+  }
+  public static get moderator_instructor(): string {
+    return this.moderator + 'dashboard-moderator';
+  }
+  public static get moderator_chat(): string {
+    return this.moderator + 'moderator-chat';
+  }
+  public static get moderator_deposit_dashboard(): string {
+    return this.moderator + 'deposit-moderator-dashboard';
+  }
+  public static get moderator_list(): string {
+    return this.moderator + 'moderator-view/moderator-list';
+  }
+  public static get moderator_grid(): string {
+    return this.moderator + 'moderator-view/moderator-grid';
+  }
+  public static get moderator_course(): string {
+    return this.moderator + 'moderator-course';
+  }
+  public static get moderator_reviews(): string {
+    return this.moderator + 'moderator-reviews';
+  }
+  public static get moderator_student_grid(): string {
+    return this.moderator + 'moderator-student-grid';
+  }
+  public static get moderator_student_list(): string {
+    return this.moderator + 'moderator-student-list';
+  }
+  public static get moderator_earnings(): string {
+    return this.instructor + 'moderator-earnings';
+  }
+  public static get moderator_orders(): string {
+    return this.moderator + 'moderator-orders';
+  }
+  public static get moderator_payouts(): string {
+    return this.moderator + 'moderator-payouts';
+  }
+  public static get moderator_new_tickets(): string {
+    return this.moderator + 'moderator-new-tickets';
+  }
+  public static get moderator_tickets(): string {
+    return this.moderator + 'moderator-tickets';
+  }
+  public static get moderator_edit_profile(): string {
+    return this.moderator + 'moderator-edit-profile';
+  }
+  public static get moderator_security(): string {
+    return this.moderator + 'moderator-security';
+  }
+  public static get moderator_social_profiles(): string {
+    return this.moderator + 'moderator-social-profiles';
+  }
+  public static get moderator_notification(): string {
+    return this.moderator + 'moderator-notification';
+  }
+  public static get moderator_profile_privacy(): string {
+    return this.moderator + 'moderator-profile-privacy';
+  }
+  public static get moderator_delete_profile(): string {
+    return this.moderator + 'moderator-delete-profile';
+  }
+  public static get moderator_linked_account(): string {
+    return this.moderator + 'moderator-linked-account';
+  }
+  public static get moderator_instructor_profile(): string {
+    return this.moderator + 'moderator-profile';
+  }
+  public static get moderator_withdrawal_instructor(): string {
+    return this.moderator+ 'withdrawal-moderator';
+  }
+  public static get moderator_deposit_instructor(): string {
+    return this.moderator + 'deposit-moderator';
+  }
+  public static get moderator_transactions_instructor(): string {
+    return this.instructor + 'transactions-moderator';
+  }
+  public static get moderatorAnnouncements(): string {
+    return this.instructor + 'instructor-announcements';
+  }
+  public static get moderatorAssignment(): string {
+    return this.instructor + 'instructor-assignment';
+  }
+  public static get moderatorWishlist(): string {
+    return this.moderator+ 'moderator-wishlist';
+  }
+
+
+  public static get moderatorChangePassword(): string {
+    return this.moderator + 'settings/moderator-change-password';
+  }
+  public static get moderatorSettings(): string {
+    return this.moderator + 'settings/moderator-settings';
+  }
+  public static get moderatorwithdraw(): string {
+    return this.moderator + 'moderator-withdraw';
+  }
+  public static get moderatorProfile(): string {
+    return this.moderator + 'moderator-profile';
+  }
+  public static get moderatorQA(): string {
+    return this.moderator + 'moderator-qa';
+  }
+  public static get moderatorQuiz(): string {
+    return this.moderator + 'moderator-quiz';
+  }
+  public static get moderatorQuizAttempts(): string {
+    return this.moderator + 'moderator-quiz-attempts';
+  }
+  public static get moderatorQuizAttemptsDetails(): string {
+    return this.moderator + 'moderator-quiz-attempts-details';
+  }
+  public static get moderatorSettingNotifications(): string {
+    return this.moderator + 'settings/moderator-setting-notifications';
+  }
+  public static get moderatorReferral(): string {
+    return this.moderator + 'moderator-referral';
+  }
+  public static get moderatorDeleteAccount(): string {
+    return this.moderator + 'settings/moderator-delete-account';
+  }
+  public static get moderatorCourse(): string {
+    return this.moderator + 'moderator-course';
+  }
+  public static get moderatorDetails(): string {
+    return this.moderator + 'moderator-details';
+  }
+  public static get moderatorEnrolledCourse(): string {
+    return this.moderator + 'moderator-enrolled-course';
+  }
+  public static get moderatorQuizDetails(): string {
+    return this.moderator + 'moderator-quiz-details';
+  }
+  public static get moderatorSettingWithdraw(): string {
+    return this.moderator + 'settings/moderatorsetting-withdraw';
+  }
+  // moderator routing
+  // Instructor Routings
+
   public static get instructor(): string {
     return this.baseUrl + '/instructor/';
   }
@@ -19,6 +162,11 @@ export class routes {
   public static get instructor_chat(): string {
     return this.instructor + 'instructor-chat';
   }
+
+  public static get instructor_reclamation(): string {
+    return this.instructor + 'instructor-reclamation';
+  }
+
   public static get instructor_deposit_dashboard(): string {
     return this.instructor + 'deposit-instructor-dashboard';
   }
@@ -169,6 +317,9 @@ public static get EditTest(): string {
     return this.instructor + 'settings/instructor-setting-withdraw';
   }
 
+
+
+
   // Student Routings
 
   public static get students(): string {
@@ -188,6 +339,14 @@ public static get EditTest(): string {
 
 public static get test_attempt(): string {
   return  this.students + 'test-attempt';
+}
+
+public static get Mes_Reclamations(): string {
+  return  this.students + 'student-reclamation';
+}
+
+public static get CreateReclamation(): string {
+  return  this.students + 'create-reclamation';
 }
 
 

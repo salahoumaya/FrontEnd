@@ -36,7 +36,7 @@ import { QuestionListComponent } from './questions/question-list/question-list.c
 import { AdminTestResultComponent } from './tests/admin-test-result/admin-test-result.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { NgCircleProgressModule } from 'ng-circle-progress';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminReclamationsComponent } from './reclamation/admin-reclamations/admin-reclamations.component';
 
 
 
@@ -67,7 +67,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TestListComponent,
     QuestionFormComponent,
     QuestionListComponent,
-    AdminTestResultComponent
+    AdminTestResultComponent,
+    AdminReclamationsComponent,
 
   ],
   imports: [
@@ -81,7 +82,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SharedModule,
     NgApexchartsModule,
     NgCircleProgressModule.forRoot({
-      // Configuration par défaut pour les graphiques circulaires
+
       radius: 60,
       outerStrokeWidth: 8,
       innerStrokeWidth: 4,

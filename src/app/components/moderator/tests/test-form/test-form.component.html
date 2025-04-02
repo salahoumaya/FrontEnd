@@ -1,0 +1,66 @@
+<div class="page-content">
+  <div class="container">
+    <div class="row">
+      <app-instructor-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-instructor-sidebar>
+
+      <div class="col-xl-9 col-lg-9">
+        <div class="settings-widget card-details">
+          <div class="settings-menu p-4">
+            <div class="profile-heading text-center">
+              <h3>{{ isEditMode ? 'Modifier le Test' : 'Créer un Test' }}</h3>
+            </div>
+
+            <div class="checkout-form">
+              <form (ngSubmit)="saveTest()">
+                <div class="form-group">
+                  <label for="title">Titre</label>
+                  <input id="title" [(ngModel)]="test.title" name="title" required class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea id="description" [(ngModel)]="test.description" name="description" class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="scheduledAt">Date</label>
+                  <input type="datetime-local" id="scheduledAt" [(ngModel)]="test.scheduledAt" name="scheduledAt"
+                         required class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                  <label for="duration">Durée du Test (min)</label>
+                  <input type="number" id="duration" [(ngModel)]="test.duration" name="duration"
+                         required min="1" max="180" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                  <label for="score">Score Total</label>
+                  <input type="number" id="score" [(ngModel)]="test.score" name="score"
+                         required min="10" max="100" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                  <label for="image">Image du Test</label>
+                  <input type="file" id="image" (change)="onImageSelected($event)" accept="image/*" class="form-control"/>
+                  <img *ngIf="test.image" [src]="'assets/img/tests/' + test.image" alt="Aperçu de l'image"
+                       class="img-thumbnail mt-2" width="200">
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                  <button type="submit" class="btn btn-success">
+                    {{ isEditMode ? 'Mettre à jour' : 'Créer' }}
+                  </button>
+                  <button type="button" (click)="goToAddQuestion()" class="btn btn-primary">
+                    Ajouter une Question
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

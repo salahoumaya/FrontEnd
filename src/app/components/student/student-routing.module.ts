@@ -1,3 +1,4 @@
+import { MesReclamationsComponent } from './reclamation/mes-reclamations/mes-reclamations.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StudentComponent } from './student.component';
@@ -16,6 +17,7 @@ import { StudentTicketsComponent } from './student-tickets/student-tickets.compo
 import { StudentQuizDetailsComponent } from './student-quiz-details/student-quiz-details.component';
 import { TestSelectionComponent } from './tests/test-selection/test-selection.component';
 import { TestAttemptComponent } from './tests/test-attempt/test-attempt.component';
+import { CreateReclamationComponent } from './reclamation/create-reclamations/create-reclamations.component';
 
 const routes: Routes = [
   {
@@ -35,6 +37,8 @@ const routes: Routes = [
       { path: 'student-profile', component: StudentProfileComponent },
       { path: 'student-dashboard', component: StudentDashboardComponent },
 
+      { path: 'student-reclamation',component: MesReclamationsComponent  },
+      { path: 'create-reclamation',component: CreateReclamationComponent  },
       { path: 'view-invoice', component: ViewInvoiceComponent },
       { path: 'student-qa', component: StudentQaComponent },
       { path: 'student-quiz', component: StudentQuizComponent },

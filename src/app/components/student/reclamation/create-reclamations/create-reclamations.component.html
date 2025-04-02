@@ -1,0 +1,63 @@
+<div class="page-content">
+  <div class="container">
+      <div class="row">
+
+          <!-- sidebar -->
+          <app-student-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-student-sidebar>
+          <!-- /Sidebar -->
+<div class="card-container">
+  <h2>Créer une Réclamation</h2>
+  <form (ngSubmit)="submitReclamation()" class="form-container">
+
+    <!-- Type -->
+    <div class="form-group">
+      <label>Type de Réclamation</label>
+      <select [(ngModel)]="reclamation.type" name="type" required (change)="onTypeChange()">
+        <option value="" disabled selected>Choisir le type</option>
+        <option value="EVENT">Événement</option>
+        <option value="TRAINING">Formation</option>
+        <option value="SUJET_PFE">Sujet PFE</option>
+      </select>
+    </div>
+
+    <!-- Target selon le type -->
+    <div *ngIf="reclamation.type === 'EVENT'" class="form-group">
+      <label>Choisir un Événement</label>
+      <select [(ngModel)]="reclamation.targetId" name="targetEvent" required>
+        <option *ngFor="let e of events" [ngValue]="e.id">{{ e.title }}</option>
+      </select>
+    </div>
+
+    <div *ngIf="reclamation.type === 'TRAINING'" class="form-group">
+      <label>Choisir une Formation</label>
+      <select [(ngModel)]="reclamation.targetId" name="targetTraining" required>
+        <option *ngFor="let t of trainings" [ngValue]="t.id">{{ t.title }}</option>
+      </select>
+    </div>
+
+    <div *ngIf="reclamation.type === 'SUJET_PFE'" class="form-group">
+      <label>Choisir un Sujet PFE</label>
+      <select [(ngModel)]="reclamation.targetId" name="targetSujet" required>
+        <option *ngFor="let s of sujetsPFE" [ngValue]="s.id">{{ s.titre }}</option>
+      </select>
+    </div>
+
+    <!-- Titre -->
+    <div class="form-group">
+      <label>Titre de la Réclamation</label>
+      <input type="text" [(ngModel)]="reclamation.title" name="title" placeholder="Ex: Problème de date" required>
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label>Description</label>
+      <textarea [(ngModel)]="reclamation.description" name="description" placeholder="Décrivez votre réclamation..." rows="4" required></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">Créer la réclamation</button>
+
+  </form>
+</div>
+</div>
+</div>
+</div>

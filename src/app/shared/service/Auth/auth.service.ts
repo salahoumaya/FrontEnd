@@ -49,4 +49,8 @@ export class AuthService {
     });
     return this.http.get(`${this.baseUrl}/adminuser/get-profile`, { headers });
   }
+  getCurrentUser(): Observable<any> {
+    return this.getProfile();
+  }
+
 }

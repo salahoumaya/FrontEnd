@@ -1,0 +1,105 @@
+<!-- Page Content -->
+<div class="page-content">
+  <div class="container">
+      <div class="row">
+
+          <!-- Sidebar -->
+          <app-student-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-student-sidebar>
+          <!-- /Sidebar -->
+
+          <!-- Content Réclamations -->
+          <div class="col-xl-9 col-lg-9">
+
+              <div class="settings-widget card-info">
+                  <div class="settings-menu p-0">
+
+                      <div class="profile-heading">
+                          <h3>📋 Mes Réclamations</h3>
+                      </div>
+
+                      <div class="checkout-form pb-0">
+
+                          <button class="btn btn-primary mb-3" (click)="goToCreateReclamation()">➕ Créer une Réclamation</button>
+
+                          <div *ngIf="isLoading">Chargement...</div>
+                          <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+                          <table class="table table-bordered" *ngIf="reclamations.length > 0">
+                              <thead class="table-light">
+                                  <tr>
+                                      <th>Type</th>
+                                      <th>Titre</th>
+                                      <th>Description</th>
+                                      <th>Actions</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let reclamation of reclamations; let i = index"
+                                [ngClass]="{
+                                    'event-row': reclamation.event,
+                                    'training-row': reclamation.training,
+                                    'sujetpfe-row': reclamation.sujetPfe
+                                }">
+
+                                      <td>
+                                          <span *ngIf="reclamation.event">Événement</span>
+                                          <span *ngIf="reclamation.training">Formation</span>
+                                          <span *ngIf="reclamation.sujetPfe">Sujet PFE</span>
+                                      </td>
+                                      <td>{{ reclamation.title }}</td>
+                                      <td>{{ reclamation.description }}...</td>
+                                      <td>
+                                          <button class="btn btn-info btn-sm me-1" (click)="showDetails(reclamation)">📄 Détails</button>
+                                          <button class="btn btn-warning btn-sm" (click)="showStatus(reclamation)">✅ Statut</button>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+
+                          <div *ngIf="!isLoading && reclamations.length === 0" class="alert alert-info">
+                              Aucune réclamation pour le moment.
+                          </div>
+
+                          <!-- Bloc détails -->
+<div *ngIf="selectedReclamation" class="alert alert-secondary detail-box">
+  <h5>📄 Détails de la Réclamation</h5>
+  <p><strong>Type :</strong>
+      <span *ngIf="selectedReclamation.event">Événement</span>
+      <span *ngIf="selectedReclamation.training">Formation</span>
+      <span *ngIf="selectedReclamation.sujetPfe">Sujet PFE</span>
+  </p>
+  <p><strong>Titre :</strong> {{ selectedReclamation.title }}</p>
+  <p><strong>Description :</strong> {{ selectedReclamation.description }}</p>
+  <button class="btn btn-sm btn-danger" (click)="selectedReclamation = null">Fermer</button>
+</div>
+
+<!-- Bloc statut -->
+<div *ngIf="statusReclamation" class="card details-card animate">
+  <h5>✅ Statut de la Réclamation</h5>
+  <p><strong>Titre :</strong> {{ statusReclamation.title }}</p>
+  <p><strong>Statut :</strong>
+      <span [ngClass]="{
+          'badge': true,
+          'badge-open': statusReclamation.status === 'OPEN',
+          'badge-inprogress': statusReclamation.status === 'IN_PROGRESS',
+          'badge-resolved': statusReclamation.status === 'RESOLVED',
+          'badge-rejected': statusReclamation.status === 'REJECTED'
+      }">{{ statusReclamation.status }}</span>
+  </p>
+  <p><strong>Message :</strong> {{ statusReclamation.responseMessage }}</p>
+  <button class="btn btn-sm btn-danger" (click)="statusReclamation = null">Fermer</button>
+</div>
+
+
+                      </div>
+
+                  </div>
+              </div>
+
+          </div>
+          <!-- /Content Réclamations -->
+
+      </div>
+  </div>
+</div>
+<!-- /Page Content -->

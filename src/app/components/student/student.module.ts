@@ -1,3 +1,4 @@
+import { CreateReclamationComponent } from './reclamation/create-reclamations/create-reclamations.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -21,11 +22,13 @@ import { StudentQuizDetailsComponent } from './student-quiz-details/student-quiz
 import { TestSelectionComponent } from './tests/test-selection/test-selection.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TestAttemptComponent } from './tests/test-attempt/test-attempt.component';
+import { MesReclamationsComponent } from './reclamation/mes-reclamations/mes-reclamations.component';
 
 
 @NgModule({
   declarations: [
     StudentComponent,
+
     StudentDashboardComponent,
     StudentMessageComponent,
     StudentOrderHistoryComponent,
@@ -39,7 +42,10 @@ import { TestAttemptComponent } from './tests/test-attempt/test-attempt.componen
     StudentTicketsComponent,
     StudentQuizDetailsComponent,
     TestSelectionComponent,
-    TestAttemptComponent
+    TestAttemptComponent,
+    MesReclamationsComponent,
+    CreateReclamationComponent
+
   ],
   imports: [
     CommonModule,

@@ -28,6 +28,7 @@ import { TestFormComponent } from './tests/test-form/test-form.component';
 import { QuestionListComponent } from './questions/question-list/question-list.component';
 import { QuestionFormComponent } from './questions/question-form/question-form.component';
 import { AdminTestResultComponent } from './tests/admin-test-result/admin-test-result.component';
+import { AdminReclamationsComponent } from './reclamation/admin-reclamations/admin-reclamations.component';
 
 const routes: Routes = [
   {
@@ -77,6 +78,10 @@ const routes: Routes = [
       {
         path: 'instructor-levelTest',
         component: TestListComponent,
+      },
+      {
+        path: 'instructor-reclamation',
+        component: AdminReclamationsComponent,
       },
       {
         path: 'instructor-addTest',

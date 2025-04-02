@@ -4,7 +4,7 @@
           <div class="profile-bg">
             <div class="profile-img">
               <a [routerLink]="routes.studentProfile">
-                  <img [src]="userImage" alt="User Image" class="profile-img-small img-fluid">
+                  <img [src]="userProfile.image" alt="User Image"  class="avatar-img rounded-circle" >
               </a>
           </div>
 
@@ -12,8 +12,8 @@
           <div class="profile-group">
               <div class="profile-name text-center">
                   <!-- 🔹 Utiliser le nom dynamique -->
-                  <h2><a [routerLink]="routes.studentProfile">{{ userName }}</a></h2>
-                  <p>{{ userName }}</p>
+                  <h2><a [routerLink]="routes.studentProfile">{{userProfile.name }}</a></h2>
+                  <p>{{ userProfile.role }}</p>
               </div>
           </div>
       </div>
@@ -42,6 +42,11 @@
                       <i class="bx bxs-graduation"></i>Enrolled Courses
                   </a>
               </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a [routerLink]="routes.Mes_Reclamations" class="nav-link">
+                    <i class="bx bxs-graduation"></i>Reclamations
+                </a>
+            </li>
               <li class="nav-item" routerLinkActive="active">
                   <a [routerLink]="routes.studentWishlist" class="nav-link">
                       <i class="bx bxs-heart"></i>Wishlist

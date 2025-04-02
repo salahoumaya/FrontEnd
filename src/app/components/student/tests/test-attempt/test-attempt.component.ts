@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { userTestService } from 'src/app/shared/service/LevelTest/userTest.service';
+import { routes } from 'src/app/shared/service/routes/routes';
 
 @Component({
   selector: 'app-test-attempt',
@@ -15,6 +16,7 @@ export class TestAttemptComponent implements OnInit {
   timeLeft: number = 0;
   timerInterval: any;
   hasSubmitted: boolean = false;
+   public routes = routes;
 
   constructor(
     private route: ActivatedRoute,
@@ -43,11 +45,6 @@ export class TestAttemptComponent implements OnInit {
   }
 
 
-  @HostListener('document:contextmenu', ['$event'])
-  disableRightClick(event: MouseEvent) {
-    event.preventDefault();
-    alert('🚫 Clic droit désactivé pendant le test.');
-  }
 
   loadTestDetails() {
     this.testService.getTestById(this.testId).subscribe({
@@ -95,19 +92,22 @@ export class TestAttemptComponent implements OnInit {
       next: (score) => {
         this.score = score;
         this.hasSubmitted = true;
+
+        localStorage.setItem('testPassed', 'true');
+
         alert(`✅ Temps écoulé ! Votre test a été soumis automatiquement. Score : ${this.score} / ${this.test.score}`);
-        this.router.navigate(['/student/student-test']);
+        this.router.navigate(['/student/student-dashboard']);
       },
       error: (err) => {
-        console.error("Erreur lors de la soumission automatique du test :", err);
-        alert("⚠️ Une erreur s'est produite lors de la soumission automatique.");
+        console.error("Erreur lors de la soumission auto :", err);
+        alert("Ce test a déjà été soumis, vous ne pouvez plus soumettre à nouveau !");
       }
     });
   }
 
   submitTest() {
     if (this.hasSubmitted) {
-      alert("🚫 Vous ne pouvez plus soumettre ce test !");
+      alert("🚫 Ce test a déjà été soumis, vous ne pouvez plus soumettre à nouveau !");
       return;
     }
 
@@ -123,15 +123,20 @@ export class TestAttemptComponent implements OnInit {
       next: (score) => {
         this.score = score;
         this.hasSubmitted = true;
+
+        // ✅ Marquer que le test a été passé
+        localStorage.setItem('testPassed', 'true');
+
         alert(`Test soumis avec succès ! Votre score : ${this.score} / ${this.test.score}`);
-        this.router.navigate(['/student/test-selection']);
+        this.router.navigate(['/student/student-dashboard']);
       },
       error: (err) => {
         console.error("Erreur lors de la soumission du test :", err);
-        alert("Erreur lors de la soumission du test.");
+        alert(" 🚫 Ce test a déjà été soumis, vous ne pouvez plus soumettre à nouveau !");
       }
     });
 
     clearInterval(this.timerInterval);
   }
 }
+

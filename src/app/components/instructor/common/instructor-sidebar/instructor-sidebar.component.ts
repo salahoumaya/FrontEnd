@@ -15,6 +15,7 @@ export class InstructorSidebarComponent {
   public base = '';
   public page = '';
   public last = '';
+  public userProfile: any = {};
 
   // ✅ Variables pour le profil utilisateur
   public userName: string = 'Admin';
@@ -32,19 +33,25 @@ export class InstructorSidebarComponent {
     });
 
     // ✅ Charger le profil utilisateur
+
+  }
+  ngOnInit(): void {
     this.loadUserProfile();
   }
 
   // ✅ Charger les informations utilisateur depuis l'API
   loadUserProfile() {
     this.userService.getProfile().subscribe({
-      next: (data) => {
-        this.userName = data.name || 'Admin';
-        this.userPhoto = data.photoUrl || 'assets/img/user/default.jpg';
+      next: (response) => {
+        console.log('📥 Détails de ourUsers :', response.ourUsers);
+
+        this.userProfile = response.ourUsers;
+
       },
-      error: (err) => {
-        console.error('Erreur lors du chargement du profil utilisateur:', err);
-      },
+      error: (error) => {
+        console.log('❌ Erreur lors de la récupération des données utilisateur :', error);
+
+      }
     });
   }
 }

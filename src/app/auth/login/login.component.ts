@@ -65,8 +65,9 @@ export class LoginComponent {
 
             // 🔹 Vérification du token dans la réponse
             if (response.token) {
-                localStorage.setItem('token', response.token);  // Stocker le token si présent
-            } else {
+              localStorage.setItem('token', response.token);  // Stocker le token
+
+          } else {
                 this.errorMessage = ' Réessayez.';
                 this.loading = false;
                 return;
@@ -74,18 +75,25 @@ export class LoginComponent {
 
             // 🔹 Redirection selon le rôle
             switch (response.role) {
-                case 'ADMIN':
-                    this.router.navigate(['/instructor/instructor-dashboard']);
-                    break;
-                case 'MODERATOR':
-                    this.router.navigate(['/home-three']);
-                    break;
-                default:
-                    this.router.navigate(['/student/student-test']);
-                    break;
-            }
+              case 'ADMIN':
+                  this.router.navigate(['/instructor/instructor-dashboard']);
+                  break;
+              case 'MODERATOR':
+                  this.router.navigate(['/moderator/moderator-dashboard']);
+                  break;
+                  default:
+  const testPassed = localStorage.getItem('testPassed') === 'true';
 
-            alert('✅ Login réussi !');
+  if (!testPassed) {
+    this.router.navigate(['/student/student-test']);
+  } else {
+    this.router.navigate(['/student/student-dashboard']);
+  }
+  break;
+          }
+
+
+
         },
         error: (error) => {
             console.log('❌ Login Error:', error);

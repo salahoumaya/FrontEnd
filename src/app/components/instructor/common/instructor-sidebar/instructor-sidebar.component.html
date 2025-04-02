@@ -3,15 +3,18 @@
         <div class="settings-menu">
             <div class="profile-bg">
                 <div class="profile-img">
-                  <a [routerLink]="routes.instructorProfile">
-                    <img [src]="userPhoto" alt="Photo de profil">
-                </a>
+                    <a [routerLink]="routes.instructorProfile">
+                        <img [src]="userProfile.name"   class="avatar-img rounded-circle" >
+                    </a>
                 </div>
-            </div>
-            <div class="profile-group">
-                <div class="profile-name text-center">
-                  <h4><a [routerLink]="routes.instructorProfile">{{ userName }}</a></h4>
 
+
+                <div class="profile-group">
+                    <div class="profile-name text-center">
+                        <!-- 🔹 Utiliser le nom dynamique -->
+                        <h2><a [routerLink]="routes.instructorProfile">{{userProfile.name }}</a></h2>
+                        <p>{{ userProfile.role }}</p>
+                    </div>
                     <p></p>
                     <a [routerLink]="routes.page_add_course" class="add-course btn-primary">Add New Course</a>
                 </div>
@@ -42,16 +45,8 @@
                         <i class="bx bxs-heart"></i>Event
                     </a>
                 </li>
-              <li class="nav-item" routerLinkActive="active">
-                    <a [routerLink]="routes.instructor_reviews" class="nav-link">
-                        <i class="bx bxs-star"></i>LevelTest
-                    </a>
-                </li>
-                <li class="nav-item" routerLinkActive="active">
-                  <a [routerLink]="routes.ResultTest" class="nav-link">
-                      <i class="bx bxs-star"></i>LevelTest
-                  </a>
-              </li>
+
+
                 <li class="nav-item" routerLinkActive="active">
                   <a [routerLink]="routes.TestLevel" class="nav-link">
                       <i class="bx bxs-star"></i>LevelTest
@@ -88,7 +83,7 @@
                     </a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
-                    <a [routerLink]="routes.instructor_tickets" class="nav-link">
+                    <a [routerLink]="routes.instructor_reclamation" class="nav-link">
                         <i class="bx bxs-coupon"></i>Reclamation
                     </a>
                 </li>
