@@ -1,0 +1,73 @@
+<div class="stickybar">
+  <div class="settings-widget dash-profile">
+    <div class="settings-menu">
+      <div class="profile-bg">
+        <div class="profile-img">
+          <a [routerLink]="routes.moderatorProfile">
+            <img [src]="moderatorProfile.image" alt="Moderator Image" class="avatar-img rounded-circle">
+          </a>
+        </div>
+      </div>
+      <div class="profile-group">
+        <div class="profile-name text-center">
+          <h2>
+            <a [routerLink]="routes.moderatorProfile">{{ moderatorProfile.name }}</a>
+          </h2>
+          <p>{{ moderatorProfile.role }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-widget account-settings">
+    <div class="settings-menu">
+      <h3>Dashboard</h3>
+      <ul>
+        <li class="nav-item" routerLinkActive="active">
+          <a routerLink="/moderator/Checkout" class="nav-link">
+            <i class="bx bxs-tachometer"></i>Dashboard
+          </a>
+        </li>
+
+        <li class="nav-item" routerLinkActive="active">
+          <a routerLink="/moderator/support" class="nav-link">
+            <i class="bx bxs-tachometer"></i>Planification
+          </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a routerLink="/moderator/Examens" class="nav-link">
+            <i class="bx bxs-tachometer"></i>Examens
+          </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a routerLink="/moderator/addCourse" class="nav-link">
+            <i class="bx bxs-tachometer"></i>Ajouter Cours
+          </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a routerLink="/moderator/CourseList" class="nav-link">
+            <i class="bx bxs-tachometer"></i>Liste des Formations
+          </a>
+        </li>
+
+        <li class="nav-item" routerLinkActive="active">
+          <a [routerLink]="routes.moderatorProfile" class="nav-link">
+            <i class="bx bxs-comment-error"></i>Réclamations
+          </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a [routerLink]="routes.Listsujet" class="nav-link">
+            <i class="bx bxs-comment-error"></i>Sujet Affectée
+          </a>
+        </li>
+
+
+        <li class="nav-item" routerLinkActive="active">
+          <a [routerLink]="routes.home" class="nav-link">
+            <i class="bx bxs-log-out"></i>Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

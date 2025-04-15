@@ -30,6 +30,17 @@ import { QuestionFormComponent } from './questions/question-form/question-form.c
 import { AdminTestResultComponent } from './tests/admin-test-result/admin-test-result.component';
 import { AdminReclamationsComponent } from './reclamation/admin-reclamations/admin-reclamations.component';
 
+import { AddEventComponent } from './evenement/add-event/add-event.component';
+import { UpdateEventComponent } from './update-event/update-event.component';
+import { SujetpfeBackofficeComponent } from './sujetpfe-backoffice/sujetpfe-backoffice.component';
+import { CourseDetailsComponent } from './Candidature/course-details/course-details.component';
+import { AddCourseComponent } from './Candidature/add-course/add-course.component';
+import { StudentMessageComponent } from './Candidature/student-message/student-message.component';
+import { DiplomeComponent } from './diplome/diplome.component';
+import { FormationComponent } from './formation/formation.component';
+import { ExamenComponent } from './examen/examen.component';
+import { ReclamationStatesComponent } from './reclamation/reclamation-states/reclamation-states.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -48,8 +59,24 @@ const routes: Routes = [
         component: InstructorDashboardComponent,
       },
       {
+        path: 'reclamationStates',
+        component: ReclamationStatesComponent,
+      },
+      {
         path: 'instructor-earnings',
         component: InstructorEarningsComponent,
+      },
+      {
+        path: 'diplome',
+        component: DiplomeComponent,
+      },
+      {
+        path: 'Examens',
+        component: FormationComponent,
+      },
+      {
+        path: 'examen/:id',
+        component: ExamenComponent,
       },
       {
         path: 'instructor-notification',
@@ -118,6 +145,29 @@ const routes: Routes = [
       {
         path: 'instructor-wishlist',
         component: InstructorWishlistComponent,
+      },
+      {
+        path: 'list-sujet',
+        component: SujetpfeBackofficeComponent,
+      },
+      {
+        path: 'candidature',
+        component: CourseDetailsComponent,
+      },
+      {
+        path: 'addcandidature',
+        component: AddCourseComponent,
+      },
+
+      {
+        path: 'modifiercandidature/:id',
+        component: StudentMessageComponent,
+      },
+
+
+      {
+        path: 'updatevent/:id',
+        component: UpdateEventComponent,
       },
       {
         path: 'settings',

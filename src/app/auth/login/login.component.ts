@@ -79,7 +79,7 @@ export class LoginComponent {
                   this.router.navigate(['/instructor/instructor-dashboard']);
                   break;
               case 'MODERATOR':
-                  this.router.navigate(['/moderator/moderator-dashboard']);
+                this.router.navigate(['/moderator/dashboard']);
                   break;
                   default:
   const testPassed = localStorage.getItem('testPassed') === 'true';

@@ -1,0 +1,78 @@
+<div class="page-content">
+  <div class="container">
+    <div *ngIf="errorMessage; else resultBlock" class="alert alert-danger mt-4 text-center">
+      {{ errorMessage }}
+    </div>
+
+    <ng-template #resultBlock>
+      <div class="row">
+        <div class="col-xl-10 col-lg-10 mx-auto">
+          <div class="card p-4 shadow text-center">
+            <h3> Résultat du Test : {{ testTitle }}</h3>
+            <p><strong>Votre Score :</strong> {{ score }}</p>
+
+
+            <!-- Navigation par numéros -->
+            <div class="question-nav my-4 d-flex flex-wrap justify-content-center gap-2">
+              <button
+                *ngFor="let question of questionResults; let i = index"
+                class="btn btn-sm"
+                [ngClass]="{
+                  'btn-success': question.correct,
+                  'btn-danger': question.userAnswer && !question.correct,
+                  'btn-secondary': !question.userAnswer,
+                  'border border-dark': i === selectedQuestionIndex
+                }"
+                (click)="selectedQuestionIndex = i"
+              >
+                {{ i + 1 }}
+              </button>
+            </div>
+
+          <!-- Détails de la question sélectionnée -->
+<div *ngIf="selectedQuestionIndex !== null && questionResults[selectedQuestionIndex]" class="mt-4 text-start">
+  <div class="border rounded p-3">
+    <h5>Question {{ questionResults[selectedQuestionIndex].questionId }}</h5>
+    <p><strong>Texte :</strong> {{ questionResults[selectedQuestionIndex].questionText }}</p>
+
+    <div *ngIf="questionResults[selectedQuestionIndex].questionImage">
+      <img
+        [src]="'data:image/png;base64,' + questionResults[selectedQuestionIndex].questionImage"
+        class="img-thumbnail mb-2"
+        style="width: 300px; height: auto;"
+      />
+    </div>
+
+    <p>
+      <strong>Votre réponse :</strong>
+      <span [ngClass]="{
+        'text-success': questionResults[selectedQuestionIndex].correct,
+        'text-danger': !questionResults[selectedQuestionIndex].correct
+      }">
+        {{ questionResults[selectedQuestionIndex].userAnswer || 'Non répondu' }}
+      </span>
+    </p>
+
+    <p *ngIf="!questionResults[selectedQuestionIndex].correct">
+      <strong class="text-success">Bonne réponse :</strong>
+      {{ questionResults[selectedQuestionIndex].correctAnswer }}
+    </p>
+
+   <!-- 🔍 Explication IA -->
+<div *ngIf="!questionResults[selectedQuestionIndex].correct">
+  <button
+    class="btn btn-outline-info btn-sm mt-2"
+    (click)="explain(questionResults[selectedQuestionIndex])"
+    [disabled]="loadingExplanation[questionResults[selectedQuestionIndex]?.questionId]"
+  >
+     Expliquer cette question
+  </button>
+
+  <div *ngIf="loadingExplanation[questionResults[selectedQuestionIndex]?.questionId]" class="text-info mt-2">
+    ⏳ Chargement de l'explication...
+  </div>
+
+  <div *ngIf="getExplanationForCurrentQuestion()" class="alert alert-info mt-2">
+    {{ getExplanationForCurrentQuestion() }}
+  </div>
+</div>

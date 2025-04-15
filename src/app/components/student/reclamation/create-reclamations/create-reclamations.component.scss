@@ -57,3 +57,12 @@ input:focus, select:focus, textarea:focus {
   background-color: #5848e5;
   transform: scale(1.02);
 }
+
+.alert {
+  animation: fadeIn 0.5s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+

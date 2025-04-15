@@ -18,6 +18,11 @@ import { StudentQuizDetailsComponent } from './student-quiz-details/student-quiz
 import { TestSelectionComponent } from './tests/test-selection/test-selection.component';
 import { TestAttemptComponent } from './tests/test-attempt/test-attempt.component';
 import { CreateReclamationComponent } from './reclamation/create-reclamations/create-reclamations.component';
+import { TestResultComponent } from './tests/test-result/test-result.component';
+import { EventListComponent } from './event-list/event-list.component';
+import { SujetpfeFrontoffice } from './sujetpfe-frontoffice/sujetpfe-frontoffice.component';
+import { ExmanComponent } from './exman/exman.component';
+import { ListeComponent } from './liste/liste.component';
 
 const routes: Routes = [
   {
@@ -25,7 +30,12 @@ const routes: Routes = [
     component: StudentComponent,
     children: [
       { path: 'student-test', component: TestSelectionComponent },
+      { path: 'liste', component: ListeComponent },
+      { path: 'examn/:id', component: ExmanComponent },
       { path: 'test-attempt/:id', component: TestAttemptComponent },
+      { path: 'test-result/:id', component: TestResultComponent },
+
+
       {
         path: 'student-view',
         loadChildren: () =>
@@ -36,6 +46,8 @@ const routes: Routes = [
 
       { path: 'student-profile', component: StudentProfileComponent },
       { path: 'student-dashboard', component: StudentDashboardComponent },
+      { path: 'student-event', component: EventListComponent },
+      { path: 'sujetpfe-user', component: SujetpfeFrontoffice },
 
       { path: 'student-reclamation',component: MesReclamationsComponent  },
       { path: 'create-reclamation',component: CreateReclamationComponent  },

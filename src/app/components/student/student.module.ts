@@ -23,12 +23,21 @@ import { TestSelectionComponent } from './tests/test-selection/test-selection.co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TestAttemptComponent } from './tests/test-attempt/test-attempt.component';
 import { MesReclamationsComponent } from './reclamation/mes-reclamations/mes-reclamations.component';
+import { TestResultComponent } from './tests/test-result/test-result.component';
+import { EventListComponent } from './event-list/event-list.component';
+import { AfficheReservationComponent } from './affiche-reservation/affiche-reservation.component';
+import { SujetpfeFrontoffice } from './sujetpfe-frontoffice/sujetpfe-frontoffice.component';
+import { ExmanComponent } from './exman/exman.component';
+import { ListeComponent } from './liste/liste.component';
+
+
 
 
 @NgModule({
   declarations: [
+    ListeComponent,
     StudentComponent,
-
+    ExmanComponent,
     StudentDashboardComponent,
     StudentMessageComponent,
     StudentOrderHistoryComponent,
@@ -44,7 +53,11 @@ import { MesReclamationsComponent } from './reclamation/mes-reclamations/mes-rec
     TestSelectionComponent,
     TestAttemptComponent,
     MesReclamationsComponent,
-    CreateReclamationComponent
+    CreateReclamationComponent,
+    TestResultComponent,
+    EventListComponent,
+    AfficheReservationComponent,
+    SujetpfeFrontoffice
 
   ],
   imports: [
@@ -55,6 +68,7 @@ import { MesReclamationsComponent } from './reclamation/mes-reclamations/mes-rec
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+
   ]
 })
 export class StudentModule { }

@@ -1,46 +1,68 @@
-<div class="page-content">
-  <div class="container">
-    <div class="row">
-      <div class="col-xl-9 col-lg-9">
-        <div class="settings-widget card-details">
-          <div class="settings-menu p-4">
-            <div class="profile-heading text-center">
-              <h3>Test : {{ test?.title }}</h3>
-              <p><strong>Durée :</strong> {{ test?.duration }} minutes | <strong>Score total :</strong> {{ test?.score }}</p>
-              <p><strong>Temps restant :</strong>
-                <span [ngClass]="{'text-danger': timeLeft <= 30}">
-                  {{ (timeLeft / 60) | number:'2.0-0' }}:{{ (timeLeft % 60) | number:'2.0-0' }}
-                </span>
-              </p>
-            </div>
+<div class="quiz-container">
+  <div class="quiz-box">
+    <h2 class="quiz-title">TEST : {{ test?.title }}</h2>
 
-            <div *ngFor="let question of test?.questions" class="mb-4">
-              <!-- 🔄 Vérifier si la question est une image ou un texte -->
-              <div *ngIf="question.questionImage; else textQuestion">
-                <img [src]="'data:image/png;base64,' + question.questionImage"
-                     alt="Image de la Question"
-                     class="img-thumbnail mb-2"
-                     style="width: 300px; height: 200px; object-fit: cover;">
-              </div>
-              <ng-template #textQuestion>
-                <h4>{{ question.questionText }}</h4>
-              </ng-template>
+    <div class="quiz-meta">
+      <p><strong>Durée :</strong> {{ test?.duration }} minutes</p>
+      <p><strong>Temps restant :</strong>
+        <span [ngClass]="{ 'text-danger': timeLeft <= 30 }">
+          {{ (timeLeft / 60) | number: '2.0-0' }}:{{ (timeLeft % 60) | number: '2.0-0' }}
+        </span>
+      </p>
+    </div>
 
-              <div *ngFor="let option of ['optionA', 'optionB', 'optionC', 'optionD']" class="mb-2">
-                <input type="radio" [name]="'question' + question.id" [value]="question[option]"
-                       [(ngModel)]="answers[question.id]"> {{ question[option] }}
-              </div>
-            </div>
-
-            <button class="btn btn-success mt-3" (click)="submitTest()" [disabled]="hasSubmitted">
-              Soumettre
-            </button>
-
-            <div *ngIf="score !== null">
-              <h4>Votre Score : {{ score }} / {{ test?.score }}</h4>
-            </div>
-          </div>
+    <div *ngIf="currentQuestion" class="quiz-question-box">
+      <div *ngIf="currentQuestion.questionImage; else textQuestion" class="question-header">
+        <img
+          [src]="'data:image/png;base64,' + currentQuestion.questionImage"
+          alt="Image de la question"
+          class="img-thumbnail mb-2"
+          style="width: 300px; height: auto; object-fit: cover;"
+        />
+      </div>
+      <ng-template #textQuestion>
+        <div class="question-header">
+          {{ currentQuestionIndex + 1 }}. {{ currentQuestion.questionText }}
         </div>
+      </ng-template>
+
+      <div *ngFor="let option of ['optionA', 'optionB', 'optionC', 'optionD']" class="option-block">
+        <label class="option">
+          <input
+            type="radio"
+            [name]="'question' + currentQuestion.id"
+            [value]="currentQuestion[option]"
+            [(ngModel)]="answers[currentQuestion.id]"
+          />
+          {{ currentQuestion[option] }}
+        </label>
+      </div>
+
+      <div class="mt-4 d-flex justify-content-between">
+        <button
+          class="btn btn-outline-primary"
+          (click)="goToPreviousQuestion()"
+          [disabled]="currentQuestionIndex === 0"
+        >
+          ⬅️ Question Précédente
+        </button>
+
+        <button
+          class="btn btn-primary"
+          *ngIf="currentQuestionIndex < test?.questions.length - 1"
+          (click)="goToNextQuestion()"
+        >
+          Question Suivante ➡️
+        </button>
+
+        <button
+          class="btn btn-success"
+          *ngIf="currentQuestionIndex === test?.questions.length - 1"
+          (click)="submitTest()"
+          [disabled]="hasSubmitted"
+        >
+          ✅ Soumettre
+        </button>
       </div>
     </div>
   </div>

@@ -1,0 +1,72 @@
+<section class="page-content course-sec" style="padding-top: 120px !important;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-11 col-lg-11">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 d-flex">
+                        <div class="card dash-info flex-fill">
+                            <div class="card-body">
+                                <h5>Total Trainings</h5>
+                                <h2>{{ totalTrainings }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 d-flex">
+                        <div class="card dash-info flex-fill">
+                            <div class="card-body">
+                                <h5>Total Students</h5>
+                                <h2>{{ totalStudents }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 d-flex">
+                        <div class="card dash-info flex-fill">
+                            <div class="card-body">
+                                <h5>Total Courses</h5>
+                                <h2>{{ totalCourses }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instructor-course-table">
+                    <div class="dashboard-title">
+                        <h4>My Students</h4>
+                    </div>
+                    <div class="table-responsive custom-table">
+                        <!-- Students Table -->
+                        <table class="table table-nowrap mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Training</th>
+                                    <th>Date d'inscription</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let student of myStudents;let i = index; track i">
+                                    <td>{{ student.username }}</td>
+                                    <td>{{ student.trainingTitle }}</td>
+                                    <td>{{ student.dateSubscription | date: 'yyyy-MM-dd HH:mm' }}</td>
+                                </tr>
+                                <tr *ngIf="myStudents.length === 0">
+                                    <td colspan="3" class="text-center">No students enrolled yet.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                 <div class="dashboard-title mt-4">
+                    <h4>Evolution of Subscribers Over Time</h4>
+                </div>
+                <div style="height: 300px;">
+                    <canvas #subscribersChart></canvas>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,3 +1,4 @@
+
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,10 +15,14 @@ import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
     AppComponent,
+
+
 
 
 
@@ -35,6 +40,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     BrowserAnimationsModule,
     SharedModule,
     NgApexchartsModule,
+    ToastrModule.forRoot(),
     NgCircleProgressModule.forRoot({
       radius: 60,
       outerStrokeWidth: 8,
@@ -47,6 +53,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
       showSubtitle: false,
       units: '%',
     }),
+
 
       ],
 

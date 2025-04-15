@@ -10,14 +10,22 @@ export class routes {
   public static get moderator(): string {
     return this.baseUrl + '/moderator/';
   }
+
   public static get moderator_dashboard(): string {
-    return this.moderator + 'moderator-dashboard';
+    return this.moderator + 'dashboard';
   }
+  public static get AddCourse(): string {
+    return this.moderator + ' addCourse';
+  }
+
   public static get moderator_instructor(): string {
     return this.moderator + 'dashboard-moderator';
   }
   public static get moderator_chat(): string {
     return this.moderator + 'moderator-chat';
+  }
+  public static get moderator_Ex(): string {
+    return this.moderator + 'Examens';
   }
   public static get moderator_deposit_dashboard(): string {
     return this.moderator + 'deposit-moderator-dashboard';
@@ -135,6 +143,10 @@ export class routes {
   public static get moderatorCourse(): string {
     return this.moderator + 'moderator-course';
   }
+
+  public static get Listsujet(): string {
+    return this.moderator + 'listesujet';
+  }
   public static get moderatorDetails(): string {
     return this.moderator + 'moderator-details';
   }
@@ -165,6 +177,9 @@ export class routes {
 
   public static get instructor_reclamation(): string {
     return this.instructor + 'instructor-reclamation';
+  }
+  public static get instructor_states(): string {
+    return this.instructor + 'reclamationStates';
   }
 
   public static get instructor_deposit_dashboard(): string {
@@ -250,6 +265,17 @@ export class routes {
   public static get ResultTest(): string {
     return this.instructor + 'instructor-test-result/';
 }
+
+public static get Candidature(): string {
+  return this.instructor + 'candidature';
+}
+
+public static get ModifierCandidature(): string {
+  return this.instructor + 'modifiercandidature';
+}
+public static get AddCandidature(): string {
+  return this.instructor + 'addcandidature';
+}
 public static get EditTest(): string {
   return this.instructor + 'instructor-editTest';
 }
@@ -280,11 +306,24 @@ public static get EditTest(): string {
   public static get instructorProfile(): string {
     return this.instructor + 'instructor-profile';
   }
+
+
+  public static get instructorEvent(): string {
+      return this.instructor + 'instructor-addEvent';
+        }
+
   public static get instructorQA(): string {
     return this.instructor + 'instructor-qa';
   }
+
+  public static get instructorUpdateEvent(): string {
+          return this.instructor + 'updatevent';
+        }
   public static get instructorQuiz(): string {
     return this.instructor + 'instructor-quiz';
+  }
+  public static get list_sujet(): string {
+    return this.instructor + 'list-sujet';
   }
   public static get instructorQuizAttempts(): string {
     return this.instructor + 'instructor-quiz-attempts';
@@ -307,6 +346,12 @@ public static get EditTest(): string {
   public static get instructorDetails(): string {
     return this.instructor + 'instructor-details';
   }
+  public static get instructorformations(): string {
+    return this.instructor + 'Examens';
+  }
+  public static get instructorDiplome(): string {
+    return this.instructor + 'diplomes';
+  }
   public static get instructorEnrolledCourse(): string {
     return this.instructor + 'instructor-enrolled-course';
   }
@@ -325,6 +370,9 @@ public static get EditTest(): string {
   public static get students(): string {
     return this.baseUrl + '/student/';
   }
+  public static get GetListe(): string {
+    return  this.students + 'liste';
+  }
 
   public static get students_list(): string {
     return this.students + 'student-view/students-list';
@@ -341,6 +389,15 @@ public static get test_attempt(): string {
   return  this.students + 'test-attempt';
 }
 
+
+ public static get test_result(): string {
+  return  this.students + 'test-result';
+}
+
+public static get studentSujetPFE(): string {
+  return  this.students + 'sujetpfe-user';
+}
+
 public static get Mes_Reclamations(): string {
   return  this.students + 'student-reclamation';
 }
@@ -354,6 +411,10 @@ public static get CreateReclamation(): string {
   public static get student_test(): string {
     return this.students + 'student-test';
   }
+
+   public static get EventList(): string {
+    return this.students + 'student-event';
+  }
   public static get students_profile(): string {
     return this.students + 'student-profile';
   }
@@ -364,8 +425,9 @@ public static get CreateReclamation(): string {
     return this.students + 'deposit-student';
   }
   public static get course_student(): string {
-    return this.students + 'course-student';
+    return this.students + 'student-courses';
   }
+
   public static get view_invoice_student(): string {
     return this.students + 'view-invoice';
   }

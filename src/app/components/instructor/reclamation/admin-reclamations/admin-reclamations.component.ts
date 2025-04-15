@@ -13,12 +13,22 @@ export class AdminReclamationsComponent implements OnInit {
   pageSize = 5;
   pageIndex: { [key: string]: number } = {};
   filters: { [key: string]: string } = {};
+  dateFilters: { [key: string]: string } = {};
+  showAutoProcessedOnly = false;
+
+
 
   constructor(private adminReclamationService: ReclamationService) {}
 
   ngOnInit(): void {
-    this.types.forEach(type => { this.pageIndex[type] = 0; this.filters[type] = ''; });
+
     this.loadReclamations();
+    this.types.forEach(type => {
+      this.pageIndex[type] = 0;
+      this.filters[type] = '';
+      this.dateFilters[type] = '';  // Init du filtre date
+    });
+
   }
 
   loadReclamations() {
@@ -29,9 +39,16 @@ export class AdminReclamationsComponent implements OnInit {
 
   getFilteredReclamations(type: string) {
     return this.reclamations
-      .filter(r => r.type === type && (r.title?.toLowerCase().includes(this.filters[type].toLowerCase()) || r.user?.email?.toLowerCase().includes(this.filters[type].toLowerCase())))
+      .filter(r =>
+        r.type === type &&
+        (!this.filters[type] || r.title?.toLowerCase().includes(this.filters[type].toLowerCase()) || r.user?.email?.toLowerCase().includes(this.filters[type].toLowerCase())) &&
+        (!this.dateFilters[type] || r.creationDate?.startsWith(this.dateFilters[type])) &&
+        (!this.showAutoProcessedOnly || r.autoProcessed === true)
+      )
+      .sort((a, b) => new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime())
       .slice(this.pageIndex[type] * this.pageSize, (this.pageIndex[type] + 1) * this.pageSize);
   }
+
 
   totalPages(type: string) {
     return Math.ceil(this.reclamations.filter(r => r.type === type && (r.title?.toLowerCase().includes(this.filters[type].toLowerCase()) || r.user?.email?.toLowerCase().includes(this.filters[type].toLowerCase()))).length / this.pageSize) || 1;
@@ -71,4 +88,8 @@ export class AdminReclamationsComponent implements OnInit {
       'badge-danger': status === 'REJECTED'
     };
   }
+  toggleAutoProcessedFilter() {
+    this.showAutoProcessedOnly = !this.showAutoProcessedOnly;
+  }
+
 }

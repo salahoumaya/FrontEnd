@@ -15,7 +15,7 @@ export class CreateReclamationComponent implements OnInit {
     title: '',
     description: ''
   };
-
+  automaticStatus: string | null = null;
   events: any[] = [];
   trainings: any[] = [];
   sujetsPFE: any[] = [];
@@ -37,28 +37,31 @@ export class CreateReclamationComponent implements OnInit {
 }
 
 submitReclamation() {
-    if (!this.reclamation.type || !this.reclamation.targetId || !this.reclamation.title || !this.reclamation.description) {
-      alert('Tous les champs sont obligatoires');
-      return;
-    }
+  if (!this.reclamation.type || !this.reclamation.targetId || !this.reclamation.title || !this.reclamation.description) {
+    alert('Tous les champs sont obligatoires');
+    return;
+  }
 
-    const data = {
-      type: this.reclamation.type,
-      targetId: Number(this.reclamation.targetId), // ✅ assure que c'est bien un nombre
-      title: this.reclamation.title,
-      description: this.reclamation.description
-    };
+  const data = {
+    type: this.reclamation.type,
+    targetId: Number(this.reclamation.targetId),
+    title: this.reclamation.title,
+    description: this.reclamation.description
+  };
 
-    this.reclamationService.createReclamation(data).subscribe({
-      next: (res) => {
-        console.log('Réclamation créée:', res);
-        alert('Réclamation créée avec succès');
-        this.router.navigate(['/student/student-reclamation']);
-      },
-      error: (err) => {
-        console.error(err);
-        alert('Erreur lors de la création de la réclamation');
+  this.reclamationService.createReclamation(data).subscribe({
+    next: (res: any) => {
+      this.automaticStatus = res.status || 'OPEN';
+      if (res.autoProcessed) {
+        alert(`✅ Réclamation créée et traitée automatiquement avec le statut : ${res.status}`);
+      } else {
+        alert('Réclamation créée avec succès. Elle sera examinée prochainement.');
       }
-    });
+      setTimeout(() => this.router.navigate(['/student/student-reclamation']), 3000);
+    },
+    error: () => {
+      alert('Erreur lors de la création de la réclamation');
+    }
+  });
 }
 }

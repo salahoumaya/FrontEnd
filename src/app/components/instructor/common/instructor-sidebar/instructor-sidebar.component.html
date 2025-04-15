@@ -26,7 +26,7 @@
             <h3>Dashboard</h3>
             <ul>
                 <li class="nav-item" routerLinkActive="active">
-                    <a [routerLink]="routes.instructor_dashboard" class="nav-link">
+                    <a routerLink="/moderator/Checkout" class="nav-link">
                         <i class="bx bxs-tachometer"></i>Dashboard
                     </a>
                 </li>
@@ -36,12 +36,17 @@
                     </a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
+                    <a [routerLink]="routes.instructorformations" class="nav-link">
+                        <i class="bx bxs-user"></i>Examens
+                    </a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
                     <a [routerLink]="routes.instructorEnrolledCourse" class="nav-link">
                         <i class="bx bxs-graduation"></i>Training
                     </a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
-                    <a [routerLink]="routes.instructorWishlist" class="nav-link">
+                    <a [routerLink]="routes.instructorEvent" class="nav-link">
                         <i class="bx bxs-heart"></i>Event
                     </a>
                 </li>
@@ -53,7 +58,7 @@
                   </a>
               </li>
                 <li class="nav-item" routerLinkActive="active">
-                    <a [routerLink]="routes.instructorQuiz" class="nav-link">
+                    <a [routerLink]="routes.Candidature" class="nav-link">
                         <i class="bx bxs-shapes"></i>Recruitment
                     </a>
                 </li>
@@ -63,8 +68,8 @@
                     </a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
-                    <a [routerLink]="routes.instructorQA" class="nav-link">
-                        <i class="bx bxs-bookmark-alt"></i>ESP
+                    <a [routerLink]="routes.list_sujet" class="nav-link">
+                        <i class="bx bxs-bookmark-alt"></i>Sujet PFE
                     </a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">

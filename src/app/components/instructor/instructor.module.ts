@@ -34,14 +34,29 @@ import { TestListComponent } from './tests/test-list/test-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { QuestionListComponent } from './questions/question-list/question-list.component';
 import { AdminTestResultComponent } from './tests/admin-test-result/admin-test-result.component';
-import { NgApexchartsModule } from 'ng-apexcharts';
+
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { AdminReclamationsComponent } from './reclamation/admin-reclamations/admin-reclamations.component';
+import { AddEventComponent } from './evenement/add-event/add-event.component';
+import { UpdateEventComponent } from './update-event/update-event.component';
+import { SujetpfeBackofficeComponent } from './sujetpfe-backoffice/sujetpfe-backoffice.component';
+import { CourseDetailsComponent } from './Candidature/course-details/course-details.component';
+import { AddCourseComponent } from './Candidature/add-course/add-course.component';
+import { StudentMessageComponent } from './Candidature/student-message/student-message.component';
+
+import { DiplomeComponent } from './diplome/diplome.component';
+import { FormationComponent } from './formation/formation.component';
+import { ExamenComponent } from './examen/examen.component';
+import { ReclamationStatesComponent } from './reclamation/reclamation-states/reclamation-states.component';
 
 
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
+    DiplomeComponent,
+    FormationComponent,
+    ExamenComponent,
     InstructorComponent,
     InstructorAnnouncementsComponent,
     InstructorAssignmentComponent,
@@ -69,6 +84,13 @@ import { AdminReclamationsComponent } from './reclamation/admin-reclamations/adm
     QuestionListComponent,
     AdminTestResultComponent,
     AdminReclamationsComponent,
+    AddEventComponent,
+    UpdateEventComponent,
+    SujetpfeBackofficeComponent,
+    CourseDetailsComponent,
+    AddCourseComponent,
+    StudentMessageComponent,
+    ReclamationStatesComponent,
 
   ],
   imports: [
@@ -81,6 +103,7 @@ import { AdminReclamationsComponent } from './reclamation/admin-reclamations/adm
     NgxPaginationModule,
     SharedModule,
     NgApexchartsModule,
+
     NgCircleProgressModule.forRoot({
 
       radius: 60,

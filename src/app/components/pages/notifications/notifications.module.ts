@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { NotificationsRoutingModule } from './notifications-routing.module';
 import { NotificationsComponent } from './notifications.component';
+import { ModeratorSidebarModule } from "../moderator-sidebar/moderator-sidebar.module";
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { NotificationsComponent } from './notifications.component';
   ],
   imports: [
     CommonModule,
-    NotificationsRoutingModule
-  ]
+    NotificationsRoutingModule,
+    ModeratorSidebarModule
+]
 })
 export class NotificationsModule { }

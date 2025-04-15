@@ -11,8 +11,6 @@ import { routes } from 'src/app/shared/service/routes/routes';
 export class StudentSidebarComponent implements OnInit {
   public routes = routes;
   public userProfile: any = {};
-  public userName: string = '';
-  public userImage: string = 'assets/img/user/default-avatar.png'; // Image par défaut
 
   constructor(private authService: AuthService, private router: Router) {}
 

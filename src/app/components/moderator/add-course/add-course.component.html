@@ -1,0 +1,96 @@
+<!-- New Course -->
+<section class="page-content course-sec">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-12">
+        <div class="add-course-header">
+          <h2>Add New Training</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <!-- Course Wizard -->
+          <div class="widget-set">
+            <div class="widget-content multistep-form">
+              <div class="add-course-info mat-style">
+                <div class="add-course-inner-header">
+                  <h4>Training Information</h4>
+                </div>
+                <div class="add-course-form">
+                  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                    <div class="input-block">
+                      <label for="title" class="add-course-label">Title</label>
+                      <input type="text" class="form-control" placeholder="Title" [(ngModel)]="title" name="title" required />
+                      <div *ngIf="form.submitted && !title" class="error-text">Title is required</div>
+                    </div>
+
+                    <div class="input-block">
+                      <label for="level" class="add-course-label">Level</label>
+                      <mat-select class="custom-mat-select select" [(ngModel)]="selected" name="level" required>
+                        <mat-option value="Beginner">Beginner</mat-option>
+                        <mat-option value="Intermediate">Intermediate</mat-option>
+                        <mat-option value="Advanced">Advanced</mat-option>
+                        <mat-option value="Expert">Expert</mat-option>
+                      </mat-select>
+                      <div *ngIf="form.submitted && !selected" class="error-text">Please select a level</div>
+                    </div>
+
+                    <div class="input-block">
+                      <label for="type" class="add-course-label">Type</label>
+                      <mat-select class="custom-mat-select select" [(ngModel)]="selected2" name="type" required>
+                        <mat-option value="ONLINE">Online</mat-option>
+                        <mat-option value="Video">Video</mat-option>
+                      </mat-select>
+                      <div *ngIf="form.submitted && !selected2" class="error-text">Please select a type</div>
+                    </div>
+
+                    <div class="input-block mb-0">
+                      <label for="description" class="add-course-label">Description</label>
+                      <input type="text" class="form-control" placeholder="Description" [(ngModel)]="description" name="description" required />
+                      <div *ngIf="form.submitted && !description" class="error-text">Description is required</div>
+                    </div>
+
+                    <div class="widget-btn">
+                      <button type="submit" class="btn btn-info-light next_btn" [disabled]="isSubmitting">
+                        {{ isSubmitting ? 'Saving...' : 'Save' }}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /Course Wizard -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Success/Error Modal -->
+<div class="modal fade" id="responseModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+          <div class="page-wrapper-new p-0">
+              <div class="modal-header border-0 custom-modal-header">
+                  <div class="page-title">
+                      <h4 [ngClass]="{'text-success': !isError, 'text-danger': isError}">
+                          {{ modalTitle }}
+                      </h4>
+                  </div>
+                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                      <i class="feather icon-x"></i>
+                  </button>
+              </div>
+              <div class="modal-body custom-modal-body">
+                  <p>{{ modalMessage }}</p>
+              </div>
+              <div class="modal-footer-btn">
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

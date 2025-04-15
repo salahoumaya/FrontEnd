@@ -33,12 +33,17 @@
                   </a>
               </li>
               <li class="nav-item" routerLinkActive="active">
+                <a [routerLink]="routes.GetListe" class="nav-link">
+                    <i class="bx bxs-graduation"></i>My Courses
+                </a>
+            </li>
+              <li class="nav-item" routerLinkActive="active">
                   <a [routerLink]="routes.student_test" class="nav-link">
                       <i class="bx bxs-user"></i>TestLevel
                   </a>
               </li>
               <li class="nav-item" routerLinkActive="active">
-                  <a [routerLink]="routes.studentCourses" class="nav-link">
+                  <a [routerLink]="routes.course_student" class="nav-link">
                       <i class="bx bxs-graduation"></i>Enrolled Courses
                   </a>
               </li>
@@ -52,9 +57,10 @@
                       <i class="bx bxs-heart"></i>Wishlist
                   </a>
               </li>
+
               <li class="nav-item" routerLinkActive="active">
-                  <a [routerLink]="routes.studentReviews" class="nav-link">
-                      <i class="bx bxs-star"></i>Reviews
+                  <a [routerLink]="routes.EventList" class="nav-link">
+                      <i class="bx bxs-star"></i>MyEvent
                   </a>
               </li>
               <li class="nav-item" routerLinkActive="active">
@@ -67,6 +73,11 @@
                       <i class="bx bxs-chat"></i>Messages
                   </a>
               </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a [routerLink]="routes.studentSujetPFE" class="nav-link">
+                    <i class="bx bxs-chat"></i>Sujet PFE
+                </a>
+            </li>
               <li class="nav-item" routerLinkActive="active">
                   <a [routerLink]="routes.home" class="nav-link">
                       <i class="bx bxs-log-out"></i>Logout

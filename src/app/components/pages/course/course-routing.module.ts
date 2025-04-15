@@ -7,13 +7,13 @@ const routes: Routes = [
     path: '',
     component: CourseComponent,
     children: [
-      {
-        path: 'add-course',
+       /*{
+       path: 'add-course',
         loadChildren: () =>
           import('./add-course/add-course.module').then(
             (m) => m.AddCourseModule
           ),
-      },
+      }*/
       {
         path: 'course-details',
         loadChildren: () =>

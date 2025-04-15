@@ -53,4 +53,9 @@ export class AuthService {
     return this.getProfile();
   }
 
+  // Méthode pour récupérer la liste des modérateurs
+  getAllModerators(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/admin/get-all-moderators`); // Effectuer une requête GET
+  }
+
 }

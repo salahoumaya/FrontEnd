@@ -28,6 +28,10 @@ import { StudentSettingTabModule } from 'src/app/components/student/common/stude
 import { StudentSidebarModule } from 'src/app/components/student/common/student-sidebar/student-sidebar.module';
 import { DatePipe } from '@angular/common';
 
+import { ModeratorSidebarModule } from 'src/app/components/pages/moderator-sidebar/moderator-sidebar.module';
+import { ModeratorModule } from 'src/app/components/moderator/moderator.module';
+import { ModeratorComponent } from 'src/app/components/moderator/moderator/moderator.component';
+
 @NgModule({ exports: [
         FeatherIconModule,
         NgCircleProgressModule,
@@ -53,6 +57,9 @@ import { DatePipe } from '@angular/common';
         NgScrollbarModule,
         InstructorSidebarModule,
         StudentSidebarModule,
+       ModeratorSidebarModule,
+
+
         EditorModule,
         InstructorSettingTabModule,
         StudentSettingTabModule,
@@ -99,5 +106,7 @@ import { DatePipe } from '@angular/common';
         EditorModule,
         InstructorSettingTabModule,
         StudentSettingTabModule,
+
+
         BsDatepickerModule], providers: [BsDatepickerConfig, DatePipe, BsDaterangepickerConfig, provideHttpClient(withInterceptorsFromDi())] })
 export class SharedModule {}

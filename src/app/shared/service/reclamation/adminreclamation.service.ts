@@ -42,4 +42,16 @@ export class ReclamationService {
   deleteReclamation(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`, { headers: this.getAuthHeaders() });
   }
+
+  getByType(): Observable<{ [key: string]: number }> {
+    return this.http.get<{ [key: string]: number }>(`${this.baseUrl}/types`, { headers: this.getAuthHeaders() });
+  }
+
+  getByStatus(): Observable<{ [key: string]: number }> {
+    return this.http.get<{ [key: string]: number }>(`${this.baseUrl}/status`, { headers: this.getAuthHeaders() });
+  }
+
+  getByMonth(): Observable<{ [key: string]: number }> {
+    return this.http.get<{ [key: string]: number }>(`${this.baseUrl}/monthly`, { headers: this.getAuthHeaders() });
+  }
 }

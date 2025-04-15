@@ -58,20 +58,20 @@ export class StudentHeaderComponent implements OnInit {
       },
     });
   }
-
   loadNotifications() {
     this.reclamationService.getMyReclamations().subscribe(recs => {
-      this.notifications = recs;
-      this.unreadCount = this.notifications.filter(n => !n.read).length;
+      // Ne garde que les réclamations non "OPEN" et non lues
+      this.notifications = recs.filter(r => r.status !== 'OPEN' && !r.read);
+      this.updateUnreadCount();
     });
   }
-
   markAsRead(notif: any) {
     if (notif.read) return;
 
     this.reclamationService.markAsRead(notif.id).subscribe({
       next: () => {
-        notif.read = true;
+        // Supprime la notif de la liste (car elle est lue)
+        this.notifications = this.notifications.filter(n => n.id !== notif.id);
         this.updateUnreadCount();
       },
       error: () => alert("Erreur lors du marquage comme lu")
@@ -79,11 +79,12 @@ export class StudentHeaderComponent implements OnInit {
   }
 
   markAllAsRead() {
-    const unread = this.notifications.filter(n => !n.read);
+    const unread = [...this.notifications]; // copie pour itérer
     unread.forEach(n => {
       this.reclamationService.markAsRead(n.id).subscribe({
         next: () => {
-          n.read = true;
+          // Supprime chaque notif une à une
+          this.notifications = this.notifications.filter(not => not.id !== n.id);
           this.updateUnreadCount();
         },
         error: () => console.error("Erreur lors du marquage")

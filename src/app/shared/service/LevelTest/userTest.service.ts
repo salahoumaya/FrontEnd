@@ -36,4 +36,25 @@ export class userTestService {
       headers: this.getAuthHeaders()
     });
   }
+
+
+  getTestResult(testId: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${testId}/result`, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+  explainAnswer(question: string, userAnswer: string, correctAnswer: string): Observable<any> {
+    const body = {
+      question,
+      user_answer: userAnswer,
+      correct_answer: correctAnswer
+    };
+
+    return this.http.post<any>(`${this.baseUrl}/test/explain`, body, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+
 }

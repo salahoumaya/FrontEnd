@@ -1,0 +1,122 @@
+<!-- Page Content -->
+<div class="page-content">
+  <div class="container">
+      <div class="row">
+
+          <!-- Sidebar -->
+          <app-instructor-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-instructor-sidebar>
+          <!-- /Sidebar -->
+
+          <!-- Candidature List -->
+          <div class="col-xl-9 col-lg-9">
+              <div class="settings-widget card-details">
+                  <div class="settings-menu p-0">
+                      <div class="profile-heading d-flex justify-content-between align-items-center">
+                          <h3>Liste des Candidatures</h3>
+                          <div>
+                              <button class="btn btn-primary me-2" (click)="downloadCandidaturePdf()">Télécharger PDF</button>
+                              <a routerLink="/instructor/addcandidature" class="btn btn-primary">Ajouter Candidature</a>
+                          </div>
+                      </div>
+                      <div class="checkout-form">
+
+                          <!-- Candidature Tabs -->
+                          <div class="wishlist-tab order-tab">
+                              <ul class="nav">
+                                  <li class="nav-item">
+                                      <a href="javascript:void(0);" class="active" data-bs-toggle="tab" data-bs-target="#today">Candidatures Actuelles</a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a href="javascript:void(0);" data-bs-toggle="tab" data-bs-target="#history">Historique</a>
+                                  </li>
+                              </ul>
+                          </div>
+                          <!-- /Candidature Tabs -->
+
+                          <!-- Tab Content -->
+                          <div class="tab-content">
+
+                              <!-- Candidatures Actuelles -->
+                              <div class="tab-pane show active" id="today">
+                                  <div class="table-responsive custom-table">
+                                      <table class="table table-nowrap mb-0">
+                                          <thead>
+                                              <tr>
+                                                  <th>Référence</th>
+                                                  <th>Nom</th>
+                                                  <th>Prénom</th>
+                                                  <th>Email</th>
+                                                  <th>Expériences</th>
+                                                  <th>Spécialité</th>
+                                                  <th>Statut</th>
+                                                  <th>Opérations</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                              <tr *ngFor="let candidature of candidatures">
+                                                  <td>{{ candidature.candidatId }}</td>
+                                                  <td>{{ candidature.nom }}</td>
+                                                  <td>{{ candidature.prenom }}</td>
+                                                  <td>{{ candidature.email }}</td>
+                                                  <td>{{ candidature.nbr_exp }}</td>
+                                                  <td>{{ candidature.specialite }}</td>
+                                                  <td>{{ candidature.statut }}</td>
+                                                  <td>
+                                                    <td>
+                                                      <button class="btn btn-warning btn-sm" (click)="onUpdate(candidature)">
+                                                          <i class="bx bx-edit"></i> Modifier
+                                                      </button>
+
+                                                      <button class="btn btn-danger btn-sm" (click)="onDelete(candidature.candidatId)">
+                                                          <i class="bx bx-trash"></i> Supprimer
+                                                      </button>
+
+
+                                                  </td>
+
+
+                                              </tr>
+                                          </tbody>
+                                      </table>
+                                  </div>
+                                  <div *ngIf="loading">Chargement...</div>
+                                  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+                                  <div *ngIf="!loading && candidatures.length === 0">Aucune candidature trouvée.</div>
+                              </div>
+                              <!-- /Candidatures Actuelles -->
+
+                          </div>
+                          <!-- /Tab Content -->
+
+                      </div>
+                  </div>
+              </div>
+
+              <div class="dash-pagination">
+                  <div class="row align-items-center">
+                      <div class="col-6">
+                          <p>Page 1 of 2</p>
+                      </div>
+                      <div class="col-6">
+                          <ul class="pagination">
+                              <li class="active">
+                                  <a href="javascript:void(0);">1</a>
+                              </li>
+                              <li>
+                                  <a href="javascript:void(0);">2</a>
+                              </li>
+                              <li>
+                                  <a href="javascript:void(0);"><i class="bx bx-chevron-right"></i></a>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+          <!-- /Candidature List -->
+
+      </div>
+  </div>
+</div>
+<!-- /Page Content -->

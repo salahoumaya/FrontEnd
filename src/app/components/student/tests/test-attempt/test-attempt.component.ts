@@ -16,7 +16,7 @@ export class TestAttemptComponent implements OnInit {
   timeLeft: number = 0;
   timerInterval: any;
   hasSubmitted: boolean = false;
-   public routes = routes;
+  public routes = routes;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +35,6 @@ export class TestAttemptComponent implements OnInit {
     this.loadTestDetails();
   }
 
-
   @HostListener('document:copy', ['$event'])
   @HostListener('document:paste', ['$event'])
   @HostListener('document:cut', ['$event'])
@@ -43,8 +42,6 @@ export class TestAttemptComponent implements OnInit {
     event.preventDefault();
     alert('🚫 Copier, couper et coller sont désactivés pendant le test.');
   }
-
-
 
   loadTestDetails() {
     this.testService.getTestById(this.testId).subscribe({
@@ -96,11 +93,12 @@ export class TestAttemptComponent implements OnInit {
         localStorage.setItem('testPassed', 'true');
 
         alert(`✅ Temps écoulé ! Votre test a été soumis automatiquement. Score : ${this.score} / ${this.test.score}`);
-        this.router.navigate(['/student/student-dashboard']);
+        this.goToResult(this.testId);
       },
       error: (err) => {
         console.error("Erreur lors de la soumission auto :", err);
         alert("Ce test a déjà été soumis, vous ne pouvez plus soumettre à nouveau !");
+        this.goToResult(this.testId);
       }
     });
   }
@@ -124,19 +122,40 @@ export class TestAttemptComponent implements OnInit {
         this.score = score;
         this.hasSubmitted = true;
 
-        // ✅ Marquer que le test a été passé
         localStorage.setItem('testPassed', 'true');
 
         alert(`Test soumis avec succès ! Votre score : ${this.score} / ${this.test.score}`);
-        this.router.navigate(['/student/student-dashboard']);
+        this.goToResult(this.testId);
       },
       error: (err) => {
         console.error("Erreur lors de la soumission du test :", err);
         alert(" 🚫 Ce test a déjà été soumis, vous ne pouvez plus soumettre à nouveau !");
+        this.goToResult(this.testId);
       }
     });
 
     clearInterval(this.timerInterval);
   }
+
+  // ✅ Nouvelle méthode
+  goToResult(testId: number) {
+    console.log("🔁 Redirection vers le résultat du test ID =", this.routes.test_result, testId);
+    this.router.navigate([`${this.routes.test_result}/${testId}`]);
+  }
+  currentQuestionIndex: number = 0;
+
+get currentQuestion() {
+  return this.test?.questions[this.currentQuestionIndex];
+}
+goToNextQuestion() {
+  if (this.currentQuestionIndex < this.test?.questions.length - 1) {
+    this.currentQuestionIndex++;
+  }
+}
+goToPreviousQuestion() {
+  if (this.currentQuestionIndex > 0) {
+    this.currentQuestionIndex--;
+  }
 }
 
+}

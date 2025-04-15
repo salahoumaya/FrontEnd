@@ -4755,7 +4755,7 @@ export class DataService {
     },
 
     {
-      tittle: 'Pages',
+      tittle: 'Moderator',
       base: 'pages',
       showAsTab: false,
       separateRoute: false,
