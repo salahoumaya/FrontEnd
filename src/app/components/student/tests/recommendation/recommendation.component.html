@@ -1,0 +1,47 @@
+<div class="container mt-4">
+  <button class="btn btn-success mb-3" (click)="fetchRecommendations()">
+    Obtenir mes recommandations
+  </button>
+
+  <div *ngIf="recommendations.length > 0">
+    <h5>
+      Recommandations pour {{ userEmail }} (Score : {{ score }})
+    </h5>
+
+    <!-- Chart Apex -->
+    <apx-chart
+      *ngIf="chartOptions"
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [title]="chartOptions.title"
+      [dataLabels]="chartOptions.dataLabels"
+      [yaxis]="chartOptions.yaxis"
+      [legend]="chartOptions.legend"
+    ></apx-chart>
+
+    <!-- Tableau des données -->
+    <table class="table mt-4 table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Formation</th>
+          <th>Rating</th>
+          <th>Moyennes de FeedBacks</th>
+          <th>Score Quiz</th>
+          <th>Score Composite</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rec of recommendations">
+          <td>{{ rec.trainingName }}</td>
+          <td>{{ getSatisfactionLabel(rec.UserSatisfaction) }}</td>
+          <td>{{ getSentimentLabel(rec.SentimentScore) }}</td>
+          <td>{{ getQuizScoreLabel(rec.QuizScores) }}</td>
+          <td>{{ getCompositeScoreLabel(rec.CompositeScore) }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+</div>

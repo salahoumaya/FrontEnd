@@ -9,6 +9,23 @@
         <div class="col-xl-10 col-lg-10 mx-auto">
           <div class="card p-4 shadow text-center">
             <h3> Résultat du Test : {{ testTitle }}</h3>
+             <!-- Boutons ajoutés ici avant le score -->
+             <div class="d-flex justify-content-center gap-3 mb-4">
+              <!-- Bouton Dashboard -->
+              <button
+                class="btn btn-primary"
+                [routerLink]="routes.studentDashboard"
+              >
+                <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+              </button>
+
+              <!-- Bouton Recommandations -->
+              <button
+                class="btn btn-success"
+                (click)="showRecommendations()">
+                <i class="fas fa-lightbulb me-2"></i> Recommandation
+              </button>
+            </div>
             <p><strong>Votre Score :</strong> {{ score }}</p>
 
 

@@ -40,14 +40,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let reclamation of getFilteredReclamations(type)">
-                    <td>
+                  <tr *ngFor="let reclamation of getFilteredReclamations(type)"
+                  [class.bg-priority]="reclamation.autoProcessed && reclamation.sentiment === 'NEGATIVE'">
+                  <td>
                       {{ reclamation.title }}
                       <span *ngIf="reclamation.autoProcessed && reclamation.sentiment === 'NEGATIVE'"
                             class="badge bg-danger ms-2">
-                        🔥 Prioritaire
+                           Plus urgent
                       </span>
-                    </td>
+                  </td>
 
                     <td>{{ reclamation.user?.email || '-' }}</td>
                     <td>

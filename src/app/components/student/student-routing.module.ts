@@ -23,6 +23,7 @@ import { EventListComponent } from './event-list/event-list.component';
 import { SujetpfeFrontoffice } from './sujetpfe-frontoffice/sujetpfe-frontoffice.component';
 import { ExmanComponent } from './exman/exman.component';
 import { ListeComponent } from './liste/liste.component';
+import { RecommendationComponent } from './tests/recommendation/recommendation.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
     children: [
       { path: 'student-test', component: TestSelectionComponent },
       { path: 'liste', component: ListeComponent },
+      { path: 'recommendation', component: RecommendationComponent },
       { path: 'examn/:id', component: ExmanComponent },
       { path: 'test-attempt/:id', component: TestAttemptComponent },
       { path: 'test-result/:id', component: TestResultComponent },

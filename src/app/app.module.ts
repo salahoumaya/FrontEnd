@@ -39,7 +39,7 @@ import { ToastrModule } from 'ngx-toastr';
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    NgApexchartsModule,
+
     ToastrModule.forRoot(),
     NgCircleProgressModule.forRoot({
       radius: 60,

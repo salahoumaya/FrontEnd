@@ -100,3 +100,61 @@ tr:hover {
   margin-left: 6px;
 }
 
+/* Wishlist-style pagination */
+.dash-pagination {
+  margin-top: 20px;
+  .row {
+    align-items: center;
+  }
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: #f1abec;
+  }
+  .pagination {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      margin-left: 5px;
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+        color: #333;
+        text-decoration: none;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        &:hover {
+          background-color: #f1f1f1;
+          border-color: #bbb;
+        }
+      }
+      &.active a {
+        background-color: #f6a1e0;
+        color: white;
+        border-color: #f6a1e0;
+      }
+      &.disabled a {
+        color: #ccc;
+        cursor: not-allowed;
+        &:hover {
+          background-color: transparent;
+          border-color: #ddd;
+        }
+      }
+    }
+  }
+}
+
+/* Boxicons for chevrons */
+.bx-chevron-left,
+.bx-chevron-right {
+  font-size: 18px;
+}

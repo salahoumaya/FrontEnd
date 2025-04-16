@@ -51,6 +51,20 @@
           </apx-chart>
         </div>
 
+        <!-- Après le graphique par mois -->
+<!-- Ajoutez ceci où vous voulez afficher le graphique -->
+<div class="bg-white rounded-lg shadow p-3 mt-4">
+  <apx-chart
+    [series]="prioritySeries"
+    [chart]="{ type: 'line', height: 420 }"
+    [xaxis]="{ categories: priorityCategories }"
+    [colors]="['#FF6B6B']"
+    [stroke]="{ width: 3, curve: 'smooth' }"
+    [markers]="{ size: 5 }"
+    [title]="{ text: '🔥 Réclamations Prioritaires par Mois', align: 'center', style: { fontSize: '16px' } }">
+  </apx-chart>
+</div>
+
       </div>
     </div>
   </div>

@@ -147,3 +147,25 @@ input.form-control-sm {
   position: relative;
   z-index: 1;
 }
+.bg-priority {
+  background-color: #fff8f8;  // Fond légèrement rouge
+  border-left: 3px solid #ff0000;
+
+  &:hover {
+      background-color: #ffecec !important;
+  }
+}
+
+/* Pour les cellules du tableau */
+.bg-priority td {
+  font-weight: 500;
+}
+.priority-flash {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { background-color: rgba(255, 0, 0, 0.05); }
+  50% { background-color: rgba(255, 0, 0, 0.15); }
+  100% { background-color: rgba(255, 0, 0, 0.05); }
+}

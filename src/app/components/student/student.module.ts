@@ -32,7 +32,8 @@ import { ListeComponent } from './liste/liste.component';
 
 
 
-
+import { NgxPaginationModule } from 'ngx-pagination'
+import { RecommendationComponent } from './tests/recommendation/recommendation.component';
 @NgModule({
   declarations: [
     ListeComponent,
@@ -57,7 +58,8 @@ import { ListeComponent } from './liste/liste.component';
     TestResultComponent,
     EventListComponent,
     AfficheReservationComponent,
-    SujetpfeFrontoffice
+    SujetpfeFrontoffice,
+    RecommendationComponent
 
   ],
   imports: [
@@ -68,6 +70,7 @@ import { ListeComponent } from './liste/liste.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPaginationModule
 
   ]
 })

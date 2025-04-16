@@ -389,6 +389,10 @@ public static get test_attempt(): string {
   return  this.students + 'test-attempt';
 }
 
+public static get recommendation(): string {
+  return  this.students + 'recommendation';
+}
+
 
  public static get test_result(): string {
   return  this.students + 'test-result';

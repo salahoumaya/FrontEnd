@@ -48,6 +48,15 @@ export class TestResultComponent implements OnInit {
     });
   }
 
+  showRecommendations() {
+    this.router.navigate([this.routes.recommendation]);
+  }
+
+  // Méthode optionnelle pour un modal
+  openRecommendationsModal(testId: number) {
+    // Implémentez la logique pour ouvrir un modal avec les recommandations
+  }
+
   formatTime(seconds: number): string {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;

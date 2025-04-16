@@ -1,0 +1,10 @@
+/* Pour rendre le graphique plus visible */
+.apxcharts-line-series path {
+  stroke-width: 3px;
+}
+
+.apxcharts-marker {
+  stroke: #FF6B6B;
+  fill: white;
+  stroke-width: 2px;
+}

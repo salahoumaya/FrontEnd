@@ -57,4 +57,13 @@ export class userTestService {
   }
 
 
+
+  getRecommendationFromLastScore(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/recommend`, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+
+
 }

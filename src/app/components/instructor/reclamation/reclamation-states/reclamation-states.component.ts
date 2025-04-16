@@ -31,6 +31,10 @@ export class ReclamationStatesComponent implements OnInit {
   monthSeries: ApexAxisChartSeries = [];
   monthCategories: string[] = [];
 
+  prioritySeries: ApexAxisChartSeries = [];
+  priorityCategories: string[] = [];
+  allReclamations: any[] = [];
+
   pastelColors = ['#A3CEF1', '#FFC9DE', '#FFE4A7', '#C8E7A3', '#D5C6E0'];
 
   constructor(private statService: ReclamationService) {}
@@ -53,6 +57,40 @@ export class ReclamationStatesComponent implements OnInit {
         data: Object.values(data) as number[]
       }];
     });
+    this.statService.getAllReclamations().subscribe(reclamations => {
+      this.allReclamations = reclamations;
+      this.calculatePriorityStats();
+    });
+  }
+
+
+  calculatePriorityStats() {
+    // 1. Filtrer les réclamations prioritaires
+    const priorityReclamations = this.allReclamations.filter(
+      r => r.autoProcessed && r.sentiment === 'NEGATIVE'
+    );
+
+    // 2. Grouper par mois
+    const monthlyCounts: { [key: string]: number } = {};
+
+    priorityReclamations.forEach(reclamation => {
+      const date = new Date(reclamation.creationDate);
+      const monthYear = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
+
+      if (!monthlyCounts[monthYear]) {
+        monthlyCounts[monthYear] = 0;
+      }
+      monthlyCounts[monthYear]++;
+    });
+
+    // 3. Trier les mois chronologiquement
+    this.priorityCategories = Object.keys(monthlyCounts).sort();
+
+    // 4. Préparer les données pour le graphique
+    this.prioritySeries = [{
+      name: 'Réclamations Prioritaires',
+      data: this.priorityCategories.map(month => monthlyCounts[month])
+    }];
   }
 
   // Options génériques (pour charts sans axes comme pie/donut)
@@ -118,6 +156,33 @@ generatePdfReport() {
     headStyles: { fillColor: [212, 240, 223] },
   });
 
+  autoTable(doc, {
+    startY: doc.lastAutoTable.finalY + 10,
+    head: [['Mois', 'Réclamations Urgentes']],
+    body: this.priorityCategories.map((month, index) => {
+      // Valeur par défaut si data est undefined
+      const value = this.prioritySeries[0]?.data?.[index] ?? 0;
+      return [month, value.toString()];
+    }),
+    theme: 'grid',
+    headStyles: {
+      fillColor: [255, 107, 107],
+      textColor: [255, 255, 255],
+      fontStyle: 'bold'
+    },
+    styles: {
+      cellPadding: 5,
+      fontSize: 10,
+      valign: 'middle'
+    },
+    columnStyles: {
+      0: { cellWidth: 'auto' },
+      1: { cellWidth: 'auto', halign: 'center' }
+    }
+  });
+
   doc.save('rapport-reclamations.pdf');
+
+
 }
 }
