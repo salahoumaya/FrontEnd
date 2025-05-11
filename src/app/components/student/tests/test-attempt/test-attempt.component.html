@@ -1,0 +1,69 @@
+<div class="quiz-container">
+  <div class="quiz-box">
+    <h2 class="quiz-title">TEST : {{ test?.title }}</h2>
+
+    <div class="quiz-meta">
+      <p><strong>Durée :</strong> {{ test?.duration }} minutes</p>
+      <p><strong>Temps restant :</strong>
+        <span [ngClass]="{ 'text-danger': timeLeft <= 30 }">
+          {{ (timeLeft / 60) | number: '2.0-0' }}:{{ (timeLeft % 60) | number: '2.0-0' }}
+        </span>
+      </p>
+    </div>
+
+    <div *ngIf="currentQuestion" class="quiz-question-box">
+      <div *ngIf="currentQuestion.questionImage; else textQuestion" class="question-header">
+        <img
+          [src]="'data:image/png;base64,' + currentQuestion.questionImage"
+          alt="Image de la question"
+          class="img-thumbnail mb-2"
+          style="width: 300px; height: auto; object-fit: cover;"
+        />
+      </div>
+      <ng-template #textQuestion>
+        <div class="question-header">
+          {{ currentQuestionIndex + 1 }}. {{ currentQuestion.questionText }}
+        </div>
+      </ng-template>
+
+      <div *ngFor="let option of ['optionA', 'optionB', 'optionC', 'optionD']" class="option-block">
+        <label class="option">
+          <input
+            type="radio"
+            [name]="'question' + currentQuestion.id"
+            [value]="currentQuestion[option]"
+            [(ngModel)]="answers[currentQuestion.id]"
+          />
+          {{ currentQuestion[option] }}
+        </label>
+      </div>
+
+      <div class="mt-4 d-flex justify-content-between">
+        <button
+          class="btn btn-outline-primary"
+          (click)="goToPreviousQuestion()"
+          [disabled]="currentQuestionIndex === 0"
+        >
+          ⬅️ Question Précédente
+        </button>
+
+        <button
+          class="btn btn-primary"
+          *ngIf="currentQuestionIndex < test?.questions.length - 1"
+          (click)="goToNextQuestion()"
+        >
+          Question Suivante ➡️
+        </button>
+
+        <button
+          class="btn btn-success"
+          *ngIf="currentQuestionIndex === test?.questions.length - 1"
+          (click)="submitTest()"
+          [disabled]="hasSubmitted"
+        >
+          ✅ Soumettre
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

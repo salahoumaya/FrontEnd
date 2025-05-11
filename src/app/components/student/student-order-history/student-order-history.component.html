@@ -1,0 +1,74 @@
+<!-- Page Content -->
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+
+            <!-- sidebar -->
+            <app-student-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-student-sidebar>
+            <!-- /Sidebar -->
+
+            <!-- Student Order History -->
+            <div class="col-xl-9 col-lg-9">
+
+                <div class="settings-widget card-details">
+                    <div class="settings-menu p-0">
+                        <div class="profile-heading">
+                            <h3>Order History</h3>
+                        </div>
+                        <div class="checkout-form">
+
+                            <div class="tab-content">
+
+                                <!-- Today -->
+                                <div class="tab-pane show active" id="today">
+                                    <div class="table-responsive custom-table">
+                                        <table class="table table-nowrap mb-0">
+                                            <thead>
+                                              <tr>
+                                                <th>Course Name</th>
+                                                <th>Date</th>
+                                                <th>Level</th>
+                                                <th>Courses</th>
+                                                <th></th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let formation of formations">
+                                                  <td>{{ formation.title }}</td>
+                                                  <td>{{ formation.plannings[0]?.startDate | date: 'MMMM d, y' }}</td>
+                                                  <td>{{ formation.level }}</td>
+                                                  <td>
+                                                    <span class="title-course">
+                                                    <ul class="mb-0 ps-3">
+                                                      <li *ngFor="let course of formation.courses"><a  href="{{course.content}}" target="_blank" rel="noopener noreferrer">{{ course.title }} </a></li>
+                                                    </ul>
+                                                </span>
+                                                  </td>
+                                                  <td >
+                                                    <a href="javascript:void(0);" class="action-icon" [hidden]="!formation.plannings[0]" (click)="downloadPlanningPDF(formation.plannings[formation.plannings.length-1])" >
+                                                      <i class="bx bxs-download" ></i>
+                                                    </a>
+                                                  </td>
+                                                </tr>
+                                              </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- /Today -->
+
+
+                            <!-- /Tab Content -->
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /Student Order History -->
+
+        </div>
+    </div>
+</div>
+<!-- /Page Content -->

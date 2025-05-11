@@ -1,0 +1,141 @@
+.page-content {
+  background-color: #cfefff;
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.settings-widget {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+}
+
+.profile-heading h3 {
+  font-family: 'Georgia', serif;
+  font-size: 24px;
+  color: #001f87;
+  margin-bottom: 1rem;
+}
+
+.question-header {
+  background-color: #001f87;
+  color: white;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.option-block {
+  background-color: #e6f6ff;
+  padding: 0.6rem 1rem;
+  margin: 0.4rem 0;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.option-block:hover {
+  background-color: #d2f0ff;
+}
+
+.option-block input[type="radio"] {
+  margin-right: 10px;
+}
+
+.btn-submit {
+  background: linear-gradient(to right, #8e2de2, #4a00e0);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  font-weight: bold;
+  border-radius: 20px;
+  transition: 0.3s ease;
+}
+
+.btn-submit:hover {
+  opacity: 0.9;
+}
+
+.quiz-container {
+  background: #bde3f9;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quiz-box {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  width: 80%;
+  max-width: 700px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.quiz-title {
+  color: #002b7a;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.quiz-meta p {
+  font-size: 14px;
+  text-align: center;
+  margin: 4px 0;
+}
+
+.question-header {
+  background: #1a237e;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.option-block {
+  background: #e3f2fd;
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.option input {
+  margin-right: 10px;
+}
+
+.btn-primary {
+  background-color: #7e57c2;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #5e35b1;
+}
+
+.btn-success {
+  background-color: #388e3c;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  color: white;
+  font-weight: bold;
+}
+

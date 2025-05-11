@@ -1,0 +1,33 @@
+.postuler-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #ff4667; //  par défaut
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.postuler-btn:hover {
+    background-color: orange; // Change en orange au survol
+    color: white;
+}
+
+.deposer-btn {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    background-color: #ff4667; //  par défaut
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.deposer-btn:hover {
+    background-color: orange; // Change en orange au survol
+    color: white;
+}

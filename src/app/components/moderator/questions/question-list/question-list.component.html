@@ -1,0 +1,88 @@
+<!-- Page Wrapper -->
+<div class="page-content">
+  <div class="container">
+    <div class="row">
+
+      <!-- Sidebar -->
+      <app-instructor-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-instructor-sidebar>
+      <!-- /Sidebar -->
+
+      <!-- Instructor Question List -->
+      <div class="col-xl-9 col-lg-9">
+        <div class="settings-widget card-details">
+          <div class="settings-menu p-4">
+            <div class="profile-heading text-center">
+              <h3>Liste des Questions</h3>
+            </div>
+
+            <!-- Loader -->
+            <div *ngIf="isLoading" class="text-center">
+              <p>Chargement des questions...</p>
+            </div>
+
+            <!-- Message d'erreur -->
+            <div *ngIf="errorMessage" class="alert alert-danger">
+              {{ errorMessage }}
+            </div>
+
+            <div class="checkout-form">
+              <div class="table-responsive custom-table">
+
+                <!-- Search Field -->
+                <input type="text" [(ngModel)]="searchText" (input)="filterQuestions()"
+                       class="form-control mb-3" placeholder="Rechercher une question...">
+
+                <button (click)="goToAddQuestion()" class="btn btn-primary mb-3">Créer une Question</button>
+
+                <!-- Table with Pagination -->
+                <table class="table table-striped table-bordered" *ngIf="filteredQuestions.length > 0; else noQuestions">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Question</th>
+                      <th>Options</th>
+                      <th>Réponse Correcte</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let question of filteredQuestions | paginate: { itemsPerPage: pageSize, currentPage: page }; let i = index">
+                      <td>{{ (page - 1) * pageSize + i + 1 }}</td>
+                      <td>
+                        <!-- 🔄 Affichage de l'image ou du texte de la question -->
+                        <div *ngIf="question.questionImage">
+                          <img [src]="'data:image/png;base64,' + question.questionImage"
+                               alt="Image de la Question"
+                               class="img-thumbnail"
+                               style="width: 150px; height: 100px; object-fit: cover;">
+                        </div>
+                        <p *ngIf="!question.questionImage">{{ question.questionText }}</p>
+                      </td>
+                      <td>
+                        <strong>A:</strong> {{ question.optionA }} <br>
+                        <strong>B:</strong> {{ question.optionB }} <br>
+                        <strong>C:</strong> {{ question.optionC }} <br>
+                        <strong *ngIf="question.optionD">D:</strong> {{ question.optionD }}
+                      </td>
+                      <td><strong>{{ question.correctAnswer }}</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <!-- Pagination -->
+                <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+
+                <!-- No Questions Found -->
+                <ng-template #noQuestions>
+                  <p class="text-center">Aucune question trouvée.</p>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Instructor Question List -->
+
+    </div>
+  </div>
+</div>
+<!-- /Page Wrapper -->

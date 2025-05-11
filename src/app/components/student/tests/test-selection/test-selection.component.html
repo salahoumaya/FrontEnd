@@ -1,0 +1,98 @@
+<section class="course-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9 col-md-12">
+
+        <!-- Vérifier le chargement des tests -->
+        <div *ngIf="isLoading" class="text-center">
+          <p>Chargement des tests...</p>
+        </div>
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Liste des Tests sous forme de Cartes -->
+        <div *ngFor="let test of tests" class="blog">
+          <div class="blog-image">
+            <img class="img-fluid" alt="Test Image" [src]="test.image ? 'data:image/png;base64,' + test.image : 'assets/img/course/course-02.jpg'">
+          </div>
+          <div class="blog-info clearfix">
+            <div class="post-left">
+              <ul>
+                <li>
+                  <div class="post-author">
+                    <img class="img-fluid" alt="Test Image" [src]="test.image ? 'data:image/png;base64,' + test.image : 'assets/img/course/course-02.jpg'">
+                    <span>Durée: {{ test.duration }} min</span>
+                  </div>
+                </li>
+                <li><img class="img-fluid" src="assets/img/icon/icon-22.svg" alt="">{{ test.scheduledAt }}</li>
+                <li><img class="img-fluid" src="assets/img/icon/icon-23.svg" alt=""> Score max: {{ test.score }}</li>
+              </ul>
+            </div>
+          </div>
+          <h3 class="blog-title">{{ test.title }}</h3>
+          <div class="blog-content blog-read">
+            <p>{{ test.description }}</p>
+            <button class="btn btn-primary" (click)="startTest(test.id)">Démarrer le Test</button>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="pagination lms-page">
+              <li class="page-item prev"><a class="page-link" href="javascript:void(0)"><i class="fas fa-angle-left"></i></a></li>
+              <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
+              <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
+              <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+              <li class="page-item next"><a class="page-link" href="javascript:void(0)"><i class="fas fa-angle-right"></i></a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-3 col-md-12 sidebar-right theiaStickySidebar">
+        <div class="stickybar">
+          <!-- Recherche -->
+          <div class="card search-widget blog-search blog-widget">
+            <div class="card-body">
+              <form class="search-form">
+                <div class="input-group">
+                  <input type="text" placeholder="Rechercher..." class="form-control">
+                  <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Tests Récents -->
+          <div class="card post-widget blog-widget">
+            <div class="card-header">
+              <h4 class="card-title">Tests Récents</h4>
+            </div>
+            <div class="card-body">
+              <ul class="latest-posts">
+                <li *ngFor="let test of tests.slice(0,3)">
+                  <div class="post-thumb">
+                    <a href="javascript:void(0)">
+                      <img class="img-fluid" src="assets/img/course-placeholder.jpg" alt="">
+                    </a>
+                  </div>
+                  <div class="post-info">
+                    <h4><a href="javascript:void(0)">{{ test.title }}</a></h4>
+                    <p><img class="img-fluid" src="assets/img/icon/icon-22.svg" alt="">{{ test.scheduledAt }}</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- /Sidebar -->
+
+    </div>
+  </div>
+</section>

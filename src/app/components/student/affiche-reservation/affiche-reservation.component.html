@@ -1,0 +1,13 @@
+<div class="container mt-5">
+    <h3>Réserver un Événement</h3>
+    <form [formGroup]="reservationForm" (ngSubmit)="submitReservation()">
+      <div class="form-group mb-3">
+        <label for="email">Email</label>
+        <input type="contactEmail" id="email" formControlName="email" class="form-control" required>
+        <input type="hidden" [value]="userId" formControlName="userId">
+      </div>
+      <button type="submit" class="btn btn-primary">Réserver</button>
+    </form>
+   
+  </div>
+  

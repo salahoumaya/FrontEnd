@@ -1,0 +1,77 @@
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+
+
+            <!-- Student Settings -->
+            <div class="col-xl-9 col-lg-9">
+                <div class="settings-widget card-details">
+                    <div class="settings-menu p-0">
+                        <div class="profile-heading">
+                            <h3>Mettre à jour la candidature</h3>
+                            <p>Modifiez les informations pour soumettre votre mise à jour</p>
+                        </div>
+                        <form (ngSubmit)="onSubmit(candidatureForm)" #candidatureForm="ngForm">
+                            <div class="checkout-form settings-wrap">
+                                <div class="edit-profile-info d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5>Informations Personnelles</h5>
+                                        <p>Modifiez vos informations personnelles</p>
+                                    </div>
+                                    <button class="btn btn-secondary" (click)="goToCandidatureList()">Consulter Candidatures</button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-block">
+                                            <label for="nom" class="form-label">Nom</label>
+                                            <input type="text" class="form-control" id="nom" [(ngModel)]="candidature.nom" name="nom" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-block">
+                                            <label for="prenom" class="form-label">Prénom</label>
+                                            <input type="text" class="form-control" id="prenom" [(ngModel)]="candidature.prenom" name="prenom" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-block">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="email" [(ngModel)]="candidature.email" name="email" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-block">
+                                            <label for="specialite" class="form-label">Spécialité</label>
+                                            <input type="text" class="form-control" id="specialite" [(ngModel)]="candidature.specialite" name="specialite" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-block">
+                                            <label for="statut" class="form-label">Statut</label>
+                                            <select class="form-control" [(ngModel)]="candidature.statut" name="statut" required>
+                                                <option value="REFUSE">REFUSE</option>
+                                                <option value="EN_ATTENTE">EN ATTENTE</option>
+                                                <option value="ACCEPTE">ACCEPTE</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-block">
+                                            <label for="nbr_exp" class="form-label">Nombre d'Expériences</label>
+                                            <input type="number" class="form-control" id="nbr_exp" [(ngModel)]="candidature.nbr_exp" name="nbr_exp" required />
+                                        </div>
+                                    </div>
+                                    <!-- Boutons -->
+                                    <div class="col-md-12 d-flex justify-content-between mt-3">
+                                        <button class="btn btn-primary" type="submit" [disabled]="!candidatureForm.valid">Enregistrer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- /Student Settings -->
+        </div>
+    </div>
+</div>

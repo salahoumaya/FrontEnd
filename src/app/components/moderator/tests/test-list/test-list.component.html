@@ -1,0 +1,85 @@
+<!-- Page Content -->
+<div class="page-content">
+  <div class="container">
+      <div class="row">
+
+          <!-- Sidebar -->
+          <app-instructor-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-instructor-sidebar>
+          <!-- /Sidebar -->
+
+          <!-- Instructor Tests -->
+          <div class="col-xl-9 col-lg-9">
+
+              <div class="settings-widget card-info">
+                  <div class="settings-menu p-0">
+                      <div class="profile-heading">
+                          <h3>Mes Tests</h3>
+
+                          <p>Gérez vos tests et leurs mises à jour</p>
+                      </div>
+
+                      <div class="checkout-form pb-0">
+                          <div class="wishlist-tab">
+                              <button (click)="goToAddTest()" class="btn btn-primary mb-3">Créer un Test</button>
+                          </div>
+
+                          <div class="row">
+                            <!-- Test Grid -->
+                            <div class="col-xxl-4 col-md-6 d-flex" *ngFor="let test of filteredTests | paginate: { itemsPerPage: pageSize, currentPage: page }">
+                                <div class="course-box flex-fill">
+                                    <div class="product">
+                                        <div class="product-img">
+                                            <a href="javascript:void(0);">
+                                              <img class="img-fluid" alt="Test Image" [src]="test.image ? 'data:image/png;base64,' + test.image : 'assets/img/course/course-02.jpg'">
+
+                                            </a>
+                                            <div class="price">
+                                                <h3>{{ test.scheduledAt | date:'dd/MM/yyyy' }}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="product-content">
+                                            <h3 class="title instructor-text">
+                                                <a href="javascript:void(0);">{{ test.title }}</a>
+                                            </h3>
+                                            <p>{{ test.description }}</p>
+                                            <div class="course-info d-flex align-items-center">
+                                                <div class="rating-img d-flex align-items-center">
+                                                    <img src="assets/img/icon/icon-02.svg" alt="Icon">
+                                                    <p>Durée: {{ test.duration }} min</p>
+                                                </div>
+                                                <div class="course-view d-flex align-items-center">
+                                                    <img src="assets/img/icon/icon-01.svg" alt="Icon">
+                                                    <p>Score: {{ test.score }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="course-edit-btn d-flex align-items-center justify-content-between">
+                                              <a   class="btn btn-primary " (click)="viewTestResults(test.id)">
+                                                Resultat</a>
+                                                <a class="btn btn-warning"  (click)="goToEditTest(test.id)">
+                                                  Modifier
+                                              </a>
+                                                <a  class="btn btn-primary " (click)="deleteTest(test.id)">Supprimer</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Test Grid -->
+                        </div>
+
+                          <!-- Pagination -->
+                          <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+
+                          <!-- No Tests Found -->
+                          <ng-template #noTests>
+                              <p class="text-center">Aucun test trouvé.</p>
+                          </ng-template>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- /Instructor Tests -->
+      </div>
+  </div>
+</div>
+<!-- /Page Content -->

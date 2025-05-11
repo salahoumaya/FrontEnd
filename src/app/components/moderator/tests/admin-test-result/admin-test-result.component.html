@@ -1,0 +1,148 @@
+<!-- Page Wrapper -->
+<div class="page-content">
+  <div class="container">
+    <div class="row">
+
+      <!-- ✅ Sidebar -->
+      <app-instructor-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-instructor-sidebar>
+      <!-- /Sidebar -->
+
+      <!-- ✅ Section des résultats et statistiques -->
+      <div class="col-xl-9 col-lg-9">
+        <div class="settings-widget card-details">
+          <div class="settings-menu p-4">
+
+            <!-- Titre de la section -->
+            <div class="profile-heading text-center mb-4">
+              <h3>Résultats du Test</h3>
+            </div>
+
+            <!-- ✅ Statistiques avec cercles -->
+            <div *ngIf="statistics" class="mt-4">
+
+              <div class="row">
+                <!-- Test le plus réussi -->
+                <div class="col-md-3 text-center mb-4">
+                  <h5>Test le plus réussi</h5>
+                  <circle-progress
+                    [percent]="statistics?.bestTest?.averageScore || 0"
+                    [radius]="60"
+                    [outerStrokeWidth]="8"
+                    [innerStrokeWidth]="4"
+                    [outerStrokeColor]="'#4882c2'"
+                    [innerStrokeColor]="'#e7e8ea'"
+                    [animation]="true"
+                    [animationDuration]="300">
+                  </circle-progress>
+                  <p>{{ statistics?.bestTest?.testName || 'N/A' }}</p>
+                </div>
+
+                <!-- Score moyen global -->
+                <div class="col-md-3 text-center mb-4">
+                  <h5>Score moyen global</h5>
+                  <circle-progress
+                    [percent]="statistics?.averageScore || 0"
+                    [radius]="60"
+                    [outerStrokeWidth]="8"
+                    [innerStrokeWidth]="4"
+                    [outerStrokeColor]="'#28a745'"
+                    [innerStrokeColor]="'#e7e8ea'"
+                    [animation]="true"
+                    [animationDuration]="300">
+                  </circle-progress>
+                  <p>{{ statistics?.averageScore?.toFixed(2) || 0 }}%</p>
+                </div>
+
+                <!-- Taux de réussite -->
+                <div class="col-md-3 text-center mb-4">
+                  <h5>Taux de réussite</h5>
+                  <circle-progress
+                    [percent]="statistics?.passRate || 0"
+                    [radius]="60"
+                    [outerStrokeWidth]="8"
+                    [innerStrokeWidth]="4"
+                    [outerStrokeColor]="'#ffc107'"
+                    [innerStrokeColor]="'#e7e8ea'"
+                    [animation]="true"
+                    [animationDuration]="300">
+                  </circle-progress>
+                  <p>{{ statistics?.passRate?.toFixed(2) || 0 }}%</p>
+                </div>
+
+                <!-- Nombre de participants -->
+                <div class="col-md-3 text-center mb-4">
+                  <h5>Nombre participants</h5>
+                  <circle-progress
+                    [percent]="100"
+                    [radius]="60"
+                    [outerStrokeWidth]="8"
+                    [innerStrokeWidth]="4"
+                    [outerStrokeColor]="'#dc3545'"
+                    [innerStrokeColor]="'#e7e8ea'"
+                    [animation]="true"
+                    [animationDuration]="300">
+                  </circle-progress>
+                  <p>{{ statistics?.totalParticipants || 0 }}</p>
+                </div>
+              </div>
+
+              <!-- ✅ Section des questions les plus difficiles -->
+              <h4 class="mt-5">📋 Questions les plus difficiles :</h4>
+              <div class="row mt-3">
+                <div class="col-md-4 mb-4" *ngFor="let question of difficultQuestions">
+                  <div class="card p-3 text-center">
+                    <h6>{{ question.questionText }}</h6>
+                    <circle-progress
+                      [percent]="question.correctRate || 0"
+                      [radius]="50"
+                      [outerStrokeWidth]="8"
+                      [innerStrokeWidth]="4"
+                      [outerStrokeColor]="'#ff6f61'"
+                      [innerStrokeColor]="'#e7e8ea'"
+                      [animation]="true"
+                      [animationDuration]="300">
+                    </circle-progress>
+                    <p class="mt-2">Taux de réponse correcte: {{ question.correctRate?.toFixed(2) || 0 }}%</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ✅ Tableau des résultats -->
+              <table class="table table-striped mt-4">
+                <thead>
+                  <tr>
+                    <th>Nom Utilisateur</th>
+                    <th>Titre de Test</th>
+                    <th>Score</th>
+                    <th>Réponses</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let submission of submissions">
+                    <td>{{ submission.userName }}</td>
+                    <td>{{ statistics?.testName }}</td>
+                    <td>{{ submission.score }} / 100</td>
+                    <td>
+                      <ul>
+                        <li *ngFor="let answer of submission.answers">
+                          <strong>Question {{ answer.questionId }}:</strong> {{ answer.userAnswer }}
+                          <span [ngClass]="{'text-success': answer.isCorrect, 'text-danger': !answer.isCorrect}">
+                            {{ answer.isCorrect ? '✔' : '❌' }}
+                          </span>
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Section des résultats et statistiques -->
+
+    </div>
+  </div>
+</div>
+<!-- /Page Wrapper -->

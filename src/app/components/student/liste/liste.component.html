@@ -1,0 +1,101 @@
+<!-- Page Content -->
+<div class="page-content">
+    <div class="container">
+      <div class="row">
+        <app-student-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-student-sidebar>
+        <div class="col-xl-9 col-lg-9">
+            <section class="course-content">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-9 col-md-12">
+                   
+                    <button *ngIf="status && !hidden" class="btn btn-danger p-2 mb-3" (click)="selected()">My list</button>
+                    <button *ngIf="!status && !hidden && !showCourses" class="btn btn-secondary p-2 mb-3" (click)="selected()">Formations</button>
+                    <button class="btn btn-danger p-2 mb-3" (click)="toggleHidden()">My Examens</button>
+                    <div *ngIf="hidden">
+                      <div class="row mt-4" *ngIf="examans.length > 0">
+                        <div class="col-md-4 mb-3" *ngFor="let examen of examans">
+                          <div class="card shadow">
+                            <div class="card-body">
+                              <h5 class="card-title">{{ examen.examen.titre }}</h5>
+                              <h6 class="card-subtitle mb-2 text-muted">ID: {{ examen.id }}</h6>
+                              <p class="card-text">
+                                <strong>Note :</strong> {{ examen.note || '00' }}<br>
+                                <strong>Type :</strong> {{ examen.examen.examenT }}<br>
+                                <strong>Session :</strong> {{ examen.examen.session }}<br>
+                                <strong>Date :</strong> {{ examen.examen.date | date:"yyyy-MM-dd" }}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="!hidden">
+                      <h2 class="text-danger">{{ status ? 'LIST FORMATIONS' : (showCourses ? 'Courses' : 'My list') }}</h2>
+                      <div *ngIf="!status && formations.length === 0 || status && formationsall.length === 0" class="text-center">
+                        <p>Aucune Formation</p>
+                      </div>
+                      <ng-container *ngIf="!status && !showCourses">
+                       <div class="row">
+                        <div class="col-md-6 mb-3" *ngFor="let formation of formations">
+                            <div class="card shadow">
+                              <div class="card-body">
+                                <h5 class="card-title">{{ formation.title }}</h5>
+                                <p>{{ formation.description }}</p>
+                                <p><strong>Niveau :</strong> {{ formation.level }}</p>
+                                <p><strong>Type :</strong> {{ formation.typeTraning }}</p>
+                                <p><strong>Moyenne :</strong> {{ formationMoyennes[formation.id] || 'N/A' }}</p>
+                                <button class="btn btn-warning me-2" (click)="getCourses(formation.id)">Course</button>
+                              </div>
+                            </div>
+                          </div>
+                       </div>
+                      </ng-container>
+          
+                      <!-- Cours affichés après sélection -->
+                      <ng-container *ngIf="!status && showCourses">
+                        <button class="btn btn-outline-secondary mb-3" (click)="cancelCoursesView()">Cancel</button>
+                      <div class="row">
+                        <div class="col-md-6 mb-3" *ngFor="let item of courses">
+                            <div class="card mb-3 shadow">
+                              <div class="card-body">
+                                <h5 class="card-title">{{ item.title }}</h5>
+                                <p class="card-text">{{ item.content }}</p>
+                                <button class="btn btn-warning me-2" [routerLink]="'/student/examn/' + item.id">Examen</button>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                      </ng-container>
+                      <ng-container *ngIf="status">
+                      <div class="row">
+                        <div class="col-md-6 mb-3" *ngFor="let formation of formationsall">
+                            <div class="card shadow">
+                              <div class="card-body">
+                                <h5 class="card-title">{{ formation.titre }}</h5>
+                                <p>{{ formation.description }}</p>
+                                <p><strong>Niveau :</strong> {{ formation.niveau }}</p>
+                                <p><strong>Type :</strong> {{ formation.formationT }}</p>
+                                <p><strong>Moyenne :</strong> {{ formationMoyennes[formation.id] || 'N/A' }}</p>
+                                <button class="btn btn-warning me-2" (click)="assignUser(formation.id)">Save</button>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                      </ng-container>
+                    </div>
+                    <div *ngIf="errorMessage" class="alert alert-danger">
+                      {{ errorMessage }}
+                    </div>
+          
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+  

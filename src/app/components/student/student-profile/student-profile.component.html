@@ -1,0 +1,97 @@
+<!-- Page Content -->
+<div class="page-content">
+  <div class="container">
+    <div class="row">
+
+      <!-- sidebar -->
+      <app-student-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-student-sidebar>
+      <!-- /Sidebar -->
+
+      <!-- Student Profile -->
+      <div class="col-xl-9 col-lg-9">
+
+        <!-- Affichage du profil utilisateur -->
+        <div class="settings-widget card-details mb-0" *ngIf="!loading; else loadingTemplate">
+          <div class="settings-menu p-0">
+            <div class="profile-heading">
+              <h3>My Profile</h3>
+            </div>
+            <div class="checkout-form personal-address">
+              <div class="row">
+                <div class="col-sm-12 text-center mb-4">
+                  <!-- Image de profil -->
+                  <img *ngIf="userProfile.image" [src]="userProfile.image" alt="Profile Image" class="rounded-circle" width="150">
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="contact-info">
+                    <h6>Full Name</h6>
+                    <p>{{ userProfile.name  }}</p>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="contact-info">
+                    <h6>Email</h6>
+                    <p>{{ userProfile.email}}</p>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="contact-info">
+                    <h6>Phone Number</h6>
+                    <p>{{ userProfile.numTel  }}</p>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="contact-info">
+                    <h6>City</h6>
+                    <p>{{ userProfile.city }}</p>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="contact-info">
+                    <h6>CIN</h6>
+                    <p>{{ userProfile.cin  }}</p>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="contact-info">
+                    <h6>Role</h6>
+                    <p>{{ userProfile.role  }}</p>
+                  </div>
+                </div>
+
+                <div class="col-sm-12">
+                  <div class="contact-info mb-0">
+                    <h6>Bio</h6>
+                    <p>{{ userProfile.bio || 'No bio available.' }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Template pour le chargement -->
+        <ng-template #loadingTemplate>
+          <div class="text-center my-5">
+            <p>Chargement des données utilisateur...</p>
+          </div>
+        </ng-template>
+
+        <!-- Template pour l'erreur -->
+        <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+          {{ errorMessage }}
+        </div>
+
+      </div>
+      <!-- /Student Profile -->
+
+    </div>
+  </div>
+</div>
+<!-- /Page Content -->

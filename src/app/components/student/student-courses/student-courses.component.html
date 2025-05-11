@@ -1,0 +1,188 @@
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-12">
+        <div class="breadcrumb-list">
+          <nav aria-label="breadcrumb" class="page-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a [routerLink]="routes.home">Home</a></li>
+              <li class="breadcrumb-item" aria-current="page">Student</li>
+              <li class="breadcrumb-item active" aria-current="page">Student Trainings</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Breadcrumb -->
+
+<!-- Page Content with Sidebar -->
+<div class="page-content">
+  <div class="container">
+    <div class="row">
+
+      <!-- Sidebar -->
+      <app-student-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-student-sidebar>
+      <!-- /Sidebar -->
+
+      <!-- Main Content -->
+      <div class="col-xl-9 col-lg-9">
+
+        <!-- Filter Section -->
+        <section class="course-content">
+
+          <!-- Filter -->
+          <div class="showing-list mb-4">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="d-flex align-items-center">
+                  <div class="show-result">
+                    <h4>Showing {{ filteredCourses.length }} results</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="show-filter add-course-info mat-style">
+                  <form>
+                    <div class="row gx-2 align-items-center">
+                      <div class="col-md-6 col-item">
+                        <div class="search-group">
+                          <i class="feather icon-search"></i>
+                          <input type="text"
+                            [(ngModel)]="searchDataValue"
+                            name="one"
+                            (ngModelChange)="searchData()"
+                            class="form-control" placeholder="Search courses">
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Course Cards -->
+          <div class="row">
+            <div *ngIf="isLoading" class="text-center">
+              <p>Loading courses...</p>
+            </div>
+
+            <div *ngIf="errorMessage" class="alert alert-danger">
+              {{ errorMessage }}
+            </div>
+
+            <div *ngIf="!isLoading && displayedCourses.length > 0">
+              <div class="row">
+                @for (course of displayedCourses; track course.id) {
+                  <div class="col-lg-4 col-md-6 d-flex">
+                    <div class="course-box course-design d-flex">
+                      <div class="product">
+                        <div class="product-content">
+                          <div class="course-group d-flex">
+                            <div class="course-group-img d-flex">
+                              <a [routerLink]="routes.instructor_instructor_profile">
+                                <img [src]="course.img2" alt="" class="img-fluid">
+                              </a>
+                              <div class="title">
+                                <div class="row">
+                                  <div class="col-md-10">
+                                <h4><a>{{ course.title }}</a></h4>
+                              </div>
+                              <div class="col-md-1" style="float: right;">
+                                <button class="btn btn-primary" (click)="downloadPlanningPDF(course.plannings[course.plannings.length-1])" [hidden]="!course.plannings[0]">
+                                  <i class="fas fa-download"></i>
+                                </button>
+                              </div>
+                            </div>
+                                <p>{{ course.role }}</p>
+                              </div>
+                            </div>
+                          </div>
+                          <h3 class="course-name">
+                            <a>{{ course.description }}</a>
+                          </h3>
+                          <div class="course-info d-flex align-items-center">
+                            <div class="rating-img d-flex align-items-center">
+                              <p>{{ course.courses?.length || 0 }} Courses</p>
+
+                            </div>
+                            <div class="course-view d-flex align-items-center">
+                              <p>{{ course.users?.length || 0 }} Subscribers</p>
+                            </div>
+                          </div>
+                          <div class="all-btn all-category d-flex align-items-center">
+                            <button class="btn btn-primary" (click)="openSubscribeModal(course)">SUBSCRIBE NOW</button>
+
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <div *ngIf="!isLoading && filteredCourses.length === 0" class="text-center">
+              <p>No courses found.</p>
+            </div>
+          </div>
+
+          <!-- Pagination -->
+          <div class="row">
+            <div class="col-md-12">
+              <ul class="pagination lms-page">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                  <a class="page-link" (click)="goToPage(currentPage - 1)">
+                    <i class="fas fa-angle-left"></i>
+                  </a>
+                </li>
+                @for (pageNumber of [].constructor(totalPages); let i = $index; track i) {
+                  <li class="page-item" [class.active]="currentPage === (i + 1)">
+                    <a class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</a>
+                  </li>
+                }
+                <li class="page-item" [class.disabled]="currentPage === totalPages">
+                  <a class="page-link" (click)="goToPage(currentPage + 1)">
+                    <i class="fas fa-angle-right"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </div>
+      <!-- /Main Content -->
+
+    </div>
+  </div>
+</div>
+<!-- /Page Content -->
+
+<!-- Subscription Modal -->
+<div class="modal fade" id="subscribeModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Subscription</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to subscribe to <strong>{{ selectedTraining?.title }}</strong>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="confirmSubscription()" [disabled]="isSubscribing">
+          {{ isSubscribing ? 'Subscribing...' : 'Confirm' }}
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>

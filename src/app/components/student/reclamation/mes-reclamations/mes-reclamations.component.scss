@@ -1,0 +1,160 @@
+.event-row {
+  background-color: #eaf4ff;  /* bleu clair */
+}
+
+.training-row {
+  background-color: #eaffea;  /* vert clair */
+}
+
+.sujetpfe-row {
+  background-color: #fff0e6;  /* orange pâle */
+}
+
+tr:hover {
+  opacity: 0.95;
+  transition: 0.2s;
+}
+/* Style général */
+.alert {
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+/* Overlay semi-transparent */
+.overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.1); /* plus doux */
+  z-index: 99;
+}
+
+.details-card {
+  position: fixed;
+  top: 20%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 100;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  padding: 15px;
+}
+
+
+/* Animation */
+.animate {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.details-card.ng-animating.ng-leave {
+  transform: translateX(100%);
+  opacity: 0;
+}
+/* Badges */
+.badge {
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Couleurs des statuts */
+.badge-open {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.badge-inprogress {
+  background-color: #ffeeba;
+  color: #856404;
+}
+
+.badge-resolved {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.badge-rejected {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Bloc details / status */
+.detail-box, .status-box {
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.badge-auto {
+  background-color: #e0f7fa;
+  color: #00796b;
+  border-radius: 8px;
+  padding: 3px 7px;
+  font-size: 11px;
+  font-weight: 500;
+  margin-left: 6px;
+}
+
+/* Wishlist-style pagination */
+.dash-pagination {
+  margin-top: 20px;
+  .row {
+    align-items: center;
+  }
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: #f1abec;
+  }
+  .pagination {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      margin-left: 5px;
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+        color: #333;
+        text-decoration: none;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        &:hover {
+          background-color: #f1f1f1;
+          border-color: #bbb;
+        }
+      }
+      &.active a {
+        background-color: #f6a1e0;
+        color: white;
+        border-color: #f6a1e0;
+      }
+      &.disabled a {
+        color: #ccc;
+        cursor: not-allowed;
+        &:hover {
+          background-color: transparent;
+          border-color: #ddd;
+        }
+      }
+    }
+  }
+}
+
+/* Boxicons for chevrons */
+.bx-chevron-left,
+.bx-chevron-right {
+  font-size: 18px;
+}

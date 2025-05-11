@@ -1,0 +1,178 @@
+/* ------------------ Layout Global ------------------ */
+.page-content {
+  background-color: #f1f3f6;  /* Gris très clair pour une touche moderne */
+  padding: 30px 20px;
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;  /* Police élégante et moderne */
+}
+
+/* ------------------ Cards ------------------ */
+.card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);  /* Ombre subtile pour des cartes aérées */
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);  /* Ombre renforcée au survol */
+}
+
+.card-header {
+  background-color: #2c3e50;  /* Bleu foncé pour l'en-tête */
+  color: #ecf0f1;  /* Texte en blanc pour un contraste clair */
+  font-weight: 600;
+  padding: 15px;
+  font-size: 16px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* ------------------ Tables ------------------ */
+.table {
+  background-color: #ffffff;
+  font-size: 14px;
+}
+
+.table thead {
+  background-color: #ecf0f1;  /* Gris clair pour l'en-tête */
+  color: #2c3e50;  /* Gris foncé pour les titres */
+}
+
+.table td, .table th {
+  vertical-align: middle;
+  padding: 12px;
+}
+
+/* ------------------ Badges ------------------ */
+.badge {
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badge-primary {
+  background: #2980b9;  /* Bleu plus clair pour les éléments actifs */
+  color: white;
+}
+
+.badge-warning {
+  background: #f39c12;  /* Jaune/orange pour avertir */
+  color: white;
+}
+
+.badge-success {
+  background: #27ae60;  /* Vert pour succès */
+  color: white;
+}
+
+.badge-danger {
+  background: #e74c3c;  /* Rouge pour alertes */
+  color: white;
+}
+
+/* ------------------ Buttons ------------------ */
+.btn-outline-info {
+  background-color: #ecf0f1;
+  color: #2c3e50;
+  border: 1px solid #bdc3c7;
+}
+
+.btn-outline-info:hover {
+  background-color: #bdc3c7;
+  color: #2c3e50;
+}
+
+.btn-success {
+  background-color: #27ae60;  /* Vert clair pour actions de succès */
+  color: white;
+}
+
+.btn-outline-secondary {
+  background-color: #95a5a6;
+  color: #ffffff;
+  border: 1px solid #7f8c8d;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #7f8c8d;
+}
+
+/* ------------------ Pagination ------------------ */
+button.btn-light {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background-color: #ecf0f1;
+  border: 1px solid #bdc3c7;
+}
+
+button.btn-light:hover {
+  background-color: #bdc3c7;
+  color: white;
+}
+
+/* ------------------ Reclamation Overlay & Details ------------------ */
+.overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 99;
+}
+
+.details-card {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: #ffffff;
+  z-index: 100;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+}
+
+/* ------------------ Priority Reclamations ------------------ */
+.bg-priority {
+  background-color: #f8d7da !important;  /* Fond rouge clair */
+  border-left: 5px solid #e74c3c !important;
+  color: #e74c3c !important;
+}
+
+.bg-priority:hover {
+  background-color: #f5c6cb !important;
+}
+
+/* ------------------ Sidebar ------------------ */
+.theiaStickySidebar {
+  position: relative;
+  z-index: 1;
+}
+
+/* ------------------ Grid Cards ------------------ */
+.reclamation-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  flex: 1;
+  min-width: 280px;
+}
+
+/* Animation */
+@keyframes pulse {
+  0% { background-color: rgba(231, 76, 60, 0.05); }
+  50% { background-color: rgba(231, 76, 60, 0.2); }
+  100% { background-color: rgba(231, 76, 60, 0.05); }
+}
+
+.priority-flash {
+  animation: pulse 2s infinite;
+}

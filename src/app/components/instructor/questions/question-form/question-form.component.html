@@ -1,0 +1,82 @@
+<!-- Page Wrapper -->
+<div class="page-content">
+  <div class="container">
+      <div class="row">
+
+          <!-- Sidebar -->
+          <app-instructor-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-instructor-sidebar>
+          <!-- /Sidebar -->
+
+          <!-- Add Question Form -->
+          <div class="col-xl-9 col-lg-9">
+              <div class="settings-widget card-details">
+                  <div class="settings-menu p-4">
+                      <div class="profile-heading text-center">
+                          <h3>Ajouter une Question</h3>
+                      </div>
+
+                      <!-- Form -->
+                      <div class="checkout-form">
+                          <div class="form-group">
+                              <label><strong>Sélectionner un Test :</strong></label>
+                              <select class="form-select" [(ngModel)]="selectedTestId" required>
+                                  <option value="" disabled selected>-- Choisissez un Test --</option>
+                                  <option *ngFor="let test of tests" [value]="test.id">{{ test.title }}</option>
+                              </select>
+                          </div>
+
+                          <!-- 🟢 Champ pour télécharger une image ou saisir du texte -->
+                          <div class="form-group">
+                              <label>Question (Texte ou Image)</label>
+                              <input *ngIf="!question.questionImage" type="text" [(ngModel)]="question.questionText"
+                                     class="form-control" placeholder="Texte de la question" required>
+                              <input type="file" (change)="onImageSelected($event)" accept="image/*" class="form-control">
+                          </div>
+
+                          <!-- 🟢 Aperçu de l'image sélectionnée -->
+                          <img *ngIf="question.questionImage" [src]="question.questionImage" alt="Aperçu"
+                               class="img-thumbnail mt-2" width="200">
+
+                          <div class="form-group">
+                              <label>Option A</label>
+                              <input type="text" [(ngModel)]="question.optionA" class="form-control" required>
+                          </div>
+
+                          <div class="form-group">
+                              <label>Option B</label>
+                              <input type="text" [(ngModel)]="question.optionB" class="form-control" required>
+                          </div>
+
+                          <div class="form-group">
+                              <label>Option C</label>
+                              <input type="text" [(ngModel)]="question.optionC" class="form-control" required>
+                          </div>
+
+                          <div class="form-group">
+                              <label>Option D (facultatif)</label>
+                              <input type="text" [(ngModel)]="question.optionD" class="form-control">
+                          </div>
+
+                          <div class="form-group">
+                              <label>Réponse Correcte</label>
+                              <select [(ngModel)]="question.correctAnswer" class="form-control" required>
+                                  <option [value]="question.optionA">{{ question.optionA }}</option>
+                                  <option [value]="question.optionB">{{ question.optionB }}</option>
+                                  <option [value]="question.optionC">{{ question.optionC }}</option>
+                                  <option [value]="question.optionD" *ngIf="question.optionD">{{ question.optionD }}</option>
+                              </select>
+                          </div>
+
+                          <div class="d-flex justify-content-between mt-4">
+                              <button (click)="createQuestion()" class="btn btn-success">Ajouter</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- /Add Question Form -->
+
+      </div>
+  </div>
+</div>
+<!-- /Page Wrapper -->

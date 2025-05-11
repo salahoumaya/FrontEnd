@@ -1,0 +1,86 @@
+<div class="stickybar">
+  <div class="settings-widget dash-profile">
+      <div class="settings-menu">
+          <div class="profile-bg">
+            <div class="profile-img">
+              <a [routerLink]="routes.studentProfile">
+                  <img [src]="userProfile.image" alt="User Image"  class="avatar-img rounded-circle" >
+              </a>
+          </div>
+
+          </div>
+          <div class="profile-group">
+              <div class="profile-name text-center">
+                  <!-- 🔹 Utiliser le nom dynamique -->
+                  <h2><a [routerLink]="routes.studentProfile">{{userProfile.name }}</a></h2>
+                  <p>{{ userProfile.role }}</p>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="settings-widget account-settings">
+      <div class="settings-menu">
+          <h3>Dashboard</h3>
+          <ul>
+              <li class="nav-item" routerLinkActive="active">
+                  <a [routerLink]="routes.studentDashboard" class="nav-link">
+                      <i class="bx bxs-tachometer"></i>Dashboard
+                  </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                  <a [routerLink]="routes.studentProfile" class="nav-link">
+                      <i class="bx bxs-user"></i>Mon Profile
+                  </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a [routerLink]="routes.GetListe" class="nav-link">
+                    <i class="bx bxs-graduation"></i>Mes Courses
+                </a>
+            </li>
+              <li class="nav-item" routerLinkActive="active">
+                  <a [routerLink]="routes.student_test" class="nav-link">
+                      <i class="bx bxs-user"></i>TestDeNiveau
+                  </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                  <a [routerLink]="routes.course_student" class="nav-link">
+                      <i class="bx bxs-graduation"></i>Les Formation en cours
+                  </a>
+              </li>
+               <li class="nav-item" routerLinkActive="active">
+                  <a [routerLink]="routes.studentOrderHistory" class="nav-link">
+                      <i class="bx bxs-graduation"></i>Activités
+                  </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a [routerLink]="routes.Mes_Reclamations" class="nav-link">
+                    <i class="bx bxs-graduation"></i>Reclamations
+                </a>
+            </li>
+
+
+              <li class="nav-item" routerLinkActive="active">
+                  <a [routerLink]="routes.EventList" class="nav-link">
+                      <i class="bx bxs-star"></i>Les Evenements
+                  </a>
+              </li>
+
+              <li class="nav-item" routerLinkActive="active">
+                  <a [routerLink]="routes.studentMessages" class="nav-link">
+                      <i class="bx bxs-chat"></i>Messages
+                  </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a [routerLink]="routes.studentSujetPFE" class="nav-link">
+                    <i class="bx bxs-chat"></i>Sujet PFE
+                </a>
+            </li>
+              <li class="nav-item" routerLinkActive="active">
+                  <a [routerLink]="routes.home" class="nav-link">
+                      <i class="bx bxs-log-out"></i>Logout
+                  </a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</div>

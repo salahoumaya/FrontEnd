@@ -1,0 +1,86 @@
+/* Page principale */
+.page-content {
+  background-color: #f4f7fa;
+  padding: 30px 20px;
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+}
+
+h4 {
+  font-size: 1.6rem;
+  color: #2c3e50;
+}
+
+h5 {
+  font-size: 1.4rem;
+  color: #2c3e50;
+  margin-top: 20px;
+}
+
+/* Améliorer le tableau */
+.table {
+  background-color: #ffffff;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+.table thead {
+  background-color: #ecf0f1;
+  color: #2c3e50;
+}
+
+.table tbody tr {
+  transition: background-color 0.3s ease;
+}
+
+.table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Couleurs et styles des badges */
+.badge-primary {
+  background: #2980b9;
+  color: white;
+}
+
+.badge-success {
+  background: #27ae60;
+  color: white;
+}
+
+.badge-danger {
+  background: #e74c3c;
+  color: white;
+}
+
+.badge-warning {
+  background: #f39c12;
+  color: white;
+}
+
+/* Bouton d'action */
+.btn-primary {
+  background-color: #2980b9;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #21618c;
+}
+
+.btn-success {
+  background-color: #27ae60;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #229954;
+}
+
+/* Grands graphiques */
+.apexcharts-canvas {
+  margin-top: 20px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}

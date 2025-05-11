@@ -1,0 +1,69 @@
+<div class="main-wrapper log-wrap">
+  <div class="row">
+    <!-- Login Banner -->
+    <div class="col-md-6 login-bg">
+      <div class="row w-100">
+        <div class="col-md-12">
+          <owl-carousel-o [options]="welcomeLoginOwlOptions">
+            <ng-container *ngFor="let slide of welcomeLogin">
+              <ng-template carouselSlide>
+                <div class="welcome-login">
+                  <div class="login-banner">
+                    <img [src]="slide.img" class="img-fluid" alt="Logo">
+                  </div>
+                  <div class="mentor-course text-center">
+                    <p class="welcome-text">Welcome to Coding Factory</p>
+                  </div>
+                </div>
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 login-wrap-bg">
+      <div class="login-wrapper">
+        <div class="loginbox">
+          <h1>Sign into Your Account</h1>
+
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="input-block">
+              <label for="email" class="form-control-label">Email</label>
+              <input type="email" class="form-control" placeholder="Enter your email address" formControlName="email">
+              <small *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">
+                Veuillez entrer un email valide.
+              </small>
+            </div>
+
+            <div class="input-block">
+              <label for="password" class="form-control-label">Password</label>
+              <div class="pass-group">
+                <input [type]="passwordType" class="form-control pass-input" placeholder="Enter your password"
+                  formControlName="password">
+                <span>
+                  <i class="toggle-password feather" [ngClass]="showPassword ? 'icon-eye' : 'icon-eye-off'"
+                    (click)="togglePassword()" tabindex="1"></i>
+                </span>
+              </div>
+              <small *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+                Mot de passe invalide. Min 8 caractères, avec majuscule, minuscule, chiffre et symbole.
+              </small>
+            </div>
+
+            <div class="d-grid">
+              <button class="btn btn-primary btn-start" type="submit" [disabled]="loading || loginForm.invalid">
+                {{ loading ? 'Logging in...' : 'Sign In' }}
+              </button>
+            </div>
+
+            <div *ngIf="errorMessage" class="alert alert-danger mt-2">
+              {{ errorMessage }}
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

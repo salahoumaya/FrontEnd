@@ -1,0 +1,122 @@
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="breadcrumb-list">
+                    <nav aria-label="breadcrumb" class="page-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a [routerLink]="routes.home">Home</a></li>
+                            <li class="breadcrumb-item">Pages</li>
+                            <li class="breadcrumb-item">Support</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Breadcrumb -->
+
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-11 col-md-8 mx-auto">
+                <div class="support-wrap">
+                    <div class="row">
+                        <h5>Create a planning</h5>
+                        <div class="input-block col-md-4">
+                            <label for="start">Title</label>
+                            <input type="text" class="form-control" [(ngModel)]="planning.title" />
+                        </div>
+                        <div class="input-block col-md-4">
+                            <label for="start">Start date</label>
+                            <input type="date" class="form-control" [(ngModel)]="planning.startDate" [min]="todayString" />
+                        </div>
+                        <div class="input-block col-md-4">
+                            <label for="end">End date</label>
+                            <input type="date" class="form-control" [(ngModel)]="planning.endDate" [min]="todayString" />
+                        </div>
+                    </div>
+
+                    <div class="input-block">
+                        <label for="subject">Planning Type</label>
+                        <mat-select [(ngModel)]="planning.type" class="custom-mat-select select">
+                            <mat-option value="LIVE">Live</mat-option>
+                            <mat-option value="RECORDED">Recorded</mat-option>
+                        </mat-select>
+                    </div>
+
+                    <div class="input-block">
+                        <label for="description">Associated Training</label>
+                        <mat-select [(ngModel)]="planning.trainingId" class="custom-mat-select select">
+                            <mat-option *ngFor="let training of trainings" [value]="training.id">
+                                {{ training.title }}
+                            </mat-option>
+                        </mat-select>
+                    </div>
+
+                    <!-- Loop over dynamic days -->
+                    <div *ngFor="let day of planning.days; let i = index" class="support-wrap">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h5>Day {{ i + 1 }}</h5>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-danger btn-sm" (click)="removeDay(i)"
+                                    *ngIf="planning.days.length > 1">
+                                    Delete Day
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="input-block col-md-12">
+                            <label>Date</label>
+                            <input type="date" class="form-control" [(ngModel)]="day.date" [min]="todayString" />
+                        </div>
+                        <!-- Field section stays the same -->
+                        <div *ngFor="let field of day.fields; let j = index">
+                            <div class="row">
+                                <div class="input-block col-md-6">
+                                    <label>Day Type</label>
+                                    <mat-select [(ngModel)]="field.dayType" class="custom-mat-select select">
+                                        <mat-option value="COURSE">Course</mat-option>
+                                        <mat-option value="PAUSE">Pause</mat-option>
+                                    </mat-select>
+                                </div>
+                                <div class="input-block col-md-3">
+                                    <label>Start Time</label>
+                                    <input type="time" class="form-control" [(ngModel)]="field.startTime" />
+                                </div>
+                                <div class="input-block col-md-3">
+                                    <label>End Time</label>
+                                    <input type="time" class="form-control" [(ngModel)]="field.endTime" />
+                                </div>
+                            </div>
+                            <div class="input-block">
+                                <label>Description</label>
+                                <input type="text" class="form-control" [(ngModel)]="field.description" />
+                            </div>
+                            <div class="mb-2">
+                                <button class="btn btn-danger btn-sm" (click)="removeField(i, j)"
+                                    *ngIf="day.fields.length > 1">
+                                    Remove Field
+                                </button>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-outline-primary btn-sm mt-2" (click)="addField(i)">+ Add Field</button>
+
+                        <hr />
+                    </div>
+
+                <div class="row">
+                    <button class="col-md-1 btn btn-submit" (click)="addDay()" style="margin-top: 27px; margin-right: 10px;">+ Add Day</button>
+
+                    <button class="col-md-1 btn btn-submit" style="margin-top: 27px; background-color: lightgreen; border-color: lightgreen;" (click)="submitPlanning()">Submit</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

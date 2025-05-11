@@ -1,0 +1,8 @@
+.profile-img-small {
+  width: 90px;      /* Largeur de l'image */
+  height: 90px;     /* Hauteur de l'image */
+  border-radius: 50%; /* Pour rendre l'image ronde */
+  object-fit: cover;  /* Ajuste l'image sans la déformer */
+  border: 2px solid #fff; /* Bordure blanche pour plus de style */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Ombre légère pour l'effet */
+}
