@@ -4,7 +4,7 @@ import { DataService } from 'src/app/shared/service/data/data.service';
 import { SidebarService } from 'src/app/shared/service/sidebar/sidebar.service';
 import { routes } from 'src/app/shared/service/routes/routes';
 import { SidebarItem } from 'src/app/models/model';
-
+import { AuthService } from 'src/app/shared/service/Auth/auth.service';
 @Component({
   selector: 'app-admin-header',
   templateUrl: './admin-header.component.html',
@@ -16,9 +16,11 @@ export class AdminHeaderComponent {
   last = '';
   public routes = routes;
   sidebar: SidebarItem[] = [];
+  user: any = null;
   public showDark = false;
   constructor(
     private common: CommonService,
+    private authService: AuthService,
     private data: DataService,
     private sidebarService: SidebarService
   ) {
@@ -40,12 +42,30 @@ export class AdminHeaderComponent {
       }
     });
   }
+  ngOnInit(): void {
+    this.loadUser();
+
+
+    this.sidebarService.showDark.subscribe((res: string | boolean) => {
+      this.showDark = res === 'true';
+    });
+  }
 
   public toggleSidebar(): void {
     this.sidebarService.openSidebar();
   }
   public hideSidebar(): void {
     this.sidebarService.closeSidebar();
+  }
+  loadUser() {
+    this.authService.getProfile().subscribe({
+      next: (response) => {
+        this.user = response.ourUsers;
+      },
+      error: (error) => {
+        console.error('Error:', error);
+      },
+    });
   }
   isDarkMode: boolean = false;
   applyTheme() {

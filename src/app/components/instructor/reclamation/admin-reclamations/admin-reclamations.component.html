@@ -41,15 +41,13 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let reclamation of getFilteredReclamations(type)"
-                  [class.bg-priority]="reclamation.autoProcessed && reclamation.sentiment === 'NEGATIVE'">
-                  <td>
+                      [class.bg-priority]="reclamation.autoProcessed && reclamation.sentiment === 'NEGATIVE'">
+                    <td>
                       {{ reclamation.title }}
-                      <span *ngIf="reclamation.autoProcessed && reclamation.sentiment === 'NEGATIVE'"
-                            class="badge bg-danger ms-2">
-                           Plus urgent
+                      <span *ngIf="reclamation.autoProcessed && reclamation.sentiment === 'NEGATIVE'" class="badge bg-danger ms-2">
+                        Plus urgent
                       </span>
-                  </td>
-
+                    </td>
                     <td>{{ reclamation.user?.email || '-' }}</td>
                     <td>
                       <span class="badge" [ngClass]="statusClass(reclamation.status)">
@@ -66,6 +64,7 @@
                     </td>
                   </tr>
                 </tbody>
+
               </table>
 
               <!-- Pagination -->

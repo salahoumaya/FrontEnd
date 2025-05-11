@@ -63,9 +63,9 @@ export class LoginComponent {
         next: (response) => {
             console.log('✅ Login Successful:', response);
 
-            // 🔹 Vérification du token dans la réponse
+          
             if (response.token) {
-              localStorage.setItem('token', response.token);  // Stocker le token
+              localStorage.setItem('token', response.token);  
 
           } else {
                 this.errorMessage = ' Réessayez.';
@@ -73,13 +73,13 @@ export class LoginComponent {
                 return;
             }
 
-            // 🔹 Redirection selon le rôle
+         
             switch (response.role) {
               case 'ADMIN':
                   this.router.navigate(['/instructor/instructor-dashboard']);
                   break;
               case 'MODERATOR':
-                this.router.navigate(['/moderator/dashboard']);
+                this.router.navigate(['moderator/Checkout']);
                   break;
                   default:
   const testPassed = localStorage.getItem('testPassed') === 'true';

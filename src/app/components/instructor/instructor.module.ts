@@ -51,6 +51,7 @@ import { ReclamationStatesComponent } from './reclamation/reclamation-states/rec
 
 
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { CommentSectionComponent } from './comment-section/comment-section.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     AddCourseComponent,
     StudentMessageComponent,
     ReclamationStatesComponent,
+    CommentSectionComponent,
 
   ],
   imports: [

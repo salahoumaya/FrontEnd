@@ -13,6 +13,7 @@ export class AddCourseComponent {
   selected: string = 'beginner';
   selected2: string = 'ONLINE';
   title: string = '';
+  maxStudents: number=10;
   description: string = '';
   isSubmitting: boolean = false;
 
@@ -34,6 +35,7 @@ export class AddCourseComponent {
       level: this.selected,
       typeTraning: this.selected2,
       description: this.description.trim(),
+      maxStudents: this.maxStudents
     };
 
     this.trainingService.addTraining(trainingData).subscribe(

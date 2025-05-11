@@ -26,13 +26,16 @@ export class SujetpfeBackofficeComponent implements OnInit {
     demandeurs: []
   };
   // ✅ Variables pour les statistiques
-totalSujets: number = 0;
-sujetsAttribues: number = 0;
-sujetsNonAttribues: number = 0;
+  totalSujets: number = 0;
+  sujetsAttribues: number = 0;
+  sujetsNonAttribues: number = 0;
 
   pourcentageAttribues: number = 0; // Pourcentage des sujets attribués
 
-  constructor(private sujetPfeService: SujetPfeService, private ourUserService: OuruserService) {}
+  constructor(private sujetPfeService: SujetPfeService, private ourUserService: OuruserService) {
+    this.loadSujets();
+
+  }
 
   ngOnInit(): void {
     this.loadSujets();
@@ -137,14 +140,21 @@ this.sujetsNonAttribues = this.totalSujets - this.sujetsAttribues;
     }
   }
 
-  onFileSelectedAjout(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-      this.selectedImage = file.name; // Le nom du fichier sans chemin complet
-      if (this.newSujet) {
-        this.newSujet.image = file.name;
+  onImageSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      // 🔴 Limiter la taille de l'image à 2 Mo
+      if (file.size > 2 * 1024 * 1024) {
+        alert("La taille de l'image ne doit pas dépasser 2 Mo.");
+        return;
       }
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        this.selectedImage = reader.result as string;
+        this.newSujet.image=this.selectedImage;
+      };
+      reader.readAsDataURL(file);
     }
   }
 
@@ -160,6 +170,7 @@ this.sujetsNonAttribues = this.totalSujets - this.sujetsAttribues;
   }
 
   openAddModal() {
+
     this.newSujet = {
       titre: '',
       description: '',

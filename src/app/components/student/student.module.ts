@@ -34,6 +34,12 @@ import { ListeComponent } from './liste/liste.component';
 
 import { NgxPaginationModule } from 'ngx-pagination'
 import { RecommendationComponent } from './tests/recommendation/recommendation.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { StudentSujetDetails } from './student-sujet-details/student-sujet-details.component';
+import { CommentSectionnComponent } from './comment-sectionn/comment-sectionn.component';
+import { CommentSectionComponent } from '../instructor/comment-section/comment-section.component';
+import { InstructorModule } from '../instructor/instructor.module';
+
 @NgModule({
   declarations: [
     ListeComponent,
@@ -59,7 +65,12 @@ import { RecommendationComponent } from './tests/recommendation/recommendation.c
     EventListComponent,
     AfficheReservationComponent,
     SujetpfeFrontoffice,
-    RecommendationComponent
+    RecommendationComponent,
+    StudentSujetDetails,
+    CommentSectionnComponent,
+
+
+
 
   ],
   imports: [
@@ -70,8 +81,14 @@ import { RecommendationComponent } from './tests/recommendation/recommendation.c
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgApexchartsModule,
+    InstructorModule,
 
+
+  ],
+  exports: [
+   InstructorModule
   ]
 })
 export class StudentModule { }

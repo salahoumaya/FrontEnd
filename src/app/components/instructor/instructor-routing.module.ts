@@ -83,7 +83,7 @@ const routes: Routes = [
         component: InstructorNotificationComponent,
       },
       {
-        path: 'instructor-orders',
+        path: 'instructor-orders/:id',
         component: InstructorOrdersComponent,
       },
       {

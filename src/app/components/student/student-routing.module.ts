@@ -24,6 +24,7 @@ import { SujetpfeFrontoffice } from './sujetpfe-frontoffice/sujetpfe-frontoffice
 import { ExmanComponent } from './exman/exman.component';
 import { ListeComponent } from './liste/liste.component';
 import { RecommendationComponent } from './tests/recommendation/recommendation.component';
+import { StudentSujetDetails } from './student-sujet-details/student-sujet-details.component';
 
 const routes: Routes = [
   {
@@ -64,6 +65,7 @@ const routes: Routes = [
       { path: 'student-reviews', component: StudentReviewsComponent },
       { path: 'student-referral', component: StudentReferralComponent },
       { path: 'student-tickets', component: StudentTicketsComponent },
+       { path: 'sujet-details/:id', component: StudentSujetDetails },
       {
         path: 'settings',
         loadChildren: () =>

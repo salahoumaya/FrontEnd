@@ -1,8 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { SujetPfe } from 'src/app/models/sujetpfe';
-import { OurUsers } from 'src/app/models/users';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable, Optional} from '@angular/core';
+import {Observable} from 'rxjs';
+import {SujetPfe} from 'src/app/models/sujetpfe';
+import {OurUsers} from 'src/app/models/users';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,9 @@ export class SujetPfeService {
 
   private baseUrl: string = 'http://localhost:8076/api/sujets';
 
-  constructor(private http: HttpClient) { }
-   private getAuthHeaders() {
+
+  constructor(private http: HttpClient) {}
+      private getAuthHeaders() {
         const token = localStorage.getItem('token');
         console.log('Token envoyé:', token);
 
@@ -21,8 +22,10 @@ export class SujetPfeService {
           'Authorization': ` Bearer ${token}`
       });}
 
+
+  // Ajouter un sujet
   ajouterSujet(sujetPfe: SujetPfe): Observable<SujetPfe> {
-    return this.http.post<SujetPfe>(`${this.baseUrl}/admin/create-pfe`, sujetPfe,{ headers: this.getAuthHeaders() });
+    return this.http.post<SujetPfe>(`${this.baseUrl}/admin`, sujetPfe,{ headers: this.getAuthHeaders() });
   }
 
   // Récupérer tous les sujets
@@ -52,8 +55,14 @@ export class SujetPfeService {
 
   // Postuler pour un sujet
   postulerSujetPfe(sujetPfeId: number, userId: number): Observable<SujetPfe> {
-    return this.http.post<SujetPfe>(`${this.baseUrl}/postuler/${sujetPfeId}/${userId}`, {},{ headers: this.getAuthHeaders() });
+    return this.http.post<SujetPfe>(`${this.baseUrl}/user/postuler/${sujetPfeId}/${userId}`, {},{ headers: this.getAuthHeaders() });
   }
+couldPostulate(userId: number): Observable<boolean> {
+  return this.http.get<boolean>(
+    `${this.baseUrl}/user/could-postulate/${userId}`,
+    { headers: this.getAuthHeaders() }
+  );
+}
 
   // Accepter une postulation
   accepterPostulation(sujetPfeId: number, userId: number): Observable<SujetPfe> {
@@ -88,12 +97,18 @@ export class SujetPfeService {
 
     return this.http.post(`${this.baseUrl}/${sujetPfeId}/upload`, formData,{ headers: this.getAuthHeaders() });
   }
+
   getSujetsByModerator(moderatorId: number): Observable<SujetPfe[]> {
     return this.http.get<SujetPfe[]>(`${this.baseUrl}/moderateur/${moderatorId}`,{ headers: this.getAuthHeaders() });
   }
 
   getPourcentageSujetsAttribues(): Observable<number> {
     return this.http.get<number>(`${this.baseUrl}/pourcentage-attribues`,{ headers: this.getAuthHeaders() });
+  }
+
+  getStudentAffectedToPfe(pfeId: number): Observable<OurUsers> {
+    return this.http.get<OurUsers>(`${this.baseUrl}/student-affected-to-subjet/${pfeId}`,{ headers: this.getAuthHeaders() });
+
   }
 
 

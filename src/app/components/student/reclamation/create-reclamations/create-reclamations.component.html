@@ -1,26 +1,13 @@
 <div class="page-content">
   <div class="container">
     <div class="row">
-
-      <!-- sidebar -->
       <app-student-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-student-sidebar>
-      <!-- /Sidebar -->
 
       <div class="card-container col-xl-9 col-lg-9">
         <h2>📋 Créer une Réclamation</h2>
 
-        <!-- ✅ Bloc Statut automatique détecté -->
-        <div *ngIf="automaticStatus && automaticStatus !== 'OPEN'"
-        class="alert text-center"
-        style="background-color: #e6f4ea; color: #22693b; border: 1px solid #c3e6cb; border-radius: 8px; padding: 12px;">
-     ✅ Votre réclamation a été traitée automatiquement. Statut affecté : <strong>{{ automaticStatus }}</strong>.
-   </div>
-
-
-        <!-- Formulaire -->
+        <!-- Formulaire de réclamation -->
         <form (ngSubmit)="submitReclamation()" class="form-container">
-
-          <!-- Type -->
           <div class="form-group">
             <label>Type de Réclamation</label>
             <select [(ngModel)]="reclamation.type" name="type" required (change)="onTypeChange()" class="form-control">
@@ -31,7 +18,6 @@
             </select>
           </div>
 
-          <!-- Cible selon le type -->
           <div *ngIf="reclamation.type === 'EVENT'" class="form-group">
             <label>Choisir un Événement</label>
             <select [(ngModel)]="reclamation.targetId" name="targetEvent" required class="form-control">
@@ -53,13 +39,11 @@
             </select>
           </div>
 
-          <!-- Titre -->
           <div class="form-group">
             <label>Titre de la Réclamation</label>
             <input type="text" [(ngModel)]="reclamation.title" name="title" placeholder="Ex: Problème de date" class="form-control" required>
           </div>
 
-          <!-- Description -->
           <div class="form-group">
             <label>Description</label>
             <textarea [(ngModel)]="reclamation.description" name="description" class="form-control" rows="4" required placeholder="Décrivez votre réclamation..."></textarea>
@@ -67,8 +51,13 @@
 
           <button type="submit" class="btn btn-success w-100 mt-3">Créer la réclamation</button>
         </form>
-      </div>
 
+        <div *ngIf="automaticStatus">
+          <p><strong>Statut automatique :</strong> {{ automaticStatus }}</p>
+
+        </div>
+
+      </div>
     </div>
   </div>
 </div>

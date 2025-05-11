@@ -8,39 +8,72 @@
       Recommandations pour {{ userEmail }} (Score : {{ score }})
     </h5>
 
-    <!-- Chart Apex -->
-    <apx-chart
-      *ngIf="chartOptions"
-      [series]="chartOptions.series"
-      [chart]="chartOptions.chart"
-      [xaxis]="chartOptions.xaxis"
-      [title]="chartOptions.title"
-      [dataLabels]="chartOptions.dataLabels"
-      [yaxis]="chartOptions.yaxis"
-      [legend]="chartOptions.legend"
-    ></apx-chart>
+   <!-- Graphique de Satisfaction -->
+<div *ngIf="satisfactionChartOptions">
+  <apx-chart
+    [series]="satisfactionChartOptions.series"
+    [chart]="satisfactionChartOptions.chart"
+    [xaxis]="satisfactionChartOptions.xaxis"
+    [title]="satisfactionChartOptions.title"
+    [dataLabels]="satisfactionChartOptions.dataLabels"
+    [yaxis]="satisfactionChartOptions.yaxis"
+    [legend]="satisfactionChartOptions.legend"
+    [colors]="satisfactionChartOptions.colors"
+  ></apx-chart>
+</div>
+
+<!-- Graphique de Sentiment -->
+<div *ngIf="sentimentChartOptions">
+  <apx-chart
+    [series]="sentimentChartOptions.series"
+    [chart]="sentimentChartOptions.chart"
+    [xaxis]="sentimentChartOptions.xaxis"
+    [title]="sentimentChartOptions.title"
+    [dataLabels]="sentimentChartOptions.dataLabels"
+    [yaxis]="sentimentChartOptions.yaxis"
+    [legend]="sentimentChartOptions.legend"
+    [colors]="sentimentChartOptions.colors"
+  ></apx-chart>
+</div>
+
+    <!-- Graphique de Score Quiz -->
+    <div *ngIf="quizScoreChartOptions">
+      <apx-chart
+        [series]="quizScoreChartOptions.series"
+        [chart]="quizScoreChartOptions.chart"
+        [xaxis]="quizScoreChartOptions.xaxis"
+        [title]="quizScoreChartOptions.title"
+        [dataLabels]="quizScoreChartOptions.dataLabels"
+        [yaxis]="quizScoreChartOptions.yaxis"
+        [legend]="quizScoreChartOptions.legend"
+        [colors]="quizScoreChartOptions.colors"
+      ></apx-chart>
+    </div>
 
     <!-- Tableau des données -->
     <table class="table mt-4 table-bordered table-striped">
       <thead>
         <tr>
           <th>Formation</th>
-          <th>Rating</th>
-          <th>Moyennes de FeedBacks</th>
-          <th>Score Quiz</th>
-          <th>Score Composite</th>
+          <th>Satisfaction</th>
+          <th>Feedback Comments</th>
+          <th>Score Moyennes</th>
+
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let rec of recommendations">
-          <td>{{ rec.trainingName }}</td>
+          <a [routerLink]="['/student/student-courses']" class="text-primary">
+            {{ rec.trainingName }}
+          </a>
           <td>{{ getSatisfactionLabel(rec.UserSatisfaction) }}</td>
           <td>{{ getSentimentLabel(rec.SentimentScore) }}</td>
-          <td>{{ getQuizScoreLabel(rec.QuizScores) }}</td>
-          <td>{{ getCompositeScoreLabel(rec.CompositeScore) }}</td>
+          <td>{{ rec.QuizScores }}/100</td>
+
         </tr>
       </tbody>
     </table>
+
 
 
   </div>

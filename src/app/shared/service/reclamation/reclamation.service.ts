@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class ReclamationService {
   private baseUrl = 'http://localhost:8076/user/reclamations';
 
+
   constructor(private http: HttpClient) {}
 
   private getAuthHeaders(): HttpHeaders {
@@ -20,6 +21,7 @@ export class ReclamationService {
   markAsRead(id: number): Observable<any> {
     return this.http.put(`${this.baseUrl}/${id}/mark-as-read`, {}, { headers: this.getAuthHeaders() });
 }
+
 
 
 

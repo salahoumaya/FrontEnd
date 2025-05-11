@@ -1,226 +1,264 @@
 <!-- Page Content -->
 <div class="page-content">
-    <div class="container">
-        <div class="row">
-
-            <!-- sidebar -->
-            <app-student-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-student-sidebar>
-            <!-- /Sidebar -->
-
-            <!-- Sujets PFE -->
-            <div class="col-xl-9 col-lg-9">
-
-                <div class="settings-widget card-info">
-                    <div class="settings-menu p-0">
-                        <div class="profile-heading">
-                            <h3>Les sujets PFE</h3>
-                            <br>
-                            <div class="search-bar mb-3 d-flex align-items-center">
-                                <input type="text" class="form-control w-50 me-2" placeholder="Rechercher un sujet..."
-                                       [(ngModel)]="searchTerm" (ngModelChange)="filtrerSujets()">
-                                <button class="btn btn-primary" (click)="filtrerSujets()">Rechercher</button>
-                              </div>
 
 
+  <div class="container">
+    <div class="row">
 
-                        </div>
-                        <div class="checkout-form pb-0">
-                            <div class="wishlist-tab">
-                                <ul class="nav">
-                                    <li class="nav-item">
-                                        <a href="javascript:void(0);" class="active" data-bs-toggle="tab"
-                                            data-bs-target="#sujets-nonpostules" (click)="onTabChange('sujets-nonpostules')">Tous les projets</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="javascript:void(0);" data-bs-toggle="tab"
-                                            data-bs-target="#sujets-postules" (click)="onTabChange('sujets-postules')">Projets postulés</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="javascript:void(0);" data-bs-toggle="tab"
-                                            data-bs-target="#sujets-affectes" (click)="onTabChange('sujets-affectes')">Projets affectés</a>
-                                    </li>
-                                </ul>
-                            </div>
+      <!-- sidebar -->
+      <app-student-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-student-sidebar>
+      <!-- /Sidebar -->
 
-                            <div class="tab-content">
-                                <!-- Projets non postules -->
-                                <div class="tab-pane fade show active" id="sujets-nonpostules">
-                                    <div class="row">
-                                        <div class="col-xxl-4 col-md-6 d-flex" *ngFor="let sujet of sujets">
-                                            <div class="course-box flex-fill">
-                                                <div class="product">
-                                                    <div class="product-img">
-                                                        <a >
-                                                            <img class="img-fluid" alt="Img" [src]="'/../../../../assets/img/sujetpfe/' + sujet.image">
-                                                        </a>
-                                                    </div>
-                                                    <div class="product-content">
-                                                        <h3 class="title instructor-text"><a> {{sujet.titre}}</a></h3>
-                                                        <div class="course-info d-flex align-items-center">
-                                                        </div>
-                                                        <div class="course-edit-btn d-flex align-items-center justify-content-between">
-                                                            <a href="javascript:void(0);" class="postuler-btn" (click)="postuler(sujet)"><i class="bx bx-edit me-2"></i>Postuler</a>
-                                                            <a href="javascript:void(0);" (click)="ouvrirDetails(sujet)" data-bs-toggle="modal" data-bs-target="#detailSujetModal">
-                                                                <i class="bx bx-detail me-2"></i>Détails
-                                                            </a>
+      <!-- Sujets PFE -->
+      <div class="col-xl-9 col-lg-9">
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/Projets non postules-->
-
-                                <!--Projets postulés-->
-                                <div class="tab-pane fade" id="sujets-postules">
-                                    <div class="row">
-                                        <div class="col-xxl-4 col-md-6 d-flex" *ngFor="let sujet of projetsPostules">
-                                            <div class="course-box flex-fill">
-                                                <div class="product">
-                                                    <div class="product-img">
-                                                        <a>
-                                                            <img class="img-fluid" alt="Img" [src]="'/../../../../assets/img/sujetpfe/' + sujet.image">
-                                                        </a>
-                                                    </div>
-
-                                                    <div class="product-content">
-                                                        <h3 class="title instructor-text"><a> {{sujet.titre}}</a></h3>
-                                                        <div class="course-info d-flex align-items-center">
-                                                        </div>
-                                                        <div class="course-edit-btn d-flex align-items-center justify-content-between">
-                                                            <a href="javascript:void(0);" (click)="ouvrirDetails(sujet)" data-bs-toggle="modal" data-bs-target="#detailSujetModal2">
-                                                                <i class="bx bx-detail me-2"></i>Détails
-                                                            </a>
-
-                                                        </div>
-                                                    </div>
+        <div class="settings-widget card-info">
+          <div class="settings-menu p-0">
+            <div class="profile-heading">
+              <h3>Les sujets PFE</h3>
+              <br>
+              <div class="search-bar mb-3 d-flex align-items-center">
+                <input type="text" class="form-control w-50 me-2" placeholder="Rechercher un sujet..."
+                       [(ngModel)]="searchTerm" (ngModelChange)="filtrerSujets()">
+                <button class="btn btn-primary" (click)="filtrerSujets()">Rechercher</button>
+              </div>
 
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/Projets postulés-->
-
-                                <!-- Projets affectés -->
-                                <div class="tab-pane fade" id="sujets-affectes">
-                                    <div class="row">
-                                        <div class="col-xxl-4 col-md-6 d-flex" *ngFor="let sujet of projetsAffectes">
-                                            <div class="course-box flex-fill">
-                                                <div class="product">
-                                                    <div class="product-img">
-                                                        <a>
-                                                            <img class="img-fluid" alt="Img" [src]="'/../../../../assets/img/sujetpfe/' + sujet.image">
-                                                        </a>
-                                                    </div>
-
-                                                    <div class="product-content">
-                                                        <h3 class="title instructor-text"><a> {{sujet.titre}}</a></h3>
-                                                        <div class="course-info d-flex align-items-center">
-                                                        </div>
-                                                        <div class="course-edit-btn d-flex align-items-center justify-content-between">
-                                                            <a href="javascript:void(0);" class="deposer-btn" (click)="ouvrirDeposerRapportModal(sujet)"><i class="bx bx-edit me-2"></i>Déposer rapport</a>
-                                                            <a href="javascript:void(0);" (click)="ouvrirDetails(sujet)" data-bs-toggle="modal" data-bs-target="#detailSujetModal">
-                                                                <i class="bx bx-detail me-2"></i>Détails
-                                                            </a>
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /Projets affectés -->
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-            <!-- /Sujets PFE -->
+            <div class="checkout-form pb-0">
+              <div class="wishlist-tab">
+                <ul class="nav">
+                  <li class="nav-item">
+                    <a href="javascript:void(0);" class="active" data-bs-toggle="tab"
+                       data-bs-target="#sujets-nonpostules" (click)="onTabChange('sujets-nonpostules')">Tous les
+                      projets</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="javascript:void(0);" data-bs-toggle="tab"
+                       data-bs-target="#sujets-postules" (click)="onTabChange('sujets-postules')">Projets postulés</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="javascript:void(0);" data-bs-toggle="tab"
+                       data-bs-target="#sujets-affectes" (click)="onTabChange('sujets-affectes')">Projets affectés</a>
+                  </li>
+                </ul>
+              </div>
 
+              <div class="tab-content">
+                <!-- Projets non postules -->
+                <div class="tab-pane fade show active" id="sujets-nonpostules">
+                  <div class="row">
+                    <div class="col-xxl-4 col-md-6 d-flex" *ngFor="let sujet of sujets">
+                      <div class="course-box flex-fill">
+                        <div class="product">
+                          <div class="product-img">
+                            <a>
+                              <img class="img-fluid" alt="Img" [src]="sujet.image">
+                            </a>
+                          </div>
+                          <div class="product-content">
+                            <h3 class="title instructor-text"><a> {{ sujet.titre }}</a></h3>
+                            <p>Technologies : {{ sujet.technologie }}</p>
+
+                            <div class="course-info d-flex align-items-center">
+                            </div>
+                            <div class="course-edit-btn d-flex align-items-center justify-content-between">
+                              <button class="postuler-btn"  [disabled]="!couldPostulate" (click)="postuler(sujet)"><i
+                                class="bx bx-edit me-2"></i>Postuler</button>
+                              <a href="javascript:void(0);" (click)="ouvrirDetails(sujet)" data-bs-toggle="modal"
+                                 data-bs-target="#detailSujetModal">
+                                <i class="bx bx-detail me-2"></i>Détails
+                              </a>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--/Projets non postules-->
+
+                <!--Projets postulés-->
+                <div class="tab-pane fade" id="sujets-postules">
+                  <div class="row">
+                    <div class="col-xxl-4 col-md-6 d-flex" *ngFor="let sujet of projetsPostules">
+                      <div class="course-box flex-fill">
+                        <div class="product">
+                          <div class="product-img">
+                            <a>
+                              <img class="img-fluid" alt="Img" [src]="sujet.image">
+                            </a>
+                          </div>
+
+                          <div class="product-content">
+                            <h3 class="title instructor-text"><a> {{ sujet.titre }}</a></h3>
+                            <p>Technologies : {{ sujet.technologie }}</p>
+                            <div class="course-info d-flex align-items-center">
+                            </div>
+                            <div class="course-edit-btn d-flex align-items-center justify-content-between">
+                              <a href="javascript:void(0);" (click)="ouvrirDetails(sujet)" data-bs-toggle="modal"
+                                 data-bs-target="#detailSujetModal2">
+                                <i class="bx bx-detail me-2"></i>Détails
+                              </a>
+
+                            </div>
+                          </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--/Projets postulés-->
+
+                <!-- Projets affectés -->
+                <div class="tab-pane fade" id="sujets-affectes">
+                  <div class="row">
+                    <div class="col-xxl-4 col-md-6 d-flex" *ngFor="let sujet of projetsAffectes">
+                      <div class="course-box flex-fill">
+                        <div class="product">
+                          <div class="product-img">
+                            <a>
+                              <img class="img-fluid" alt="Img" [src]="sujet.image">
+                            </a>
+                          </div>
+
+                          <div class="product-content">
+                            <h3 class="title instructor-text"><a> {{ sujet.titre }}</a></h3>
+                            <p>Technologies : {{ sujet.technologie }}</p>
+
+                            <div class="course-info d-flex align-items-center">
+                            </div>
+                            <div class="course-edit-btn d-flex align-items-center justify-content-between">
+                              <a href="javascript:void(0);" class="deposer-btn"
+                                 (click)="ouvrirDeposerRapportModal(sujet)"><i class="bx bx-edit me-2"></i>Déposer
+                                rapport</a>
+                              <a href="javascript:void(0);" [routerLink]="['/student', 'sujet-details', sujet.id]"><i
+                                class="bx bx-detail me-2"></i>Détails</a>
+
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /Projets affectés -->
+
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <!-- /Sujets PFE -->
+
     </div>
+  </div>
+
+
+
+<!-- Floating Chatbot Icon -->
+<button class="chatbot-icon" (click)="toggleChatbot()">
+  <i class="bx bx-message-square-dots"></i>
+</button>
+
+<!-- Chatbot Container (Modal) -->
+<div class="chatbot-container" *ngIf="isChatbotOpen">
+  <div class="chatbot-header">
+    <h5>Chatbot Assistance</h5>
+    <button class="btn-close" (click)="toggleChatbot()"></button>
+  </div>
+  <div class="chatbot-body">
+    <iframe
+      src="https://www.chatbase.co/chatbot-iframe/1fh1fKN25gWOxyETHqb7r"
+      width="100%"
+      style="height: 100%; min-height: 500px"
+      frameborder="0"
+    ></iframe>
+  </div>
+</div>
 </div>
 <!-- /Page Content -->
 
 <!-- MODAL DETAIL -->
 <div class="modal fade" id="detailSujetModal" tabindex="-1" aria-labelledby="detailSujetModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="detailSujetModalLabel">Détails du Sujet PFE</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div *ngIf="selectedSujet">
-                    <p><strong>Titre:</strong> {{ selectedSujet.titre }}</p>
-                    <p><strong>Description:</strong> {{ selectedSujet.description }}</p>
-                    <p><strong>Technologie:</strong> {{ selectedSujet.technologie }}</p>
-                    <p><strong>Modérateur:</strong> {{ selectedSujet.moderator?.name || 'Aucun modérateur' }}</p>
-                    <img *ngIf="selectedSujet.image" [src]="'/../../../../assets/img/sujetpfe/' + selectedSujet.image" alt="Image du Sujet" class="img-thumbnail">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <!-- Ajout d'un bouton de sauvegarde si vous voulez modifier le sujet -->
-                <button type="button" class="btn btn-primary postuler-btn" *ngIf="selectedSujet" (click)="postuler(selectedSujet)">Postuler</button>
-            </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailSujetModalLabel">Détails du Sujet PFE</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="selectedSujet">
+          <p><strong>Titre:</strong> {{ selectedSujet.titre }}</p>
+          <p><strong>Description:</strong> {{ selectedSujet.description }}</p>
+          <p><strong>Technologie:</strong> {{ selectedSujet.technologie }}</p>
+          <p><strong>Modérateur:</strong> {{ selectedSujet.moderator?.name || 'Aucun modérateur' }}</p>
+          <img *ngIf="selectedSujet.image" [src]="selectedSujet.image" alt="Image du Sujet" class="img-thumbnail">
         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <!-- Ajout d'un bouton de sauvegarde si vous voulez modifier le sujet -->
+        <button type="button" class="btn btn-primary postuler-btn" *ngIf="selectedSujet"
+                (click)="postuler(selectedSujet)">Postuler
+        </button>
+      </div>
     </div>
+  </div>
 </div>
 <!-- /MODAL DETAIL -->
 
 <!-- MODAL DETAIL 2-->
 <div class="modal fade" id="detailSujetModal2" tabindex="-1" aria-labelledby="detailSujetModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="detailSujetModalLabel">Détails du Sujet PFE</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div *ngIf="selectedSujet">
-                    <p><strong>Titre:</strong> {{ selectedSujet.titre }}</p>
-                    <p><strong>Description:</strong> {{ selectedSujet.description }}</p>
-                    <p><strong>Technologie:</strong> {{ selectedSujet.technologie }}</p>
-                    <p><strong>Modérateur:</strong> {{ selectedSujet.moderator?.name || 'Aucun modérateur' }}</p>
-                    <img *ngIf="selectedSujet.image" [src]="'/../../../../assets/img/sujetpfe/' + selectedSujet.image" alt="Image du Sujet" class="img-thumbnail">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <!-- Ajout d'un bouton de sauvegarde si vous voulez modifier le sujet -->
-            </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailSujetModalLabel">Détails du Sujet PFE</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="selectedSujet">
+          <p><strong>Titre:</strong> {{ selectedSujet.titre }}</p>
+          <p><strong>Description:</strong> {{ selectedSujet.description }}</p>
+          <p><strong>Technologie:</strong> {{ selectedSujet.technologie }}</p>
+          <p><strong>Modérateur:</strong> {{ selectedSujet.moderator?.name || 'Aucun modérateur' }}</p>
+          <img *ngIf="selectedSujet.image" [src]="selectedSujet.image"
+               alt="Image du Sujet" class="img-thumbnail">
         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <!-- Ajout d'un bouton de sauvegarde si vous voulez modifier le sujet -->
+      </div>
     </div>
+  </div>
 </div>
 <!-- /MODAL DETAIL 2-->
 
 <!-- Modal pour déposer un rapport -->
-<div class="modal fade" id="deposerRapportModal" tabindex="-1" aria-labelledby="deposerRapportModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deposerRapportModalLabel">Déposer Rapport</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <label for="rapportFile" class="form-label">Sélectionnez un rapport (PDF)</label>
-                <input type="file" class="form-control" id="rapportFile" accept=".pdf" (change)="onFileSelected($event)">
-                <div *ngIf="selectedFileName" class="mt-2">
-                    📄 Rapport sélectionné : <strong>{{ selectedFileName }}</strong>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-primary" (click)="uploadRapport()">Déposer</button>
-            </div>
+<div class="modal fade" id="deposerRapportModal" tabindex="-1" aria-labelledby="deposerRapportModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deposerRapportModalLabel">Déposer Rapport</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="rapportFile" class="form-label">Sélectionnez un rapport (PDF)</label>
+        <input type="file" class="form-control" id="rapportFile" accept=".pdf" (change)="onFileSelected($event)">
+        <div *ngIf="selectedFileName" class="mt-2">
+          📄 Rapport sélectionné : <strong>{{ selectedFileName }}</strong>
         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-primary" (click)="uploadRapport()">Déposer</button>
+      </div>
     </div>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-// .owl-theme .owl-dots .owl-dot.active span, 
+// .owl-theme .owl-dots .owl-dot.active span,
 // .owl-theme .owl-dots .owl-dot:hover span {
 //     background: #F66962;
 // }
@@ -7,12 +7,125 @@
 //     margin: auto;
 //     background: rgb(14, 13, 13);
 //   }
-  
-// body .slick-prev, 
+
+// body .slick-prev,
 // body .slick-next {
 //     height: 45px;
 //     width: 40px;
 //     background: grey !important;
 //     z-index: 100;
 // }
+
+.features {
+  padding: 4rem 0;
+  background: #f8f9ff;
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    .section-sub-head {
+      span {
+        color: #786cff;
+        font-weight: 600;
+      }
+      h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0.5rem 0;
+      }
+    }
+  }
+
+  .features-list {
+    .feature-box {
+      background: #fff;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s;
+      &:hover {
+        transform: translateY(-5px);
+      }
+      .icon {
+        color: #786cff;
+      }
+      .feature-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+      .feature-desc {
+        font-size: 0.95rem;
+        color: #555;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .features-list {
+      .feature-box {
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+}
+.benefits {
+  padding: 4rem 0;
+  background: #fff;
+
+  .section-sub-head {
+    span {
+      color: #786cff;
+      font-weight: 600;
+    }
+    h2 {
+      font-size: 2.5rem;
+      margin-top: 0.5rem;
+      font-weight: 700;
+    }
+  }
+
+  .section-text {
+    margin-bottom: 2rem;
+    p {
+      color: #555;
+      font-size: 1rem;
+    }
+  }
+
+  .benefit-item {
+    background: #f9faff;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    transition: transform 0.3s;
+    &:hover {
+      transform: translateY(-5px);
+    }
+    .icon {
+      color: #786cff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+    }
+    .content {
+      h5 {
+        margin: 0 0 0.5rem;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #333;
+      }
+      p {
+        margin: 0;
+        font-size: 0.95rem;
+        color: #666;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .benefit-item {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
 

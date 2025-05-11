@@ -1,0 +1,117 @@
+
+Ghada
+<div class="comment-section container p-3 border rounded bg-light">
+  <h3 class="mb-4">Discussion</h3>
+  <!-- Champ de recherche -->
+<div class="mb-3">
+  <input
+    type="text"
+    [(ngModel)]="keyword"
+    (input)="searchComments()"
+    placeholder="Rechercher des commentaires..."
+    class="form-control"
+  />
+</div>
+
+<!-- Liste des commentaires filtrés -->
+<div *ngIf="filteredComments.length > 0; else noResults">
+  <div *ngFor="let comment of filteredComments" class="comment-item mb-4 p-3 border rounded bg-white shadow-sm">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <strong class="text-primary">{{ comment.sender.name }}</strong>
+      <small class="text-muted">{{ comment.timestamp | date:'short' }}</small>
+    </div>
+    <p class="mb-2">{{ comment.content }}</p>
+    <!-- Afficher le fichier attaché s'il existe -->
+    <div *ngIf="comment.file" class="mt-2">
+      <img *ngIf="isImage(comment.file)" class="img-fluid rounded" style="max-width: 200px;" [src]="'data:image/png;base64,' + comment.file" alt="Attachment">
+      <a *ngIf="!isImage(comment.file)" [href]="'data:application/octet-stream;base64,' + comment.file" [attr.download]="comment.fileName || 'attachment'" class="btn btn-sm btn-outline-secondary mt-2">
+        Download {{ comment.fileName || 'Attachment' }}
+      </a>
+    </div>
+  </div>
+</div>
+
+<ng-template #noResults>
+  <p>Aucun commentaire trouvé.</p>
+</ng-template>
+
+
+  <div *ngIf="comments.length > 0; else noResults">
+    <div *ngFor="let comment of comments" class="comment-box">
+      <p>{{ comment.content }}</p>
+    </div>
+  </div>
+
+
+
+
+
+  <!-- List of Comments -->
+  <div class="comment-list" *ngIf="comments && comments.length">
+    <div *ngFor="let comment of comments" class="comment-item mb-4 p-3 border rounded bg-white shadow-sm">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <strong class="text-primary">{{ comment.sender.name }}</strong>
+        <small class="text-muted">{{ comment.timestamp | date:'short' }}</small>
+      </div>
+      <p class="mb-2">{{ comment.content }}</p>
+
+      <!-- Show attached file link if exists -->
+      <div *ngIf="comment.file" class="mt-2">
+        <!-- For images, display an image preview -->
+        <img
+          *ngIf="isImage(comment.file)"
+          class="img-fluid rounded"
+          style="max-width: 200px;"
+          [src]="'data:image/png;base64,' + comment.file"
+          alt="Attachment"
+        >
+        <!-- Otherwise, provide a download link -->
+        <a
+          *ngIf="!isImage(comment.file)"
+          [href]="'data:application/octet-stream;base64,' + comment.file"
+          [attr.download]="comment.fileName || 'attachment'"
+          class="btn btn-sm btn-outline-secondary mt-2"
+        >
+          Download {{ comment.fileName || 'Attachment' }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comment Submission Form -->
+  <form (ngSubmit)="submitComment()" #commentForm="ngForm" class="mt-4">
+    <div class="form-group mb-3">
+      <textarea
+        name="comment"
+        [(ngModel)]="newComment"
+        placeholder="Type your comment here..."
+        required
+        class="form-control"
+        rows="3">
+      </textarea>
+    </div>
+
+    <div class="form-group mb-3">
+      <input
+        type="file"
+        (change)="onFileSelected($event)"
+        class="form-control-file"
+      >
+    </div>
+
+    <!-- Preview for Selected File -->
+    <div *ngIf="selectedFile" class="file-preview mb-3">
+      <h6>File Preview:</h6>
+      <div *ngIf="previewUrl; else fileName">
+        <img [src]="previewUrl" alt="File Preview" class="img-thumbnail" style="max-width: 200px;">
+      </div>
+      <ng-template #fileName>
+        <p class="mb-0">{{ selectedFile.name }}</p>
+      </ng-template>
+    </div>
+
+    <button type="submit" [disabled]="!commentForm.valid" class="btn btn-primary">
+      Submit
+    </button>
+  </form>
+</div>

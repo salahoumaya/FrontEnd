@@ -9,11 +9,21 @@ export class TrainingService {
   private apiUrl = 'http://localhost:8076/public-training'; // URL du back-end
 
   constructor(private http: HttpClient) {}
+  private getAuthHeaders() {
+    const token = localStorage.getItem('token');
+    console.log('Token envoyé:', token);
+
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': ` Bearer ${token}`
+  });}
 
   // Récupérer toutes les formations
   getAllTrainings(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/getAllTraining`);
+
+    return this.http.get(`${this.apiUrl}/getAllTraining`, { headers: this.getAuthHeaders() });
   }
+
 
   // Récupérer une formation par ID
   getTrainingById(id: number): Observable<any> {

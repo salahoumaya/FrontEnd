@@ -16,19 +16,15 @@ export class AdminReclamationsComponent implements OnInit {
   dateFilters: { [key: string]: string } = {};
   showAutoProcessedOnly = false;
 
-
-
   constructor(private adminReclamationService: ReclamationService) {}
 
   ngOnInit(): void {
-
     this.loadReclamations();
     this.types.forEach(type => {
       this.pageIndex[type] = 0;
       this.filters[type] = '';
       this.dateFilters[type] = '';  // Init du filtre date
     });
-
   }
 
   loadReclamations() {
@@ -38,17 +34,29 @@ export class AdminReclamationsComponent implements OnInit {
   }
 
   getFilteredReclamations(type: string) {
-    return this.reclamations
+    // Filter reclamations based on type, filters, date, and showAutoProcessedOnly flag
+    const filteredReclamations = this.reclamations
       .filter(r =>
         r.type === type &&
         (!this.filters[type] || r.title?.toLowerCase().includes(this.filters[type].toLowerCase()) || r.user?.email?.toLowerCase().includes(this.filters[type].toLowerCase())) &&
         (!this.dateFilters[type] || r.creationDate?.startsWith(this.dateFilters[type])) &&
         (!this.showAutoProcessedOnly || r.autoProcessed === true)
-      )
+      );
+
+    console.log('Filtered Reclamations:', filteredReclamations);  // Log to check sentiment
+
+    // Prioritize reclamations with negative sentiment and auto-processed
+    const prioritizedReclamations = filteredReclamations
+      .filter(r => r.autoProcessed && r.sentiment === 'NEGATIVE') // Priority: Negative sentiment
+      .concat(filteredReclamations.filter(r => !(r.autoProcessed && r.sentiment === 'NEGATIVE'))); // The rest
+
+    console.log('Prioritized Reclamations:', prioritizedReclamations);  // Log to check sentiment prioritization
+
+    // Sort by creation date (most recent first)
+    return prioritizedReclamations
       .sort((a, b) => new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime())
       .slice(this.pageIndex[type] * this.pageSize, (this.pageIndex[type] + 1) * this.pageSize);
   }
-
 
   totalPages(type: string) {
     return Math.ceil(this.reclamations.filter(r => r.type === type && (r.title?.toLowerCase().includes(this.filters[type].toLowerCase()) || r.user?.email?.toLowerCase().includes(this.filters[type].toLowerCase()))).length / this.pageSize) || 1;
@@ -88,8 +96,8 @@ export class AdminReclamationsComponent implements OnInit {
       'badge-danger': status === 'REJECTED'
     };
   }
+
   toggleAutoProcessedFilter() {
     this.showAutoProcessedOnly = !this.showAutoProcessedOnly;
   }
-
 }

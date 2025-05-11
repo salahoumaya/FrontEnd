@@ -89,8 +89,8 @@ export class HeaderComponent {
   public themeChange(): void {
     this.sidebarService.themeColor();
     this.applyTheme();
-  
+
   }
- 
- 
+
+
 }

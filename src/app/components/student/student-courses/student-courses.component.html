@@ -87,7 +87,16 @@
                                 <img [src]="course.img2" alt="" class="img-fluid">
                               </a>
                               <div class="title">
+                                <div class="row">
+                                  <div class="col-md-10">
                                 <h4><a>{{ course.title }}</a></h4>
+                              </div>
+                              <div class="col-md-1" style="float: right;">
+                                <button class="btn btn-primary" (click)="downloadPlanningPDF(course.plannings[course.plannings.length-1])" [hidden]="!course.plannings[0]">
+                                  <i class="fas fa-download"></i>
+                                </button>
+                              </div>
+                            </div>
                                 <p>{{ course.role }}</p>
                               </div>
                             </div>
@@ -106,6 +115,8 @@
                           </div>
                           <div class="all-btn all-category d-flex align-items-center">
                             <button class="btn btn-primary" (click)="openSubscribeModal(course)">SUBSCRIBE NOW</button>
+
+
                           </div>
                         </div>
                       </div>
@@ -170,6 +181,7 @@
         <button type="button" class="btn btn-primary" (click)="confirmSubscription()" [disabled]="isSubscribing">
           {{ isSubscribing ? 'Subscribing...' : 'Confirm' }}
         </button>
+
       </div>
     </div>
   </div>

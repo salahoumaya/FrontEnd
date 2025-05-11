@@ -802,7 +802,7 @@ export interface featuredInstructor {
   img: string;
   name: string;
   domain: string;
-  students: string;
+  students: number;
 }
 export interface latestBlogs {
   img: string;

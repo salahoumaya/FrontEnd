@@ -57,12 +57,12 @@ export class ReclamationStatesComponent implements OnInit {
         data: Object.values(data) as number[]
       }];
     });
+
     this.statService.getAllReclamations().subscribe(reclamations => {
       this.allReclamations = reclamations;
       this.calculatePriorityStats();
     });
   }
-
 
   calculatePriorityStats() {
     // 1. Filtrer les réclamations prioritaires
@@ -123,66 +123,65 @@ export class ReclamationStatesComponent implements OnInit {
     };
   }
 
-  // ✅ Méthode corrigée
-generatePdfReport() {
-  const doc = new jsPDF();
-  doc.setFontSize(18);
-  doc.text('📈 Rapport Statistique des Réclamations', 14, 15);
+  // ✅ Méthode corrigée pour générer le PDF avec les données de réclamation
+  generatePdfReport() {
+    const doc = new jsPDF();
+    doc.setFontSize(18);
+    doc.text('📈 Rapport Statistique des Réclamations', 14, 15);
 
-  // 📊 Par Type
-  autoTable(doc, {
-    startY: 25,
-    head: [['Type', 'Nombre']],
-    body: this.typeLabels.map((label, index) => [label, this.typeSeries[index].toString()]),
-    theme: 'grid',
-    headStyles: { fillColor: [163, 206, 241] },
-  });
+    // 📊 Par Type
+    autoTable(doc, {
+      startY: 25,
+      head: [['Type', 'Nombre']],
+      body: this.typeLabels.map((label, index) => [label, this.typeSeries[index].toString()]),
+      theme: 'grid',
+      headStyles: { fillColor: [163, 206, 241] },
+    });
 
-  // 📋 Par Statut
-  autoTable(doc, {
-    startY: doc.lastAutoTable.finalY + 10,
-    head: [['Statut', 'Nombre']],
-    body: this.statusLabels.map((label, index) => [label, this.statusSeries[index].toString()]),
-    theme: 'grid',
-    headStyles: { fillColor: [249, 213, 229] },
-  });
+    // 📋 Par Statut
+    autoTable(doc, {
+      startY: doc.lastAutoTable.finalY + 10,
+      head: [['Statut', 'Nombre']],
+      body: this.statusLabels.map((label, index) => [label, this.statusSeries[index].toString()]),
+      theme: 'grid',
+      headStyles: { fillColor: [249, 213, 229] },
+    });
 
-  // 📅 Par Mois
-  autoTable(doc, {
-    startY: doc.lastAutoTable.finalY + 10,
-    head: [['Mois', 'Nombre']],
-    body: this.monthCategories.map((label, index) => [label, (this.monthSeries[0].data[index] as number).toString()]),
-    theme: 'grid',
-    headStyles: { fillColor: [212, 240, 223] },
-  });
+    // 📅 Par Mois
+    autoTable(doc, {
+      startY: doc.lastAutoTable.finalY + 10,
+      head: [['Mois', 'Nombre']],
+      body: this.monthCategories.map((label, index) => [label, (this.monthSeries[0].data[index] as number).toString()]),
+      theme: 'grid',
+      headStyles: { fillColor: [212, 240, 223] },
+    });
 
-  autoTable(doc, {
-    startY: doc.lastAutoTable.finalY + 10,
-    head: [['Mois', 'Réclamations Urgentes']],
-    body: this.priorityCategories.map((month, index) => {
-      // Valeur par défaut si data est undefined
-      const value = this.prioritySeries[0]?.data?.[index] ?? 0;
-      return [month, value.toString()];
-    }),
-    theme: 'grid',
-    headStyles: {
-      fillColor: [255, 107, 107],
-      textColor: [255, 255, 255],
-      fontStyle: 'bold'
-    },
-    styles: {
-      cellPadding: 5,
-      fontSize: 10,
-      valign: 'middle'
-    },
-    columnStyles: {
-      0: { cellWidth: 'auto' },
-      1: { cellWidth: 'auto', halign: 'center' }
-    }
-  });
+    // 📊 Réclamations Prioritaires par Mois
+    autoTable(doc, {
+      startY: doc.lastAutoTable.finalY + 10,
+      head: [['Mois', 'Réclamations Urgentes']],
+      body: this.priorityCategories.map((month, index) => {
+        // Valeur par défaut si data est undefined
+        const value = this.prioritySeries[0]?.data?.[index] ?? 0;
+        return [month, value.toString()];
+      }),
+      theme: 'grid',
+      headStyles: {
+        fillColor: [255, 107, 107],
+        textColor: [255, 255, 255],
+        fontStyle: 'bold'
+      },
+      styles: {
+        cellPadding: 5,
+        fontSize: 10,
+        valign: 'middle'
+      },
+      columnStyles: {
+        0: { cellWidth: 'auto' },
+        1: { cellWidth: 'auto', halign: 'center' }
+      }
+    });
 
-  doc.save('rapport-reclamations.pdf');
-
-
-}
+    doc.save('rapport-reclamations.pdf');
+  }
 }

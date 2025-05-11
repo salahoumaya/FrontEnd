@@ -45,7 +45,11 @@
                       </mat-select>
                       <div *ngIf="form.submitted && !selected2" class="error-text">Please select a type</div>
                     </div>
-
+                    <div class="input-block mb-0">
+                      <label for="maxStudents" class="add-course-label">Max Students</label>
+                      <input type="number" class="form-control" placeholder="Maximum number of authorized students" [(ngModel)]="maxStudents" name="maxStudents" required />
+                      <div *ngIf="form.submitted && !maxStudents" class="error-text">Maximum students is required</div>
+                    </div>
                     <div class="input-block mb-0">
                       <label for="description" class="add-course-label">Description</label>
                       <input type="text" class="form-control" placeholder="Description" [(ngModel)]="description" name="description" required />

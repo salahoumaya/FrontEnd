@@ -17,25 +17,33 @@ export class CheckoutComponent  implements OnInit, AfterViewInit {
   totalStudents=0;
   myStudents: any[] = [];
   @ViewChild('subscribersChart') subscribersChartRef!: ElementRef;
+  @ViewChild('trainingPercentageChart') trainingPercentageChartRef!: ElementRef;
+  private trainingChartInstance!: Chart;
   private chartInstance!: Chart;
   constructor(private trainingService: TrainingService) {
     }
 
-  ngOnInit(): void {
-    this.trainingService.getDashboardData().subscribe(
-      (data) => {
-        this.totalCourses = data.totalCourses;
-        this.totalTrainings = data.totalTrainings;
-        this.totalStudents= data.totalStudents;
-        this.myStudents=data.myStudents;
-        this.processChartData();
-      },
-      (error) => {
-       console.log("Erreur "+error.response)
-      }
-    );
+    ngOnInit(): void {
+      this.trainingService.getDashboardData().subscribe(
+        (data) => {
+          this.totalCourses = data.totalCourses;
+          this.totalTrainings = data.totalTrainings;
+          this.totalStudents = data.totalStudents;
+          this.myStudents = data.myStudents;
 
-  }ngAfterViewInit(): void {
+          this.processChartData();
+
+          const labels = data.trainingsNumber.map((item: any) => item.formation);
+          const percentages = data.trainingsNumber.map((item: any) => item.pourcentage);
+          this.initializeTrainingChart(labels, percentages);
+        },
+        (error) => {
+          console.log("Erreur " + error.response);
+        }
+      );
+    }
+
+  ngAfterViewInit(): void {
     this.initializeChart();
   }
 
@@ -88,4 +96,42 @@ export class CheckoutComponent  implements OnInit, AfterViewInit {
       this.chartInstance.update();
     }
   }
+  initializeTrainingChart(labels: string[], data: number[]) {
+    if (!this.trainingPercentageChartRef) return;
+
+    this.trainingChartInstance = new Chart(this.trainingPercentageChartRef.nativeElement, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Participation (%) by Training',
+          data,
+          backgroundColor: 'rgba(153, 102, 255, 0.6)',
+          borderColor: 'rgba(153, 102, 255, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Training Title'
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Participation %'
+            },
+            beginAtZero: true,
+            max: 100
+          }
+        }
+      }
+    });
+  }
+
 }
