@@ -1,0 +1,68 @@
+<div class="page-content">
+  <div class="container">
+
+    <!-- Notification Messages -->
+    <div *ngIf="successMessage" class="notification success">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="notification error">
+      {{ errorMessage }}
+    </div>
+
+    <div class="row">
+      <!-- Sidebar -->
+      <app-student-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-student-sidebar>
+      <!-- /Sidebar -->
+
+      <!-- Student Settings -->
+      <div class="col-xl-9 col-lg-9">
+        <div class="settings-widget card-details">
+          <div class="settings-menu p-0">
+            <div class="profile-heading">
+              <h3>Ajouter un nouvel entretien</h3>
+              <p>Remplissez les informations pour soumettre votre entretien</p>
+            </div>
+
+            <form (ngSubmit)="onSubmit(entretienForm)" #entretienForm="ngForm">
+              <div class="checkout-form settings-wrap">
+                <div class="edit-profile-info d-flex justify-content-between align-items-center">
+                  <div>
+                    <h5>Informations de l'Entretien</h5>
+                    <p>Remplissez les détails de l'entretien</p>
+                  </div>
+                  <button class="btn btn-secondary" (click)="goToEntretienList()">Consulter Entretiens</button>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="input-block">
+                      <label for="dateEntretien" class="form-label">Date de l'Entretien</label>
+                      <input type="datetime-local" class="form-control" id="dateEntretien" [(ngModel)]="newEntretien.dateEntretien" name="dateEntretien" required />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-block">
+                      <label for="lieu" class="form-label">Lieu</label>
+                      <input type="text" class="form-control" id="lieu" [(ngModel)]="newEntretien.lieu" name="lieu" required />
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="input-block">
+                      <label for="note" class="form-label">Note</label>
+                      <textarea class="form-control" id="note" [(ngModel)]="newEntretien.note" name="note"></textarea>
+                    </div>
+                  </div>
+                  <!-- Boutons -->
+                  <div class="col-md-12 d-flex justify-content-between mt-3">
+                    <button class="btn btn-primary" type="submit" [disabled]="!entretienForm.valid">Enregistrer</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- /Student Settings -->
+
+    </div>
+  </div>
+</div>

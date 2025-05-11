@@ -13,7 +13,13 @@ export class CourseDetailsComponent implements OnInit {
   candidatures: any[] = []; // Liste des candidatures
   public errorMessage: string = '';
   public loading: boolean = true;
+  filters = {
+    nom: '',
+    email: ''
+  };
 
+  sortBy = 'nom';
+  sortOrder = 'asc';
   constructor(private candidatureService: CandidatureService, private router: Router) {}
 
   ngOnInit(): void {
@@ -62,7 +68,7 @@ export class CourseDetailsComponent implements OnInit {
   public onUpdate(candidature: any): void {
     const id = candidature.candidatId;
     if (id) {
-      this.router.navigate(['/instructor/modifiercandidature', id]);
+      this.router.navigate(['/student/student-message', id]);
     } else {
       console.error('ID de candidature non valide');
     }
@@ -104,5 +110,19 @@ export class CourseDetailsComponent implements OnInit {
         this.errorMessage = 'Impossible de télécharger le PDF. Veuillez réessayer plus tard.';
       }
     );
+  }
+
+  applyFilters() {
+    this.candidatureService.searchCandidatures(this.filters).subscribe({
+      next: data => this.candidatures = data,
+      error: err => this.errorMessage = 'Erreur lors de la recherche'
+    });
+  }
+
+  applySort() {
+    this.candidatureService.sortCandidatures(this.sortBy, this.sortOrder).subscribe({
+      next: data => this.candidatures = data,
+      error: err => this.errorMessage = 'Erreur lors du tri'
+    });
   }
 }

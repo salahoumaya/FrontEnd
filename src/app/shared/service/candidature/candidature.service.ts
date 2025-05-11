@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -76,6 +76,28 @@ export class CandidatureService {
       { headers: this.getHeaders() }
     );
   }
+  searchCandidatures(criteria: any): Observable<any> {
+  let params = new HttpParams();
+  Object.keys(criteria).forEach(key => {
+    if (criteria[key]) {
+      params = params.set(key, criteria[key]);
+    }
+  });
 
+  return this.http.get<any[]>(`${this.apiUrl}/search`, {
+    params,
+    headers: this.getHeaders()
+  });
 }
 
+  sortCandidatures(sortBy: string, order: string): Observable<any[]> {
+  let params = new HttpParams()
+    .set('sortBy', sortBy)
+    .set('order', order);
+
+  return this.http.get<any[]>(`${this.apiUrl}/sort`, {
+    params,
+    headers: this.getHeaders()
+  });
+}
+}

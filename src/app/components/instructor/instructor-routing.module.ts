@@ -40,6 +40,7 @@ import { DiplomeComponent } from './diplome/diplome.component';
 import { FormationComponent } from './formation/formation.component';
 import { ExamenComponent } from './examen/examen.component';
 import { ReclamationStatesComponent } from './reclamation/reclamation-states/reclamation-states.component';
+import { AddEntretienComponent } from './add-entretien/add-entretien.component';
 
 const routes: Routes = [
   {
@@ -77,6 +78,10 @@ const routes: Routes = [
       {
         path: 'examen/:id',
         component: ExamenComponent,
+      },
+       {
+        path: 'add-entretien',
+        component: AddEntretienComponent,
       },
       {
         path: 'instructor-notification',

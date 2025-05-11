@@ -174,6 +174,9 @@ export class routes {
   public static get instructor_chat(): string {
     return this.instructor + 'instructor-chat';
   }
+  public static get addEntretien(): string {
+    return this.instructor + 'add-entretien';
+  }
 
   public static get instructor_reclamation(): string {
     return this.instructor + 'instructor-reclamation';

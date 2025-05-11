@@ -4,7 +4,7 @@
       <div class="row">
 
           <!-- Sidebar -->
-          <app-instructor-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-instructor-sidebar>
+          <app-student-sidebar class="col-xl-3 col-lg-3 theiaStickySidebar"></app-student-sidebar>
           <!-- /Sidebar -->
 
           <!-- Candidature List -->
@@ -19,6 +19,31 @@
                           </div>
                       </div>
                       <div class="checkout-form">
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                              <input type="text" class="form-control" placeholder="Nom"
+                                     [(ngModel)]="filters.nom" (input)="applyFilters()" />
+                            </div>
+                            <div class="col-md-3">
+                              <input type="text" class="form-control" placeholder="Email"
+                                     [(ngModel)]="filters.email" (input)="applyFilters()" />
+                            </div>
+                            <div class="col-md-3">
+                              <select class="form-select" [(ngModel)]="sortBy" (change)="applySort()">
+                                <option value="nom">Trier par Nom</option>
+                                <option value="email">Trier par Email</option>
+                                <option value="nbr_exp">Trier par Expérience</option>
+                                <option value="specialite">Trier par Spécialité</option>
+                                <option value="statut">Trier par Statut</option>
+                              </select>
+                            </div>
+                            <div class="col-md-3">
+                              <select class="form-select" [(ngModel)]="sortOrder" (change)="applySort()">
+                                <option value="asc">Croissant</option>
+                                <option value="desc">Décroissant</option>
+                              </select>
+                            </div>
+                          </div>
 
                           <!-- Candidature Tabs -->
                           <div class="wishlist-tab order-tab">
