@@ -39,6 +39,7 @@ import { StudentSujetDetails } from './student-sujet-details/student-sujet-detai
 import { CommentSectionnComponent } from './comment-sectionn/comment-sectionn.component';
 import { CommentSectionComponent } from '../instructor/comment-section/comment-section.component';
 import { InstructorModule } from '../instructor/instructor.module';
+import { StudentEventDetailsComponent } from './student-event-details/student-event-details.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { InstructorModule } from '../instructor/instructor.module';
     RecommendationComponent,
     StudentSujetDetails,
     CommentSectionnComponent,
+      StudentEventDetailsComponent
 
 
 
@@ -84,6 +86,7 @@ import { InstructorModule } from '../instructor/instructor.module';
     NgxPaginationModule,
     NgApexchartsModule,
     InstructorModule,
+
 
 
   ],

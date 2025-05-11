@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient ,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 export interface Event {
@@ -43,15 +44,20 @@ export class EventService {
   }
 
   deleteEvent(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/delete-event${id}`,{ headers: this.getAuthHeaders() }); // ✅ Correction
+    return this.http.delete<void>(`${this.apiUrl}/delete-event/${id}`,{ headers: this.getAuthHeaders() }); // ✅ Correction
   }
-
   /*getEventById(id: number): Observable<Event> {
     const url = `${this.apiUrl}/admin/{id}${id}`;
     return this.http.get<Event>(url);
   }*/
-
-
+    getEventQRCodeUrl(eventId: number): Observable<string> {
+      return this.http.get(`${this.apiUrl}/qr/${eventId}`, {
+        headers: this.getAuthHeaders(),
+        responseType: 'blob'
+      }).pipe(
+        map((blob: Blob) => URL.createObjectURL(blob))
+      );
+    }
 
   getEventById(id:number): Observable<any> {
 
